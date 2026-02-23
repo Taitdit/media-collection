@@ -6,11 +6,13 @@
 @use "./components/searchbar";
 @use "./components/grid";
 @use "./components/card";
+@use "./components/cardImg";
 
 
 * {
     font-family: variables.$font;
     font-size: 16px;
+    box-sizing: border-box;
 }
 .mention {
     display: flex;

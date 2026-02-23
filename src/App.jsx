@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import MediaGrid from "./components/MediaGrid";
 // import { mockResults } from "./utils/mockResults";
@@ -24,32 +24,18 @@ const App = () => {
   };
   const { movieGenreMap, tvGenreMap, loadingGenres, genresError } = useTmdbGenres();
 
-  // useEffect(() => {
-  //   setResults(mockResults);
-  // }, []);
-
   
-//   const testTmdb = async () => {
-//   const token = import.meta.env.VITE_TMDB_TOKEN;
+  const testTmdb = async () => {
+  const token = import.meta.env.VITE_TMDB_TOKEN;
 
-//   try {
-//     const data = await searchMulti("Breaking Bad", token);
-//     console.log("TMDB RAW RESPONSE:", data);
-//     console.log("MOVIE GENRE MAP:", movieGenreMap);
-//     console.log("TV GENRE MAP:", tvGenreMap);
+  try {
+    const data = await searchMulti("Matrix", token);
+    console.log("TMDB RAW RESPONSE:", data);
 
-//         const first = data.results.find((r) => r.media_type === "movie");
-//     if (first) {
-//       const names = (first.genre_ids ?? [])
-//         .map((id) => movieGenreMap[id])
-//         .filter(Boolean);
-//       console.log("FIRST MOVIE GENRES:", names);
-//     }
-
-//   } catch (err) {
-//     console.error("TMDB ERROR:", err);
-//   }
-// };
+  } catch (err) {
+    console.error("TMDB ERROR:", err);
+  }
+};
 
   const filtered = results.filter(item => {
     const genresReady = Object.keys(movieGenreMap).length > 0 && Object.keys(tvGenreMap).length > 0;
@@ -67,19 +53,78 @@ const App = () => {
     setSelectedType("all");
     setSelectedGenre("all");
   };
-  const sorted = [...filtered].sort((a, b) => {
-    const aName = a.title || a.original_title || a.original_name || ""
-    const bName = b.title || b.original_title || b.original_name || ""
-    return aName.localeCompare(bName, "fr", {
-      sensitivity: "base",
-    });
-  });
+const getDate = (item) => {
+  const dateStr =
+    item.media_type === "movie"
+      ? item.release_date
+      : item.first_air_date;
+
+  return dateStr ? new Date(dateStr).getTime() : 0;
+};
+
+const sorted = [...filtered].sort((a, b) => {
+  return getDate(b) - getDate(a); // décroissant (plus récent d'abord)
+});;
 
   const allMoviesShow = () => {
     setLastSearch("")
     clearFilters()
     setResults([])
   }
+
+  const normalize = (s = "") => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+
+  const cleanEdgePunct = (w) => w.replace(/^[^a-z0-9]+|[^a-z0-9]+$/g, "");
+
+const splitBySpaces = (s = "") =>
+  normalize(s)
+    .split(/\s+/)
+    .map(cleanEdgePunct)
+    .filter(Boolean);
+
+    
+  const getTitleVariants = (item) => [
+  item?.title,
+  item?.original_title,
+  item?.name,
+  item?.original_name,
+].filter(Boolean);
+
+  const wordMatches = (titleWord, qWord) => {
+  if (!titleWord || !qWord) return false;
+  if (titleWord === qWord) return true;
+  if (titleWord.includes("-")) return false;
+  return titleWord.endsWith(qWord);
+};
+
+  
+const matchesTitleStrict = (item, query) => {
+  const qWords = splitBySpaces(query).filter((w) => w.length >= 2);
+  if (qWords.length === 0) return false;
+
+  const allTitleWords = getTitleVariants(item).flatMap(splitBySpaces);
+
+  // (tu as demandé de supprimer la règle "titres longs => 2 mots")
+  return qWords.some((qw) => allTitleWords.some((tw) => wordMatches(tw, qw)));
+};
+
+
+  const hasDescription = (item) => {
+    const o = item?.overview;
+    return typeof o === "string" && o.trim().length >= 30;
+  };
+
+  const hasImage = (item) => Boolean(item?.poster_path || item?.backdrop_path);
+
+  const hasDocumentary = (item) => {
+      const mapForType = item.media_type === "movie" ? movieGenreMap : tvGenreMap;
+      return (item.genre_ids ?? [])
+        .map((id) => mapForType[id])
+        .filter(Boolean)
+        .includes("Documentaire");
+  }
+  const hasNotDocumentary = (item) => !hasDocumentary(item);
+
   const handleSearch = async (value) => {
     setLastSearch(value)
     const q = value.trim().toLowerCase();
@@ -93,13 +138,22 @@ const App = () => {
     const token = import.meta.env.VITE_TMDB_TOKEN;
 
     try {
-      const data = await searchMulti(q, token)
+      const pagesToFetch = 7;
 
-      const cleanedResults = (data.results ?? []).filter(
+      const pageResponses = await Promise.all(
+        Array.from({ length: pagesToFetch }, (_, i) => searchMulti(q, token, i + 1))
+      );
+    
+      const combined = pageResponses.flatMap((p) => p?.results ?? []);
+
+      const cleanedResults = combined.filter(
         (r) => r.media_type === "movie" || r.media_type === "tv"
       );
+
+      const filtered = cleanedResults.filter(hasNotDocumentary).filter(hasImage).filter(hasDescription).filter((item) => matchesTitleStrict(item, q));
+
         clearFilters();
-        setResults(cleanedResults);
+        setResults(filtered);
 
     } catch (err) {
       console.error("TMDB search error:", err);
@@ -162,9 +216,9 @@ const App = () => {
           )}
           <MediaGrid items={sorted} />
         </section>
-        {/* <button onClick={testTmdb}>
+        <button onClick={testTmdb}>
   Test TMDB
-</button> */}
+</button>
       </main>
     </div>
  )
