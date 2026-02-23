@@ -4,6 +4,7 @@ export const mockResults = [
     type: "movie",
     title: "The Matrix",
     titleFr: "Matrix",
+    genres: ["science fiction", "action"],
     year: 1999
   },
   {
@@ -11,6 +12,7 @@ export const mockResults = [
     type: "tv",
     title: "Breaking Bad",
     titleFr: "Breaking Bad",
+    genres: ["gangster"],
     year: 2008
   },
   {
@@ -18,6 +20,7 @@ export const mockResults = [
     type: "movie",
     title: "Inception",
     titleFr: "Inception",
+    genres: ["science fiction"],
     year: 2010
   },
   {
@@ -25,13 +28,15 @@ export const mockResults = [
     type: "tv",
     title: "The Office",
     titleFr: "The Office",
+    genres: ["comique"],
     year: 2005
   },
   {
     id: 5,
-    type: "moovie",
+    type: "movie",
     title: "Invasion of the Body Snatchers",
     titleFr: "L'Invasion des profanateurs de sépultures",
+    genres: ["thriller"],
     year: 2005
   }
 ];

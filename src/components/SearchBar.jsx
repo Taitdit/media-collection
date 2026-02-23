@@ -8,11 +8,14 @@ const SearchBar = ({ onSearch }) => {
         e.preventDefault()
         const cleaned = query.trim();
         if(!cleaned) return
+        
         onSearch(cleaned)
         setQuery("")
+
     }
 
     return (
+    <>
     <form onSubmit={handleSubmit}>
       <input
         type="text"
@@ -20,8 +23,10 @@ const SearchBar = ({ onSearch }) => {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Rechercher..."
       />
+      
       <button type="submit">Rechercher</button>
     </form>
+    </>
   );
 }
 
