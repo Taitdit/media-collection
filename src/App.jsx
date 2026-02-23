@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import SearchBar from "./components/SearchBar";
 import MediaGrid from "./components/MediaGrid";
-import { mockResults } from "./utils/mockResults";
+// import { mockResults } from "./utils/mockResults";
+import { searchMulti } from "./services/tmdb";
+import useTmdbGenres from "./hooks/useTmdbGenres";
 
 
 
@@ -12,14 +14,52 @@ const App = () => {
   const [selectedType, setSelectedType] = useState("all")
   const [selectedGenre, setSelectedGenre] = useState('all')
 
-  useEffect(() => {
-    setResults(mockResults);
-  }, []);
+  const toYear = (item) => {
+    const dateStr =
+      item.media_type === "movie"
+        ? item.release_date
+        : item.first_air_date;
+
+    return dateStr ? Number(dateStr.substring(0, 4)) : null;
+  };
+  const { movieGenreMap, tvGenreMap, loadingGenres, genresError } = useTmdbGenres();
+
+  // useEffect(() => {
+  //   setResults(mockResults);
+  // }, []);
+
+  
+//   const testTmdb = async () => {
+//   const token = import.meta.env.VITE_TMDB_TOKEN;
+
+//   try {
+//     const data = await searchMulti("Breaking Bad", token);
+//     console.log("TMDB RAW RESPONSE:", data);
+//     console.log("MOVIE GENRE MAP:", movieGenreMap);
+//     console.log("TV GENRE MAP:", tvGenreMap);
+
+//         const first = data.results.find((r) => r.media_type === "movie");
+//     if (first) {
+//       const names = (first.genre_ids ?? [])
+//         .map((id) => movieGenreMap[id])
+//         .filter(Boolean);
+//       console.log("FIRST MOVIE GENRES:", names);
+//     }
+
+//   } catch (err) {
+//     console.error("TMDB ERROR:", err);
+//   }
+// };
 
   const filtered = results.filter(item => {
-    const okYear = selectedYear === "all" || item.year === Number(selectedYear)
-    const okType = selectedType === "all" || item.type === selectedType
-    const okGenre = selectedGenre === "all" || (item.genres ?? []).includes(selectedGenre)
+    const genresReady = Object.keys(movieGenreMap).length > 0 && Object.keys(tvGenreMap).length > 0;
+    const okYear = selectedYear === "all" || toYear(item) === Number(selectedYear)
+    const okType = selectedType === "all" || item.media_type === selectedType
+    const okGenre = selectedGenre === "all" ||(genresReady && (item.genre_ids ?? []).map((id) => {
+       return item.media_type === "movie" ? movieGenreMap[id] : tvGenreMap[id]
+      
+    }).filter(Boolean).includes(selectedGenre)) 
+  
     return okYear && okType && okGenre;
   })
   const clearFilters = () => {
@@ -28,8 +68,8 @@ const App = () => {
     setSelectedGenre("all");
   };
   const sorted = [...filtered].sort((a, b) => {
-    const aName = a.titleFr || a.title || ""
-    const bName = b.titleFr || b.title || ""
+    const aName = a.title || a.original_title || a.original_name || ""
+    const bName = b.title || b.original_title || b.original_name || ""
     return aName.localeCompare(bName, "fr", {
       sensitivity: "base",
     });
@@ -38,28 +78,46 @@ const App = () => {
   const allMoviesShow = () => {
     setLastSearch("")
     clearFilters()
-    setResults(mockResults)
+    setResults([])
   }
-  const handleSearch = (value) => {
+  const handleSearch = async (value) => {
     setLastSearch(value)
     const q = value.trim().toLowerCase();
+    
     if(!q) {
-      setResults(mockResults)
+      clearFilters()
+      setResults([])
       return
     }
-    const filtered = mockResults.filter((item) => {
-        return (
-          item.title.toLowerCase().includes(q) ||
-          item.titleFr?.toLowerCase().includes(q)
-        )
-    }
-    );
-    setResults(filtered)
 
+    const token = import.meta.env.VITE_TMDB_TOKEN;
+
+    try {
+      const data = await searchMulti(q, token)
+
+      const cleanedResults = (data.results ?? []).filter(
+        (r) => r.media_type === "movie" || r.media_type === "tv"
+      );
+        clearFilters();
+        setResults(cleanedResults);
+
+    } catch (err) {
+      console.error("TMDB search error:", err);
+      setResults([]);
+    }
   };
-  const availableYears = [...new Set(results.map(item => item.year))].filter(Boolean).sort((a, b) => a - b);
-  const availableTypes = [...new Set(results.map(item => item.type))].filter(Boolean).sort((a, b) => a.localeCompare(b, "fr"));
-  const availableGenres = [...new Set(results.flatMap((item) => item.genres ?? [])),].filter(Boolean).sort((a, b) => a.localeCompare(b, "fr"));
+  const availableYears = [...new Set(results.map(item => toYear(item)))].filter(Boolean).sort((a, b) => a - b);
+  const availableTypes = [...new Set(results.map(item => item.media_type))].filter(Boolean).sort((a, b) => a.localeCompare(b, "fr"));
+  const availableGenres = [
+  ...new Set(
+    results.flatMap((item) => {
+      const ids = item.genre_ids ?? [];
+      const mapForType = item.media_type === "movie" ? movieGenreMap : tvGenreMap;
+
+      return ids.map((id) => mapForType[id]).filter(Boolean);
+    })
+  ),
+].sort((a, b) => a.localeCompare(b, "fr"));
 
   
  return (
@@ -104,6 +162,9 @@ const App = () => {
           )}
           <MediaGrid items={sorted} />
         </section>
+        {/* <button onClick={testTmdb}>
+  Test TMDB
+</button> */}
       </main>
     </div>
  )

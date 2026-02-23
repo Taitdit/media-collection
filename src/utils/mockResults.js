@@ -1,42 +1,42 @@
 export const mockResults = [
   {
     id: 1,
-    type: "movie",
-    title: "The Matrix",
-    titleFr: "Matrix",
-    genres: ["science fiction", "action"],
-    year: 1999
+    media_type: "movie",
+    original_title: "The Matrix",
+    title: "Matrix",
+    genre_ids: [18,80],
+    release_date: "1999-03-31"
   },
   {
     id: 2,
-    type: "tv",
+    media_type: "tv",
+    original_title: "Breaking Bad",
     title: "Breaking Bad",
-    titleFr: "Breaking Bad",
-    genres: ["gangster"],
-    year: 2008
+    genre_ids: [18,80],
+    first_air_date: "1999-03-31"
   },
   {
     id: 3,
-    type: "movie",
+    media_type: "movie",
+    original_title: "Inception",
     title: "Inception",
-    titleFr: "Inception",
-    genres: ["science fiction"],
-    year: 2010
+    genre_ids: [18,80],
+    release_date: "1999-03-31"
   },
   {
     id: 4,
-    type: "tv",
+    media_type: "tv",
+    original_title: "The Office",
     title: "The Office",
-    titleFr: "The Office",
-    genres: ["comique"],
-    year: 2005
+    genre_ids: [18,80],
+    first_air_date: "2000-03-31"
   },
   {
     id: 5,
-    type: "movie",
-    title: "Invasion of the Body Snatchers",
-    titleFr: "L'Invasion des profanateurs de sépultures",
-    genres: ["thriller"],
-    year: 2005
+    media_type: "movie",
+    original_title: "Invasion of the Body Snatchers",
+    title: "L'Invasion des profanateurs de sépultures",
+    genre_ids: [18,80],
+    release_date: "2001-03-31"
   }
 ];
