@@ -6,3 +6,20 @@
 @use "./components/searchbar";
 @use "./components/grid";
 @use "./components/card";
+
+
+* {
+    font-family: variables.$font;
+    font-size: 16px;
+}
+.mention {
+    display: flex;
+    align-items: center;
+    font-family: variables.$font;
+    img {
+        margin-right: variables.$space-4;
+    }
+    .small {
+        font-size: 13px;
+    }
+}
