@@ -2,6 +2,7 @@
 @use "./base/variables";
 @use "./base/mixins";
 
+@use "./components/app";
 @use "./components/searchbar";
 @use "./components/grid";
 @use "./components/card";
