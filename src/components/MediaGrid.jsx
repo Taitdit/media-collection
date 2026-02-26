@@ -1,6 +1,10 @@
 import MediaCard from "./MediaCard";
+import useTmdbGenres from "../hooks/useTmdbGenres";
+
 
 const MediaGrid = ({ items }) => {
+  const { movieGenreMap, tvGenreMap, loadingGenres, genresError } = useTmdbGenres();
+
   const toYear = (item) => {
     const dateStr =
       item.media_type === "movie"
@@ -28,13 +32,20 @@ const MediaGrid = ({ items }) => {
       {items.map((item) => (
 
         <MediaCard
-          key={`${item.type}:${item.id}`}
+          key={`${item.media_type}:${item.id}`}          
           img={item.poster_path}
           title={trueTitle(item)}
           type={item.media_type}
           year={toYear(item)}
           description={item.overview}
           country={item.original_language}
+          genre= {
+            (() => {
+            const ids = item.genre_ids ?? [];
+            const mapForType = item.media_type === "movie" ? movieGenreMap : tvGenreMap;
+            return ids.map((id) => mapForType[id]).filter(Boolean);
+          })()
+        }
         />
       ))}
     </div>
