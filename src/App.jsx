@@ -117,6 +117,8 @@ const App = () => {
     return typeof year === 'number' && !Number.isNaN(year)
   }
 
+  const hasCountry = (item) => Boolean(item?.origin_country)
+
   const hasImage = (item) => Boolean(item?.poster_path || item?.backdrop_path);
 
   const hasDocumentary = (item) => {
@@ -153,7 +155,7 @@ const App = () => {
         (r) => r.media_type === "movie" || r.media_type === "tv"
       );
 
-      const filtered = cleanedResults.filter(hasNotDocumentary).filter(hasYear).filter(hasImage).filter(hasDescription).filter((item) => matchesTitleStrict(item, q));
+      const filtered = cleanedResults.filter(hasNotDocumentary).filter(hasYear).filter(hasCountry).filter(hasImage).filter(hasDescription).filter((item) => matchesTitleStrict(item, q));
 
         clearFilters();
         setResults(filtered);
