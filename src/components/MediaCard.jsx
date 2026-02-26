@@ -2,7 +2,6 @@ import ImgCard from "./ImgCard";
 
 
 const MediaCard = ({title, img, genre , lang, country, type, description, year }) => {
-  console.log(country)
     const genreList = Array.isArray(genre) ? genre : [];
   return (
     <article className="media-card">
