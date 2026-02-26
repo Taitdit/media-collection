@@ -22,6 +22,14 @@ const MediaGrid = ({ items }) => {
     item.media_type === "movie" ? dataObjectTitle.original = item.original_title : dataObjectTitle.original = item.original_name
     return dataObjectTitle
   }
+  const typeLabel = (item) => {
+    const ids = item.genre_ids ?? [];
+    const mapForType = item.media_type === "movie" ? movieGenreMap : tvGenreMap;
+    const hasAnimation = ids.map((id) => mapForType[id]).filter(Boolean).includes("Animation")
+    if(hasAnimation) return 'Animation'
+    return item.type === "movie" ? "Film" : "Série"
+  }
+
 
   if (!items?.length) {
     return <p>Aucun résultat pour le moment.</p>;
@@ -35,15 +43,17 @@ const MediaGrid = ({ items }) => {
           key={`${item.media_type}:${item.id}`}          
           img={item.poster_path}
           title={trueTitle(item)}
-          type={item.media_type}
+          type={typeLabel(item)}
           year={toYear(item)}
           description={item.overview}
-          country={item.original_language}
+          lang={item.original_language}
+          country={item.origin_country}
           genre= {
             (() => {
             const ids = item.genre_ids ?? [];
             const mapForType = item.media_type === "movie" ? movieGenreMap : tvGenreMap;
-            return ids.map((id) => mapForType[id]).filter(Boolean);
+            const arrayGenre =  ids.map((id) => mapForType[id]).filter(Boolean)
+            return arrayGenre.filter((v) => v !== 'Animation')
           })()
         }
         />
