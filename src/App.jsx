@@ -24,47 +24,54 @@ const App = () => {
   };
   const { movieGenreMap, tvGenreMap, loadingGenres, genresError } = useTmdbGenres();
 
-  
-  const testTmdb = async () => {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
+  const genresReady =
+    Object.keys(movieGenreMap).length > 0 && Object.keys(tvGenreMap).length > 0;
 
-  try {
-    const data = await searchMulti("Matrix", token);
-    console.log("TMDB RAW RESPONSE:", data);
+  const getGenreNames = (item) => {
+    if (!genresReady) return [];
+    const ids = item.genre_ids ?? [];
+    const mapForType = item.media_type === "movie" ? movieGenreMap : tvGenreMap;
+    return ids.map((id) => mapForType[id]).filter(Boolean);
+  };
 
-  } catch (err) {
-    console.error("TMDB ERROR:", err);
-  }
-};
+  const hasGenre = (item, name) => getGenreNames(item).includes(name);
 
-  const filtered = results.filter(item => {
-    const genresReady = Object.keys(movieGenreMap).length > 0 && Object.keys(tvGenreMap).length > 0;
-    const okYear = selectedYear === "all" || toYear(item) === Number(selectedYear)
-    const okType = selectedType === "all" || item.media_type === selectedType
-    const okGenre = selectedGenre === "all" ||(genresReady && (item.genre_ids ?? []).map((id) => {
-       return item.media_type === "movie" ? movieGenreMap[id] : tvGenreMap[id]
-      
-    }).filter(Boolean).includes(selectedGenre)) 
-  
+  const filtered = results.filter((item) => {
+    const okYear = selectedYear === "all" || toYear(item) === Number(selectedYear);
+
+    const okType =
+      selectedType === "all" ||
+      (selectedType === "animation"
+        ? hasGenre(item, "Animation")
+        : selectedType === "movie"
+          ? item.media_type === "movie" && !hasGenre(item, "Animation")
+          : item.media_type === "tv" && !hasGenre(item, "Animation"));
+
+    const okGenre =
+      selectedGenre === "all" ||
+      getGenreNames(item).includes(selectedGenre);
+
     return okYear && okType && okGenre;
-  })
+  });
+
   const clearFilters = () => {
     setSelectedYear("all");
     setSelectedType("all");
     setSelectedGenre("all");
   };
-const getDate = (item) => {
-  const dateStr =
-    item.media_type === "movie"
-      ? item.release_date
-      : item.first_air_date;
 
-  return dateStr ? new Date(dateStr).getTime() : 0;
-};
+  const getDate = (item) => {
+    const dateStr =
+      item.media_type === "movie"
+        ? item.release_date
+        : item.first_air_date;
 
-const sorted = [...filtered].sort((a, b) => {
-  return getDate(b) - getDate(a); // décroissant (plus récent d'abord)
-});;
+    return dateStr ? new Date(dateStr).getTime() : 0;
+  };
+
+  const sorted = [...filtered].sort((a, b) => {
+    return getDate(b) - getDate(a); // décroissant (plus récent d'abord)
+  });;
 
   const allMoviesShow = () => {
     setLastSearch("")
@@ -76,43 +83,39 @@ const sorted = [...filtered].sort((a, b) => {
 
   const cleanEdgePunct = (w) => w.replace(/^[^a-z0-9]+|[^a-z0-9]+$/g, "");
 
-const splitBySpaces = (s = "") =>
-  normalize(s)
-    .split(/\s+/)
-    .map(cleanEdgePunct)
-    .filter(Boolean);
+  const splitBySpaces = (s = "") => normalize(s).split(/\s+/).map(cleanEdgePunct).filter(Boolean);
 
     
-  const getTitleVariants = (item) => [
-  item?.title,
-  item?.original_title,
-  item?.name,
-  item?.original_name,
-].filter(Boolean);
+  const getTitleVariants = (item) => [item?.title, item?.original_title, item?.name, item?.original_name,].filter(Boolean);
 
   const wordMatches = (titleWord, qWord) => {
   if (!titleWord || !qWord) return false;
   if (titleWord === qWord) return true;
   if (titleWord.includes("-")) return false;
   return titleWord.endsWith(qWord);
-};
+  };
 
   
-const matchesTitleStrict = (item, query) => {
-  const qWords = splitBySpaces(query).filter((w) => w.length >= 2);
-  if (qWords.length === 0) return false;
+  const matchesTitleStrict = (item, query) => {
+    const qWords = splitBySpaces(query).filter((w) => w.length >= 2);
+    if (qWords.length === 0) return false;
 
-  const allTitleWords = getTitleVariants(item).flatMap(splitBySpaces);
+    const allTitleWords = getTitleVariants(item).flatMap(splitBySpaces);
 
-  // (tu as demandé de supprimer la règle "titres longs => 2 mots")
-  return qWords.some((qw) => allTitleWords.some((tw) => wordMatches(tw, qw)));
-};
+    // (tu as demandé de supprimer la règle "titres longs => 2 mots")
+    return qWords.some((qw) => allTitleWords.some((tw) => wordMatches(tw, qw)));
+  };
 
 
   const hasDescription = (item) => {
     const o = item?.overview;
     return typeof o === "string" && o.trim().length >= 30;
   };
+
+  const hasYear = (item) => {
+    const year = toYear(item)
+    return typeof year === 'number' && !Number.isNaN(year)
+  }
 
   const hasImage = (item) => Boolean(item?.poster_path || item?.backdrop_path);
 
@@ -150,7 +153,7 @@ const matchesTitleStrict = (item, query) => {
         (r) => r.media_type === "movie" || r.media_type === "tv"
       );
 
-      const filtered = cleanedResults.filter(hasNotDocumentary).filter(hasImage).filter(hasDescription).filter((item) => matchesTitleStrict(item, q));
+      const filtered = cleanedResults.filter(hasNotDocumentary).filter(hasYear).filter(hasImage).filter(hasDescription).filter((item) => matchesTitleStrict(item, q));
 
         clearFilters();
         setResults(filtered);
@@ -160,19 +163,20 @@ const matchesTitleStrict = (item, query) => {
       setResults([]);
     }
   };
+
+  const baseTypes = [...new Set(results.map((item) => item.media_type))].filter(Boolean);
+  const hasAnyAnimation = results.some((item) => hasGenre(item, "Animation"));
+
   const availableYears = [...new Set(results.map(item => toYear(item)))].filter(Boolean).sort((a, b) => a - b);
-  const availableTypes = [...new Set(results.map(item => item.media_type))].filter(Boolean).sort((a, b) => a.localeCompare(b, "fr"));
+  const availableTypes = [...baseTypes, ...(hasAnyAnimation ? ["animation"] : [])]
+  .sort((a, b) => a.localeCompare(b, "fr"));
   const availableGenres = [
   ...new Set(
-    results.flatMap((item) => {
-      const ids = item.genre_ids ?? [];
-      const mapForType = item.media_type === "movie" ? movieGenreMap : tvGenreMap;
-
-      return ids.map((id) => mapForType[id]).filter(Boolean);
-    })
+    results.flatMap((item) => getGenreNames(item))
   ),
-].sort((a, b) => a.localeCompare(b, "fr"));
+].filter((g) => g !== "Animation").sort((a, b) => a.localeCompare(b, "fr"))
 
+const typeLabel = (t) => t === "movie" ? "Film" : t === "tv" ? "Série" : "Animation";
   
  return (
     <div className="app">
@@ -182,7 +186,7 @@ const matchesTitleStrict = (item, query) => {
 
       <main className="app__main">
         <SearchBar onSearch={handleSearch} />
-        {lastSearch.length > 0 && <button onClick={allMoviesShow}>Tout afficher</button>}    
+        {lastSearch.length > 0 && <button onClick={allMoviesShow}>Supprimer la recherche</button>}    
         <section className="results-section">
           {lastSearch ? <p>Votre recherche pour : {lastSearch}</p> : <p>Recherchez votre film via la barre de recherche ci-dessus</p>}
           {availableYears.length > 0 && (    
@@ -197,7 +201,7 @@ const matchesTitleStrict = (item, query) => {
           <select name="types" value={selectedType} id="types-select" onChange={(e) => setSelectedType(e.target.value)}>
             <option value="all" key="Tous les formats">Tous les formats</option>             
              {availableTypes.map((type) => (
-                <option value={type} key={type}>{type}</option>
+                <option value={type} key={type}>{typeLabel(type)}</option>
              ))}
           </select>)
           }
@@ -216,9 +220,7 @@ const matchesTitleStrict = (item, query) => {
           )}
           <MediaGrid items={sorted} />
         </section>
-        <button onClick={testTmdb}>
-  Test TMDB
-</button>
+
       </main>
     </div>
  )
