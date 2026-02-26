@@ -4,7 +4,6 @@ import useTmdbGenres from "../hooks/useTmdbGenres";
 
 const MediaGrid = ({ items }) => {
   const { movieGenreMap, tvGenreMap, loadingGenres, genresError } = useTmdbGenres();
-  console.log(items)
 
   const toYear = (item) => {
     const dateStr =
@@ -53,7 +52,8 @@ const MediaGrid = ({ items }) => {
             (() => {
             const ids = item.genre_ids ?? [];
             const mapForType = item.media_type === "movie" ? movieGenreMap : tvGenreMap;
-            return ids.map((id) => mapForType[id]).filter(Boolean);
+            const arrayGenre =  ids.map((id) => mapForType[id]).filter(Boolean)
+            return arrayGenre.filter((v) => v !== 'Animation')
           })()
         }
         />
