@@ -14,6 +14,8 @@ const App = () => {
   const [selectedType, setSelectedType] = useState("all")
   const [selectedGenre, setSelectedGenre] = useState('all')
 
+
+
   const toYear = (item) => {
     const dateStr =
       item.media_type === "movie"
@@ -41,13 +43,13 @@ const App = () => {
 
     const okType =
       selectedType === "all" ||
-      (selectedType === "animation"
-        ? hasGenre(item, "Animation")
-        : selectedType === "movie"
-          ? item.media_type === "movie" && !hasGenre(item, "Animation")
-          : item.media_type === "tv" && !hasGenre(item, "Animation"));
-
-    const okGenre =
+      (selectedType === "movie" ? item.media_type === "movie" && !hasGenre(item, "Animation") && !hasGenre(item, "Téléfilm") : 
+      selectedType === "tv" ? item.media_type === "tv" && !hasGenre(item, "Animation") && !hasGenre(item, "Téléfilm") :
+      selectedType === "telefilm" ? hasGenre(item, "Téléfilm") :
+      selectedType === "animated_movie" ? item.media_type === "movie" && hasGenre(item, "Animation") :
+      selectedType === "animated_tv" ? item.media_type === "tv" && hasGenre(item, "Animation") : false)
+  
+      const okGenre =
       selectedGenre === "all" ||
       getGenreNames(item).includes(selectedGenre);
 
@@ -80,7 +82,7 @@ const App = () => {
   }
 
   const normalize = (s = "") => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-
+  
   const cleanEdgePunct = (w) => w.replace(/^[^a-z0-9]+|[^a-z0-9]+$/g, "");
 
   const splitBySpaces = (s = "") => normalize(s).split(/\s+/).map(cleanEdgePunct).filter(Boolean);
@@ -117,7 +119,7 @@ const App = () => {
     return typeof year === 'number' && !Number.isNaN(year)
   }
 
-  const hasCountry = (item) => Boolean(item?.origin_country)
+  const hasLang = (item) => Boolean(item?.original_language)
 
   const hasImage = (item) => Boolean(item?.poster_path || item?.backdrop_path);
 
@@ -129,6 +131,12 @@ const App = () => {
         .includes("Documentaire");
   }
   const hasNotDocumentary = (item) => !hasDocumentary(item);
+
+  const hasGenreExist = (item) => {
+    if(item?.genre_ids.length === 1 && (hasGenre(item, "Animation") || hasGenre(item, "Téléfilm"))) return false
+
+    return Boolean(item?.genre_ids.length > 0)
+  }
 
   const handleSearch = async (value) => {
     setLastSearch(value)
@@ -143,7 +151,7 @@ const App = () => {
     const token = import.meta.env.VITE_TMDB_TOKEN;
 
     try {
-      const pagesToFetch = 7;
+      const pagesToFetch = 17;
 
       const pageResponses = await Promise.all(
         Array.from({ length: pagesToFetch }, (_, i) => searchMulti(q, token, i + 1))
@@ -155,8 +163,8 @@ const App = () => {
         (r) => r.media_type === "movie" || r.media_type === "tv"
       );
 
-      const filtered = cleanedResults.filter(hasNotDocumentary).filter(hasYear).filter(hasCountry).filter(hasImage).filter(hasDescription).filter((item) => matchesTitleStrict(item, q));
-
+      const filtered = cleanedResults.filter(hasNotDocumentary).filter(hasGenreExist).filter(hasYear).filter(hasLang).filter(hasImage).filter(hasDescription).filter((item) => matchesTitleStrict(item, q));
+      
         clearFilters();
         setResults(filtered);
 
@@ -167,18 +175,24 @@ const App = () => {
   };
 
   const baseTypes = [...new Set(results.map((item) => item.media_type))].filter(Boolean);
-  const hasAnyAnimation = results.some((item) => hasGenre(item, "Animation"));
+  const hasAnimatedMovie = results.some((item) => item.media_type === "movie" && hasGenre(item, "Animation"));
+  const hasAnimatedTv = results.some((item) => item.media_type === "tv" && hasGenre(item, "Animation"));
+  const hasTelefilm = results.some((item) => hasGenre(item, "Téléfilm"))
+
 
   const availableYears = [...new Set(results.map(item => toYear(item)))].filter(Boolean).sort((a, b) => a - b);
-  const availableTypes = [...baseTypes, ...(hasAnyAnimation ? ["animation"] : [])]
+  const availableTypes = [...baseTypes, ...(hasAnimatedMovie ? ["animated_movie"] : []), ...(hasAnimatedTv ? ["animated_tv"] : []), ...(hasTelefilm ? ["telefilm"] : []) ]
   .sort((a, b) => a.localeCompare(b, "fr"));
+ 
+
+
   const availableGenres = [
   ...new Set(
     results.flatMap((item) => getGenreNames(item))
   ),
-].filter((g) => g !== "Animation").sort((a, b) => a.localeCompare(b, "fr"))
+].filter((g) => g !== "Animation").filter((g) => g !== "Téléfilm").sort((a, b) => a.localeCompare(b, "fr"))
 
-const typeLabel = (t) => t === "movie" ? "Film" : t === "tv" ? "Série" : "Animation";
+const typeLabel = (t) => t === "movie" ? "Film" : t === "tv" ? "Série" : t === "animated_movie" ? "Animation" : t === "animated_tv" ? "Série animée" : t === "telefilm" ? "Téléfilm" : t;
   
  return (
     <div className="app">
