@@ -96,7 +96,7 @@ const libraryIndex = useMemo(() => {
       checked={filmFilter === "all"}
       onChange={(e) => setFilmFilter(e.target.value)}
     />
-    Afficher tous les films de la recherche
+    Afficher tous les médias de la recherche
   </label>
   <label>
     <input
@@ -106,7 +106,7 @@ const libraryIndex = useMemo(() => {
       checked={filmFilter === "physicalAndDisc"}
       onChange={(e) => setFilmFilter(e.target.value)}
     />
-    Afficher tous les films de la recherche que j'ai 
+    Afficher tous les médias de la recherche que j'ai 
   </label>
   <label>
     <input
@@ -116,7 +116,7 @@ const libraryIndex = useMemo(() => {
       checked={filmFilter === "physical"}
       onChange={(e) => setFilmFilter(e.target.value)}
     />
-    Afficher tous les de la recherche que j'ai en DVD ou Blu-ray 
+    Afficher tous les médias de la recherche que j'ai en DVD ou Blu-ray 
   </label>
 
   <label>
@@ -127,7 +127,7 @@ const libraryIndex = useMemo(() => {
       checked={filmFilter === "disc"}
       onChange={(e) => setFilmFilter(e.target.value)}
     />
-    Afficher tous les de la recherche que j'ai sur disque
+    Afficher tous les médias de la recherche que j'ai sur disque
   </label>
 </form>
      )}
