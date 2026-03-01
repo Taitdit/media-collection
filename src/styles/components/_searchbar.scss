@@ -1,0 +1,33 @@
+@use "../base/variables";
+
+.search {
+    &__info{
+        font-size: 16px;
+        font-weight: bold;
+    }
+    &__form {
+        width: 100%;
+        display: flex;
+        gap: variables.$space-2;
+    }
+    &__input {
+        flex: 1;
+        padding: variables.$space-2;
+        border-radius: variables.$radius;
+        border: variables.$border;
+    }
+    &__button {
+        border-radius: variables.$radius;
+        background-color: variables.$black;
+        color: variables.$white;
+        padding: variables.$space-2 variables.$space-3;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        border: variables.$borderBlack;
+        &:hover, &:active, &:focus {
+            background-color: variables.$white;
+             color: variables.$black;
+        }
+    }
+}

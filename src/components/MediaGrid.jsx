@@ -81,7 +81,12 @@ const libraryIndex = useMemo(() => {
   }
 
   if (!items?.length) {
-    return <p>Aucun résultat pour le moment.</p>;
+    return (
+    <>
+    <p>Recherchez votre film via la <b>barre de recherche</b></p>
+    <p>&#128557; Aucun résultat</p>
+    </>
+    )
   }
 
   return (

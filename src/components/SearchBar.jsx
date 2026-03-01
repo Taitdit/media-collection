@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, className }) => {
 
     const [query, setQuery] = useState("");
 
@@ -15,18 +15,20 @@ const SearchBar = ({ onSearch }) => {
     }
 
     return (
-    <>
-    <form onSubmit={handleSubmit}>
+    <div className={className}>
+      <p className="search__info">Utilisez la barre de recherche ci-dessous pour trouver votre, film, série, animé, série animé ou téléfilm...</p>
+    <form className="search__form" onSubmit={handleSubmit}>
       <input
         type="text"
         value={query}
+        className="search__input"
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Rechercher..."
       />
       
-      <button type="submit">Rechercher</button>
+      <button className="search__button" type="submit">Rechercher</button>
     </form>
-    </>
+    </div>
   );
 }
 
