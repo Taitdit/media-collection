@@ -9,16 +9,20 @@
 .app__header {
   margin-bottom: variables.$space-6;
 }
-
-.search-section {
-  display: flex;
-  gap: 12px;
-  margin-bottom: variables.$space-6;
-}
-
 .results-section {
-  min-height: 100px;
   border: variables.$border;
   padding: variables.$space-4;
-  border-radius: 8px;
+  border-radius: variables.$radius;
+  min-height: 80vh;
+  &.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: variables.$space-4;
+    p, b {
+      font-size: 24px;
+    }
+  }
 }

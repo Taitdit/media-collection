@@ -1,9 +1,12 @@
 import { useState } from "react";
-import SearchBar from "./components/SearchBar";
+import Header from './components/Header.jsx'
 import MediaGrid from "./components/MediaGrid";
 // import { mockResults } from "./utils/mockResults";
 import { searchMulti } from "./services/tmdb";
 import useTmdbGenres from "./hooks/useTmdbGenres";
+import LastSearch from "./components/LastSearch";
+
+
 
 
 
@@ -11,8 +14,13 @@ const App = () => {
   const [lastSearch, setLastSearch] = useState("");
   const [results, setResults] = useState([]);
   const [selectedYear, setSelectedYear] = useState("all")
-  const [selectedType, setSelectedType] = useState("all")
   const [selectedGenre, setSelectedGenre] = useState('all')
+
+
+
+  const [selectedGenres, setSelectedGenres] = useState(['all'])
+  const [selectedTypes, setSelectedTypes] = useState(["all"])
+
 
 
 
@@ -41,25 +49,50 @@ const App = () => {
   const filtered = results.filter((item) => {
     const okYear = selectedYear === "all" || toYear(item) === Number(selectedYear);
 
-    const okType =
-      selectedType === "all" ||
-      (selectedType === "movie" ? item.media_type === "movie" && !hasGenre(item, "Animation") && !hasGenre(item, "Téléfilm") : 
-      selectedType === "tv" ? item.media_type === "tv" && !hasGenre(item, "Animation") && !hasGenre(item, "Téléfilm") :
-      selectedType === "telefilm" ? hasGenre(item, "Téléfilm") :
-      selectedType === "animated_movie" ? item.media_type === "movie" && hasGenre(item, "Animation") :
-      selectedType === "animated_tv" ? item.media_type === "tv" && hasGenre(item, "Animation") : false)
-  
-      const okGenre =
-      selectedGenre === "all" ||
-      getGenreNames(item).includes(selectedGenre);
+    const okTypes = 
+     selectedTypes.includes("all") ||
+     selectedTypes.some((s) => {
+      return (
+        (s === "movie" && item.media_type === "movie" && !hasGenre(item, "Animation") && !hasGenre(item, "Téléfilm")) ||
+        (s === "tv" && item.media_type === "tv" && !hasGenre(item, "Animation") && !hasGenre(item, "Téléfilm")) ||
+        (s === "telefilm" && hasGenre(item, "Téléfilm")) ||
+        (s === "animated_movie" && item.media_type === "movie" && hasGenre(item, "Animation")) ||
+        (s === "animated_tv" && item.media_type === "tv" && hasGenre(item, "Animation"))
+      )
+     })
 
-    return okYear && okType && okGenre;
+      // const okGenre =
+      // selectedGenre === "all" ||
+      // getGenreNames(item).includes(selectedGenre);
+
+     const okGenres = 
+     selectedGenres.includes('all') ||
+      getGenreNames(item).some(i => selectedGenres.includes(i));
+
+      
+    return okYear && okTypes && okGenres;
   });
+
+  const toogleBtnFilter = (t, prev) => {
+      if(t === 'all') return ["all"]
+      const withoutAll = prev.filter((x) => x !== 'all')
+
+      if(withoutAll.includes(t)) {
+        const next = withoutAll.filter((x) => x !== t)
+        return next.length === 0 ? ['all'] : next 
+      }
+      return [...withoutAll, t]
+  }
+
+  const toggleFilter = (t, wichbutton) => {
+      if(wichbutton === 'type') setSelectedTypes((prev) => toogleBtnFilter(t, prev))
+      if(wichbutton === 'genre') setSelectedGenres((prev) => toogleBtnFilter(t, prev))
+  }
 
   const clearFilters = () => {
     setSelectedYear("all");
-    setSelectedType("all");
-    setSelectedGenre("all");
+    setSelectedTypes(["all"])
+    setSelectedGenres(["all"]);
   };
 
   const getDate = (item) => {
@@ -73,9 +106,9 @@ const App = () => {
 
   const sorted = [...filtered].sort((a, b) => {
     return getDate(b) - getDate(a); // décroissant (plus récent d'abord)
-  });;
+  });
 
-  const allMoviesShow = () => {
+  const clearMoovie = () => {
     setLastSearch("")
     clearFilters()
     setResults([])
@@ -101,10 +134,7 @@ const App = () => {
   const matchesTitleStrict = (item, query) => {
     const qWords = splitBySpaces(query).filter((w) => w.length >= 2);
     if (qWords.length === 0) return false;
-
     const allTitleWords = getTitleVariants(item).flatMap(splitBySpaces);
-
-    // (tu as demandé de supprimer la règle "titres longs => 2 mots")
     return qWords.some((qw) => allTitleWords.some((tw) => wordMatches(tw, qw)));
   };
 
@@ -192,53 +222,70 @@ const App = () => {
   ),
 ].filter((g) => g !== "Animation").filter((g) => g !== "Téléfilm").sort((a, b) => a.localeCompare(b, "fr"))
 
-const typeLabel = (t) => t === "movie" ? "Film" : t === "tv" ? "Série" : t === "animated_movie" ? "Animation" : t === "animated_tv" ? "Série animée" : t === "telefilm" ? "Téléfilm" : t;
-  
- return (
-    <div className="app">
-      <header className="app__header">
-        <h1>Ma collection</h1>
-      </header>
+const typeLabel = (t) => t === "movie" ? "Film" : t === "tv" ? "Série" : t === "animated_movie" ? "Animation" : t === "animated_tv" ? "Série animée" : t === "telefilm" ? "Téléfilm" : t==="all" ? "Tous les formats" : t;
+const typeGenre = (t) => t === "all" ? "Tous les genres" : t
 
+const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : sorted?.length ? "results-section" : "results-section empty"
+
+ return (
+  <>
+    <Header handleSearch={handleSearch} />
+    <div className="app">
       <main className="app__main">
-        <SearchBar onSearch={handleSearch} />
-        {lastSearch.length > 0 && <button onClick={allMoviesShow}>Supprimer la recherche</button>}    
-        <section className="results-section">
-          {lastSearch ? <p>Votre recherche pour : {lastSearch}</p> : <p>Recherchez votre film via la barre de recherche ci-dessus</p>}
-          {availableYears.length > 0 && (    
-          <select name="years" value={selectedYear} id="years-select" onChange={(e) => setSelectedYear(e.target.value)}>
-            <option value="all" key="Toutes les années">Toutes les années</option>             
-            {availableYears.map((year) => (
-              <option value={year} key={year}>{year}</option>
-            ))}
-          </select>
-          )}
+        <section className={classResult()}>
+          {lastSearch?.length ? <LastSearch lastSearch={lastSearch} /> : <p>Recherchez votre film via la <b>barre de recherche</b></p> }    
+
           {availableTypes.length > 0 && (
-          <select name="types" value={selectedType} id="types-select" onChange={(e) => setSelectedType(e.target.value)}>
-            <option value="all" key="Tous les formats">Tous les formats</option>             
-             {availableTypes.map((type) => (
-                <option value={type} key={type}>{typeLabel(type)}</option>
-             ))}
-          </select>)
+
+          <div>
+            <h3>Selectionnez le type de format :</h3>
+            <button type="button" value="all" key='all' onClick={() => toggleFilter('all', 'type')}>Tous les formats</button>
+            {availableTypes.map((type) => (
+              <button type="button" value={type} key={type} onClick={() => toggleFilter(type, 'type')}>{typeLabel(type)}</button>
+            ))}
+            <p>Format selectionné : {typeLabel(selectedTypes.map(typeLabel).join(", "))}</p>
+          </div>
+
+          )
           }
           {availableGenres.length > 0 && (
-          <select name="genres" value={selectedGenre} id="genres-select"  onChange={(e) => setSelectedGenre(e.target.value)}>
-            <option value="all" key="Tous les genres">Tous les genres</option>             
-             {availableGenres.map((genre) => (
-                <option value={genre} key={genre}>{genre}</option>
-             ))}
-          </select>)
+            <div>
+            <h3>Selectionnez le genre :</h3>
+            <button type="button" value="all" key='all' onClick={() => toggleFilter('all', 'genre')}>Tous les formats</button>
+            {availableGenres.map((genre) => (
+              <button type="button" value={genre} key={genre} onClick={() => toggleFilter(genre, 'genre')}>{genre}</button>
+            ))}
+            <p>Genre selectionné : {selectedGenres.map(typeGenre).join(", ")}</p>
+          </div>
+          )
           }
-          {(selectedYear !== "all" || selectedType !== "all" || selectedGenre !== "all") && (
+          
+          {availableYears.length > 0 && (    
+            <div>
+              <h3>Selectionnez l'année :</h3>
+              <select name="years" value={selectedYear} id="years-select" onChange={(e) => setSelectedYear(e.target.value)}>
+                <option value="all" key="Toutes les années">Toutes les années</option>             
+                {availableYears.map((year) => (
+                  <option value={year} key={year}>{year}</option>
+                ))}
+              </select>
+            </div>
+
+          
+          )}
+
+
+          {(selectedYear !== "all" || selectedTypes[0] !== "all" || selectedGenres[0] !== "all") && (
           <button onClick={clearFilters}>
             Réinitialiser les filtres
           </button>
           )}
-          <MediaGrid items={sorted} />
+          { lastSearch?.length > 0 && <MediaGrid items={sorted} />}
         </section>
 
       </main>
     </div>
+  </>
  )
 }
 
