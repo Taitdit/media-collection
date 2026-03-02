@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Header from './components/Header.jsx'
 import MediaGrid from "./components/MediaGrid";
 // import { mockResults } from "./utils/mockResults";
@@ -7,9 +7,7 @@ import useTmdbGenres from "./hooks/useTmdbGenres";
 import LastSearch from "./components/LastSearch";
 import NoResult from "./components/NoResult"
 import Filters from "./components/Filters"
-
-
-
+import {ThemeContext} from "./components/context/ThemeContext.jsx"
 
 const App = () => {
   const [lastSearch, setLastSearch] = useState("");
@@ -17,11 +15,27 @@ const App = () => {
   const [selectedYear, setSelectedYear] = useState("all")
   const [selectedGenres, setSelectedGenres] = useState(['all'])
   const [selectedTypes, setSelectedTypes] = useState(["all"])
-  const [dark, setDark] = useState(false)
+  const [msgError, setMsgError] = useState(false)
 
-  const darkmode = dark ? '-dark' : ''
+  const { theme } = useContext(ThemeContext)
+  const darkmode = theme !== 'light' ? '-dark' : ''
 
   
+  useEffect(() => {
+    const body = document.querySelector('body')
+    const removeAndAdd = (bool, value) => {
+      let valueNeg = ''
+      value === "light" ? valueNeg = 'dark' : valueNeg = 'light'
+      if(bool) {
+        body.classList.remove(value)
+        body.classList.add(valueNeg)
+      } else {
+          body.classList.add(valueNeg)
+      }
+    }
+    theme !== 'light' ? body.classList.contains('light') ? removeAndAdd(true, 'light') : removeAndAdd(false, 'light')  : body.classList.contains('dark') ? removeAndAdd(true, 'dark') : removeAndAdd(false, 'dark')
+  },[theme])
+    
   const toYear = (item) => {
     const dateStr =
       item.media_type === "movie"
@@ -190,10 +204,13 @@ const App = () => {
       const filtered = cleanedResults.filter(hasNotDocumentary).filter(hasGenreExist).filter(hasYear).filter(hasLang).filter(hasImage).filter(hasDescription).filter((item) => matchesTitleStrict(item, q));
       
         clearFilters();
+        msgError && setMsgError(true)
+
         setResults(filtered);
 
     } catch (err) {
       console.error("TMDB search error:", err);
+      !msgError && setMsgError(true)
       setResults([]);
     }
   };
@@ -226,29 +243,38 @@ const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : so
     <Header handleSearch={handleSearch} />
     <div className={`app${darkmode}`}>
       <main className="app__main">
+        
+        
         <section className={classResult()}>
-          {lastSearch?.length ? <LastSearch lastSearch={lastSearch} clearMoovie={clearMoovie} darkmode={darkmode} /> : <NoResult emptyResult={false}/> }    
+        
+          {!msgError ?
+            <>
+            {lastSearch?.length ? <LastSearch lastSearch={lastSearch} clearMoovie={clearMoovie} /> : <NoResult emptyResult={false}/> }
 
-         {!!(availableTypes?.length || availableGenres?.length || availableYears?.length) &&
-          <Filters 
-          availableTypes={availableTypes} 
-          availableGenres={availableGenres} 
-          availableYears={availableYears}
-          toggleFilter={toggleFilter}
-          typeLabel={typeLabel}
-          typeGenre={typeGenre}
-          setSelectedYear={setSelectedYear}
-          selectedYear={selectedYear}
-          selectedTypes={selectedTypes}
-          selectedGenres={selectedGenres}
-          clearFilters={clearFilters}
-          darkmode={darkmode}
-          /> 
-          }
+          {!!(availableTypes?.length || availableGenres?.length || availableYears?.length) &&
+            <Filters 
+            availableTypes={availableTypes} 
+            availableGenres={availableGenres} 
+            availableYears={availableYears}
+            toggleFilter={toggleFilter}
+            typeLabel={typeLabel}
+            typeGenre={typeGenre}
+            setSelectedYear={setSelectedYear}
+            selectedYear={selectedYear}
+            selectedTypes={selectedTypes}
+            selectedGenres={selectedGenres}
+            clearFilters={clearFilters}
+            /> 
+            }
 
           { lastSearch?.length > 0 && <MediaGrid items={sorted} />}
-        </section>
+          </>
+          :
+          <p>&#128557; Désolé il semblerait qu'il y ait un problème avec l'API qui charge les films</p>
 
+          }
+          
+          </section>
       </main>
     </div>
   </>

@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState, useContext } from "react";
+import {ThemeContext} from "./context/ThemeContext.jsx"
 import FilterA from "./svg/FilterA"
 import FilterB from "./svg/FilterB"
 
@@ -15,15 +16,16 @@ const Filters = ({
     selectedTypes,
     selectedGenres,
     clearFilters,
-    darkmode
 }) => {
     const [showFilsters, setShowFilters] = useState(false)
+    const { theme } = useContext(ThemeContext)
 
     const classContainer = showFilsters && 'show'
+    
 
     return (
-        <div className={`filters${darkmode}`}>
-        <button className={`cta-acc${darkmode}`} onClick={() => setShowFilters(currentValue => !currentValue)}><span className="label">Filtrez votre recherche</span> {!showFilsters ? <FilterA className="picto" /> : <FilterB className="picto" />}</button>
+        <div className={`filters${theme !== 'light' ? '-dark' : ''}`}>
+        <button className={`cta-acc${theme !== 'light' ? '-dark' : ''}`} onClick={() => setShowFilters(currentValue => !currentValue)}><span className="label">Filtrez votre recherche</span> {!showFilsters ? <FilterA className="picto" /> : <FilterB className="picto" />}</button>
           <div className={`filters__container ${classContainer}`}>
            
           {availableTypes?.length > 0 && (

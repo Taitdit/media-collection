@@ -1,6 +1,7 @@
-import { useState } from "react";
-
+import { useState, useContext } from "react";
+import {ThemeContext} from "./context/ThemeContext.jsx"
 const SearchBar = ({ onSearch, className }) => {
+    const { theme } = useContext(ThemeContext)
 
     const [query, setQuery] = useState("");
 
@@ -21,12 +22,12 @@ const SearchBar = ({ onSearch, className }) => {
       <input
         type="text"
         value={query}
-        className="search__input"
+        className={`search__input ${theme}`}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Rechercher..."
       />
       
-      <button className="cta-primary" type="submit">Rechercher</button>
+      <button className={`cta-primary${theme !== 'light' ? '-dark' : ''}`} type="submit">Rechercher</button>
     </form>
     </div>
   );

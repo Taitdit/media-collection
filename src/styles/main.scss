@@ -10,6 +10,7 @@
 @use "./components/card";
 @use "./components/cardImg";
 @use "./components/filters";
+@use "./components/tooglemode";
 
 * {
     font-family: v.$font;
@@ -17,6 +18,14 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+body {
+  color: v.$black;
+  background-color: v.$white;
+  &.dark {
+    color:v.$white;
+    background-color: v.$darkGrey;
+  }
 }
 .mention {
     display: flex;

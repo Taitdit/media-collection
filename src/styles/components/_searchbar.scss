@@ -15,6 +15,15 @@
         padding: v.$space-2;
         border-radius: v.$radius;
         border: v.$border;
+        background-color: v.$white;
+        &.dark {
+            background-color: v.$black;
+            border-color: v.$black;
+            color: v.$white;
+            &::placeholder {
+                color: v.$grey;
+            }
+        }
     }
 
 }
