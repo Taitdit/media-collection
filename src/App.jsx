@@ -5,7 +5,8 @@ import MediaGrid from "./components/MediaGrid";
 import { searchMulti } from "./services/tmdb";
 import useTmdbGenres from "./hooks/useTmdbGenres";
 import LastSearch from "./components/LastSearch";
-
+import NoResult from "./components/NoResult"
+import Filters from "./components/Filters"
 
 
 
@@ -14,16 +15,13 @@ const App = () => {
   const [lastSearch, setLastSearch] = useState("");
   const [results, setResults] = useState([]);
   const [selectedYear, setSelectedYear] = useState("all")
-  const [selectedGenre, setSelectedGenre] = useState('all')
-
-
-
   const [selectedGenres, setSelectedGenres] = useState(['all'])
   const [selectedTypes, setSelectedTypes] = useState(["all"])
+  const [dark, setDark] = useState(false)
 
+  const darkmode = dark ? '-dark' : ''
 
-
-
+  
   const toYear = (item) => {
     const dateStr =
       item.media_type === "movie"
@@ -60,10 +58,6 @@ const App = () => {
         (s === "animated_tv" && item.media_type === "tv" && hasGenre(item, "Animation"))
       )
      })
-
-      // const okGenre =
-      // selectedGenre === "all" ||
-      // getGenreNames(item).includes(selectedGenre);
 
      const okGenres = 
      selectedGenres.includes('all') ||
@@ -181,7 +175,7 @@ const App = () => {
     const token = import.meta.env.VITE_TMDB_TOKEN;
 
     try {
-      const pagesToFetch = 17;
+      const pagesToFetch = 10;
 
       const pageResponses = await Promise.all(
         Array.from({ length: pagesToFetch }, (_, i) => searchMulti(q, token, i + 1))
@@ -230,56 +224,28 @@ const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : so
  return (
   <>
     <Header handleSearch={handleSearch} />
-    <div className="app">
+    <div className={`app${darkmode}`}>
       <main className="app__main">
         <section className={classResult()}>
-          {lastSearch?.length ? <LastSearch lastSearch={lastSearch} /> : <p>Recherchez votre film via la <b>barre de recherche</b></p> }    
+          {lastSearch?.length ? <LastSearch lastSearch={lastSearch} clearMoovie={clearMoovie} darkmode={darkmode} /> : <NoResult emptyResult={false}/> }    
 
-          {availableTypes.length > 0 && (
-
-          <div>
-            <h3>Selectionnez le type de format :</h3>
-            <button type="button" value="all" key='all' onClick={() => toggleFilter('all', 'type')}>Tous les formats</button>
-            {availableTypes.map((type) => (
-              <button type="button" value={type} key={type} onClick={() => toggleFilter(type, 'type')}>{typeLabel(type)}</button>
-            ))}
-            <p>Format selectionné : {typeLabel(selectedTypes.map(typeLabel).join(", "))}</p>
-          </div>
-
-          )
+         {!!(availableTypes?.length || availableGenres?.length || availableYears?.length) &&
+          <Filters 
+          availableTypes={availableTypes} 
+          availableGenres={availableGenres} 
+          availableYears={availableYears}
+          toggleFilter={toggleFilter}
+          typeLabel={typeLabel}
+          typeGenre={typeGenre}
+          setSelectedYear={setSelectedYear}
+          selectedYear={selectedYear}
+          selectedTypes={selectedTypes}
+          selectedGenres={selectedGenres}
+          clearFilters={clearFilters}
+          darkmode={darkmode}
+          /> 
           }
-          {availableGenres.length > 0 && (
-            <div>
-            <h3>Selectionnez le genre :</h3>
-            <button type="button" value="all" key='all' onClick={() => toggleFilter('all', 'genre')}>Tous les formats</button>
-            {availableGenres.map((genre) => (
-              <button type="button" value={genre} key={genre} onClick={() => toggleFilter(genre, 'genre')}>{genre}</button>
-            ))}
-            <p>Genre selectionné : {selectedGenres.map(typeGenre).join(", ")}</p>
-          </div>
-          )
-          }
-          
-          {availableYears.length > 0 && (    
-            <div>
-              <h3>Selectionnez l'année :</h3>
-              <select name="years" value={selectedYear} id="years-select" onChange={(e) => setSelectedYear(e.target.value)}>
-                <option value="all" key="Toutes les années">Toutes les années</option>             
-                {availableYears.map((year) => (
-                  <option value={year} key={year}>{year}</option>
-                ))}
-              </select>
-            </div>
 
-          
-          )}
-
-
-          {(selectedYear !== "all" || selectedTypes[0] !== "all" || selectedGenres[0] !== "all") && (
-          <button onClick={clearFilters}>
-            Réinitialiser les filtres
-          </button>
-          )}
           { lastSearch?.length > 0 && <MediaGrid items={sorted} />}
         </section>
 

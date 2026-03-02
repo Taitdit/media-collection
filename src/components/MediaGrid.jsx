@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import MediaCard from "./MediaCard";
 import useTmdbGenres from "../hooks/useTmdbGenres";
 import useFilmotheque from "../hooks/useFilmotheque";
+import NoResult from "./NoResult";
 
 const MediaGrid = ({ items }) => {
 const { movieGenreMap, tvGenreMap, loadingGenres, genresError } = useTmdbGenres();
@@ -83,8 +84,7 @@ const libraryIndex = useMemo(() => {
   if (!items?.length) {
     return (
     <>
-    <p>Recherchez votre film via la <b>barre de recherche</b></p>
-    <p>&#128557; Aucun résultat</p>
+    <NoResult emptyResult={true} />
     </>
     )
   }

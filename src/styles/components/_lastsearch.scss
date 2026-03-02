@@ -1,0 +1,11 @@
+@use "../base/variables" as v;
+
+.lastSearch {
+    margin: 0 0 v.$space-2 0;
+    display: flex;
+    align-items: center;
+    gap: v.$space-3;
+    p, b {
+        font-size: 20px;
+    }
+}

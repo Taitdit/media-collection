@@ -1,0 +1,20 @@
+@use "../base/variables" as v;
+
+.filters, .filters-dark {
+    background-color: v.$grey;
+    padding: v.$space-5 v.$space-4;
+    border-radius: v.$radius;
+    margin-bottom: v.$space-3;
+
+    &__container {
+        overflow: hidden;
+        max-height: 0;
+        transition: v.$transition;
+        &.show {
+            max-height: 1000px;
+        }
+    }
+}
+.filters-dark {
+    background-color: v.$darkGrey;
+}

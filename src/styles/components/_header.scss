@@ -1,4 +1,4 @@
-@use "../base/variables";
+@use "../base/variables" as v;
 
 .app {
     &__header {
@@ -6,11 +6,11 @@
         width: 100%;
         top: 0;
         left: 0;
-        background-color: variables.$primary;
+        background-color: v.$primary;
         z-index: 1;
-        padding: variables.$space-4;
+        padding: v.$space-4;
         display: flex;
-        gap: variables.$space-4;
+        gap: v.$space-4;
         align-items: center;
         justify-content: space-between;
         
@@ -40,6 +40,6 @@
        max-width: 540px;
        display: flex;
        flex-direction: column;
-       gap: variables.$space-4;
+       gap: v.$space-4;
     }
 }

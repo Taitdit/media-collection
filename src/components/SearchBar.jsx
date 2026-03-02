@@ -26,7 +26,7 @@ const SearchBar = ({ onSearch, className }) => {
         placeholder="Rechercher..."
       />
       
-      <button className="search__button" type="submit">Rechercher</button>
+      <button className="cta-primary" type="submit">Rechercher</button>
     </form>
     </div>
   );

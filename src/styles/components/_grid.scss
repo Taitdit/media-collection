@@ -1,7 +1,7 @@
-@use "../base/variables";
+@use "../base/variables" as v;
 
 .media-grid {
   display: grid;
-  gap: variables.$space-3;
+  gap: v.$space-3;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }

@@ -1,17 +1,18 @@
 @use "./base/reset";
-@use "./base/variables";
+@use "./base/variables" as v;
 @use "./base/mixins";
 
 @use "./components/app";
 @use "./components/header";
 @use "./components/searchbar";
+@use "./components/lastsearch";
 @use "./components/grid";
 @use "./components/card";
 @use "./components/cardImg";
-
+@use "./components/filters";
 
 * {
-    font-family: variables.$font;
+    font-family: v.$font;
     font-size: 16px;
     box-sizing: border-box;
     margin: 0;
@@ -20,11 +21,32 @@
 .mention {
     display: flex;
     align-items: center;
-    font-family: variables.$font;
+    font-family: v.$font;
     img {
-        margin-right: variables.$space-4;
+        margin-right: v.$space-4;
     }
     .small {
         font-size: 13px;
     }
+}
+.cta-primary {
+  @include mixins.cta("cta-primary");
+}
+.cta-secondary {
+  @include mixins.cta("cta-secondary");
+}
+
+.cta-acc {
+    @include mixins.link("cta-acc"); 
+}
+
+.cta-primary-dark {
+  @include mixins.cta("cta-primary-dark");
+}
+.cta-secondary-dark {
+  @include mixins.cta("cta-secondary-dark");
+}
+
+.cta-acc-dark {
+    @include mixins.link("cta-acc-dark"); 
 }

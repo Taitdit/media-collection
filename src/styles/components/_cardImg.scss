@@ -1,4 +1,4 @@
-@use "../base/variables";
+@use "../base/variables" as v;
 
 .popinPicture {
     width: 100vw;
@@ -8,14 +8,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: variables.$space-6;
+    padding: v.$space-6;
     top: 0;
     left: 0;
     cursor: pointer;
     z-index: 999;
     img {
-        max-width: calc(100% - variables.$space-3);
-        max-height: calc(100% - variables.$space-3);
+        max-width: calc(100% - v.$space-3);
+        max-height: calc(100% - v.$space-3);
     }
 }
 .card_img {

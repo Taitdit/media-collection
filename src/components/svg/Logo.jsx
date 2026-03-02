@@ -2,8 +2,8 @@ const Logo = ({role, ariaLabel, className}) => {
     return (
         <div role={role} aria-label={ariaLabel} className={className}>
         <svg version="1.1" id="Calque_1" x="0px" y="0px"
-	 width="573.766px" height="134.463px" viewBox="0 0 573.766 134.463" enable-background="new 0 0 573.766 134.463"
-	 xml:space="preserve">
+	 width="573.766px" height="134.463px" viewBox="0 0 573.766 134.463" enableBackground="new 0 0 573.766 134.463"
+	 xmlSpace="preserve">
 <g>
 	<g>
 		<path d="M0,28.248c1.514,3.286,0.258,9.34,2.398,11.995c0.48-2.918,1.051-5.746,2.399-7.797C4.124,30.501,1.632,27.243,0,28.248z"

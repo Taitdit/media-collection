@@ -1,0 +1,54 @@
+@use "./components" as *;
+@use "./variables" as v;
+@use "sass:map";
+
+@mixin cta($name) {
+  $conf: map.get($components, $name);
+
+  background: map.get($conf, bg);
+  color: map.get($conf, color);
+  border-radius: map.get($conf, radius);
+  border: map.get($conf, border);
+  padding: v.$space-2 v.$space-3;
+  font-size: map.get($conf, textsize);
+  cursor: pointer;
+  font-weight: bold;
+
+  &:hover, &:focus, &:active {
+    background: map.get($conf, hoverbg);
+    color: map.get($conf, hover-text);
+  }
+}
+@mixin link($name) {
+    $conf: map.get($components, $name);
+    color: map.get($conf, color);
+    cursor: pointer;
+    background: none;
+    border: 0;
+    display: flex;
+    align-items: center;
+    gap: v.$space-3;
+    font-size: 17px;
+    font-weight: bold;
+     &:hover {
+      .label {
+          text-decoration: none;
+      }
+     }
+     span {
+       text-decoration: none;
+       &.label {
+        text-decoration: underline;
+        font-size: map.get($conf, textsize);
+        text-transform: uppercase;
+       }
+     }
+     .picto {
+      width: 28px;
+      svg {
+        width: 60px;
+        height: auto;
+        fill: map.get($conf, color);
+      }
+     }
+  }
