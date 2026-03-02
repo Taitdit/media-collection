@@ -1,24 +1,30 @@
-@use "../base/variables";
+@use "../base/variables" as v;
 
 
-.app {
-  font-family: variables.$font;
-  padding: variables.$space-6;
+.app, .app-dark {
+  font-family: v.$font;
+  padding: v.$space-6;
+  color: v.$black;
+  background-color: v.$white;
 }
-
-.app__header {
-  margin-bottom: variables.$space-6;
+.app-dark {
+  color: v.$white;
+  background-color: v.$black;
 }
-
-.search-section {
-  display: flex;
-  gap: 12px;
-  margin-bottom: variables.$space-6;
-}
-
 .results-section {
-  min-height: 100px;
-  border: variables.$border;
-  padding: variables.$space-4;
-  border-radius: 8px;
+  border: v.$border;
+  padding: v.$space-4;
+  border-radius: v.$radius;
+  min-height: 80vh;
+  &.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: v.$space-4;
+    p, b {
+      font-size: 24px;
+    }
+  }
 }

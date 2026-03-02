@@ -1,0 +1,49 @@
+@use "./variables" as v;
+
+
+$components: (
+  "cta-primary": (
+    bg: v.$black,
+    color: v.$white,
+    textsize: 14px,
+    radius: v.$radius,
+    border: v.$borderBlack,
+    hoverbg: v.$white,
+    hover-text: v.$black
+  ),
+    "cta-secondary": (
+    bg: v.$white,
+    color: v.$black,
+    textsize: 14px,
+    radius: v.$radius,
+    border: v.$borderBlack,
+    hoverbg: v.$black,
+    hover-text: v.$white
+  ),
+    "cta-primary-dark": (
+    bg: v.$white,
+    color: v.$black,
+    textsize: 14px,
+    radius: v.$radius,
+    border: v.$borderWhite,
+    hoverbg: v.$black,
+    hover-text: v.$white
+  ),
+    "cta-secondary-dark": (
+    bg: v.$black,
+    color: v.$white,
+    textsize: 14px,
+    radius: v.$radius,
+    border: v.$borderWhite,
+    hoverbg: v.$white,
+    hover-text: v.$black
+  ),
+  "cta-acc": (
+    color: v.$black,
+    textsize: 18px
+  ),
+  "cta-acc-dark": (
+    color: v.$white,
+    textsize: 18px
+  ),
+);

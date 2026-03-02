@@ -1,0 +1,55 @@
+@use "../base/variables" as v;
+
+.app {
+    &__header {
+        position: sticky;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: v.$primary;
+        z-index: 1;
+        padding: v.$space-4;
+        display: flex;
+        gap: v.$space-10;
+        align-items: center;
+        justify-content: space-between;
+        
+        &.dark {
+            background-color: v.$primary-dark;
+        }
+
+        .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        }
+    }
+    &__logo {
+        max-width: 390px;
+        width: 100%;
+        position: relative;
+        top: v.$space-1;
+        svg {
+            width: 100%;
+            height: auto;
+        }
+        &.dark {
+            svg {
+                fill: v.$white;
+            }
+        }
+    }
+    &__search {
+       width: 100%;
+       max-width: 540px;
+       display: flex;
+       flex-direction: column;
+       gap: v.$space-4;
+    }
+}
