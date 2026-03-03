@@ -11,6 +11,7 @@
 @use "./components/cardImg";
 @use "./components/filters";
 @use "./components/tooglemode";
+@use "./components/radiofilter";
 
 * {
     font-family: v.$font;
@@ -44,6 +45,10 @@ body {
 .cta-secondary {
   @include mixins.cta("cta-secondary");
 }
+.cta-tertiary {
+  @include mixins.cta("cta-tertiary");
+}
+
 
 .cta-acc {
     @include mixins.link("cta-acc"); 
@@ -54,6 +59,9 @@ body {
 }
 .cta-secondary-dark {
   @include mixins.cta("cta-secondary-dark");
+}
+.cta-tertiary-dark {
+  @include mixins.cta("cta-tertiary-dark");
 }
 
 .cta-acc-dark {

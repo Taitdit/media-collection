@@ -251,6 +251,8 @@ const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : so
             <>
             {lastSearch?.length ? <LastSearch lastSearch={lastSearch} clearMoovie={clearMoovie} /> : <NoResult emptyResult={false}/> }
 
+            <div className={`container ${!sorted?.length ? 'empty' : ''}`}>
+
           {!!(availableTypes?.length || availableGenres?.length || availableYears?.length) &&
             <Filters 
             availableTypes={availableTypes} 
@@ -268,10 +270,10 @@ const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : so
             }
 
           { lastSearch?.length > 0 && <MediaGrid items={sorted} />}
+          </div>
           </>
           :
           <p>&#128557; Désolé il semblerait qu'il y ait un problème avec l'API qui charge les films</p>
-
           }
           
           </section>

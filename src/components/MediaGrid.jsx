@@ -3,6 +3,7 @@ import MediaCard from "./MediaCard";
 import useTmdbGenres from "../hooks/useTmdbGenres";
 import useFilmotheque from "../hooks/useFilmotheque";
 import NoResult from "./NoResult";
+import RadioFilter from "./RadioFilter";
 
 const MediaGrid = ({ items }) => {
 const { movieGenreMap, tvGenreMap, loadingGenres, genresError } = useTmdbGenres();
@@ -83,58 +84,16 @@ const libraryIndex = useMemo(() => {
 
   if (!items?.length) {
     return (
-    <>
+    <div className="container_search">
     <NoResult emptyResult={true} />
-    </>
+    </div>
     )
   }
 
   return (
-    <>
+    <div className="container_search">
     {items.length && (
-<form className="yourVideo">
-  <label>
-    <input
-      type="radio"
-      name="filmFilter"
-      value="all"
-      checked={filmFilter === "all"}
-      onChange={(e) => setFilmFilter(e.target.value)}
-    />
-    Afficher tous les médias de la recherche
-  </label>
-  <label>
-    <input
-      type="radio"
-      name="filmFilter"
-      value="physicalAndDisc"
-      checked={filmFilter === "physicalAndDisc"}
-      onChange={(e) => setFilmFilter(e.target.value)}
-    />
-    Afficher tous les médias de la recherche que j'ai 
-  </label>
-  <label>
-    <input
-      type="radio"
-      name="filmFilter"
-      value="physical"
-      checked={filmFilter === "physical"}
-      onChange={(e) => setFilmFilter(e.target.value)}
-    />
-    Afficher tous les médias de la recherche que j'ai en DVD ou Blu-ray 
-  </label>
-
-  <label>
-    <input
-      type="radio"
-      name="filmFilter"
-      value="disc"
-      checked={filmFilter === "disc"}
-      onChange={(e) => setFilmFilter(e.target.value)}
-    />
-    Afficher tous les médias de la recherche que j'ai sur disque
-  </label>
-</form>
+      <RadioFilter filmFilter={filmFilter} setFilmFilter={setFilmFilter}/>
      )}
     <div className="media-grid">
       {items.map((item) => (
@@ -161,7 +120,7 @@ const libraryIndex = useMemo(() => {
         />
       ))}
     </div>
-    </>
+    </div>
   );
 };
 

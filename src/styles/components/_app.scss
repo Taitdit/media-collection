@@ -11,6 +11,16 @@
   color: v.$white;
   background-color: v.$black;
 }
+.container {
+  display: flex;
+  gap: v.$space-4;
+  align-items: flex-start;
+  margin-top: v.$space-4;
+  width: 100%;
+  &.empty {
+    align-items: center;
+  }
+}
 .results-section {
   border: v.$border;
   padding: v.$space-4;

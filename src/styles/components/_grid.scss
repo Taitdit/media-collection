@@ -1,5 +1,12 @@
 @use "../base/variables" as v;
 
+.container_search {
+  display: flex;
+  flex-direction: column;
+  flex: 6;
+  position: relative;
+}
+
 .media-grid {
   display: grid;
   gap: v.$space-3;

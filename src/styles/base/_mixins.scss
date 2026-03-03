@@ -9,14 +9,23 @@
   color: map.get($conf, color);
   border-radius: map.get($conf, radius);
   border: map.get($conf, border);
-  padding: v.$space-2 v.$space-3;
+  padding: map.get($conf, padding);
   font-size: map.get($conf, textsize);
   cursor: pointer;
-  font-weight: bold;
+  font-weight:  map.get($conf, weight);
 
-  &:hover, &:focus, &:active {
+  &:hover {
     background: map.get($conf, hoverbg);
     color: map.get($conf, hover-text);
+    border-color: map.get($conf, hoverbordercolor);
+  }
+  &:focus, &:active {
+    background: map.get($conf, focusBg);
+    color: map.get($conf, focusText);
+    border-color: map.get($conf, focusBorder);
+  }
+  &.selected {
+    background: map.get($conf, seletedbg);
   }
 }
 @mixin link($name) {
@@ -28,7 +37,6 @@
     display: flex;
     align-items: center;
     gap: v.$space-3;
-    font-size: 17px;
     font-weight: bold;
      &:hover {
       .label {
@@ -41,10 +49,13 @@
         text-decoration: underline;
         font-size: map.get($conf, textsize);
         text-transform: uppercase;
+        flex: 2;
+        font-size: 15px;
+        text-align: left;
        }
      }
      .picto {
-      width: 28px;
+        flex:1;
       svg {
         width: 60px;
         height: auto;
