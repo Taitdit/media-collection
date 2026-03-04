@@ -71,7 +71,7 @@ const Filters = ({
           })}
 
           {(selectedYear !== "all" || selectedTypes[0] !== "all" || selectedGenres[0] !== "all") && (
-          <button className={`cta-secondary${theme !== 'light' ? '-dark' : ''}`} onClick={clearFilters}>
+          <button className={`cta-secondary${theme !== 'light' ? '-dark' : ''}`} onClick={() => clearFilters(false)}>
             Réinitialiser les filtres
           </button>
           )}

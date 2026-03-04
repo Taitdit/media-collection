@@ -1,13 +1,14 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useContext } from "react";
+import {ListContext} from "./context/ListContext.jsx"
 import MediaCard from "./MediaCard";
 import useTmdbGenres from "../hooks/useTmdbGenres";
 import useFilmotheque from "../hooks/useFilmotheque";
 import NoResult from "./NoResult";
 import RadioFilter from "./RadioFilter";
 
-const MediaGrid = ({ items }) => {
+const MediaGrid = ({ items, filmFilter, setFilmFilter }) => {
 const { movieGenreMap, tvGenreMap, loadingGenres, genresError } = useTmdbGenres();
-const [filmFilter, setFilmFilter] = useState('all')
+const { list } = useContext(ListContext)
 
 
 const normalizeTitle = (s) => (s ?? "").toLowerCase().replace(/['’]/g, "'").replace(/[:\-–—]/g, " ").replace(/\s+/g, " ").trim();
@@ -91,11 +92,12 @@ const libraryIndex = useMemo(() => {
   }
 
   return (
+    
     <div className="container_search">
     {items.length && (
       <RadioFilter filmFilter={filmFilter} setFilmFilter={setFilmFilter}/>
      )}
-    <div className="media-grid">
+    <div className={`media-grid${list ? ' list' : ''}`}>
       {items.map((item) => (
 
         <MediaCard

@@ -18,6 +18,73 @@
         max-height: calc(100% - v.$space-3);
     }
 }
-.card_img {
-    cursor: pointer
+.ImgCard {
+    cursor: pointer;
+    max-height: 330px;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    &__img {
+        width: 100%;
+    }
+    &.list {
+        max-height: 500px;
+        width: auto;
+        display: flex;
+        .ImgCard__img {
+            width: auto;
+        }
+    }
+    .hover {
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #000000, $alpha: 0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+            fill: v.$white;
+            width: 60px;
+            opacity: 0.65;
+        }
+    }
+    .patch {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+        width: 140px;
+        height: 70px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 18px 0 0;
+        &.blu-ray {
+            background-color: v.$bluray;
+        }
+        &.dvd {
+            background-color: v.$dvd;
+        }
+        &.disque-dur {
+            background-color: v.$dd;
+        }
+        &.dark {
+            &.blu-ray{
+                background-color: v.$darkbluray;
+            }
+            &.dvd {
+                background-color: v.$darkdvd;
+            }
+            &.disque-dur {
+                background-color: v.$darkdd;                
+            }
+        }
+    }
 }

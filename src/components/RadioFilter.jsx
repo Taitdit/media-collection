@@ -1,8 +1,13 @@
 import { useContext } from "react";
+import {ListContext} from "./context/ListContext.jsx"
 import {ThemeContext} from "./context/ThemeContext.jsx"
+import Grille from './svg/Grille'
+import Liste from './svg/Liste'
 
 const RadioFilter = ({filmFilter, setFilmFilter}) => {
     const { theme } = useContext(ThemeContext)
+    const { list, toggleList } = useContext(ListContext)
+
     const arrayFIlter = ["all", "physicalAndDisc", "physical", "disc"]
 
     return (
@@ -26,6 +31,7 @@ const RadioFilter = ({filmFilter, setFilmFilter}) => {
             })
             }
         </form>
+        <button className="radioFilter__list" onClick={() => toggleList()}>{list ? <Liste className='picto' /> : <Grille className='picto' />}</button>
         </div>
 
     )

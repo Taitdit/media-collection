@@ -99,6 +99,38 @@ $components: (
     focusBg: none,
     focusText: v.$black,
     focusBorder: v.$grey
+  ),    
+  "cta-four": (
+    bg: v.$white,
+    padding: v.$space-2 v.$space-7,
+    color: v.$black,
+    textsize: 14px,
+    radius: v.$radius,
+    border: v.$borderBlack,
+    weight: bold,
+
+    hoverbg: v.$grey,
+    hover-text: v.$black,
+    hoverbordercolor: v.$black,
+    focusBg: v.$grey,
+    focusText: v.$black,
+    focusBorder:v.$black
+  ),
+    "cta-four-dark": (
+    bg: v.$black,
+    padding: v.$space-2 v.$space-7,
+    color: v.$white,
+    textsize: 14px,
+    radius: v.$radius,
+    border: v.$borderWhite,
+    weight: bold,
+
+    hoverbg: v.$darkGrey,
+    hover-text: v.$white,
+    hoverbordercolor: v.$white,
+    focusBg: v.$grey,
+    focusText: v.$white,
+    focusBorder:v.$white
   ),
   "cta-acc": (
     color: v.$black,
