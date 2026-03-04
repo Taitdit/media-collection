@@ -1,27 +1,151 @@
+@use "../base/variables" as v;
+
 .media-card {
-  border: 1px solid #ddd;
+  border: 1px solid v.$darkGrey;
   border-radius: 8px;
   padding: 12px;
-
+  width: calc(25% - 12px);
+  background-color: v.$white;
+  flex: 0 0 auto;
+  min-width: 360px;
+  box-shadow: 1px 0 8px 0px v.$darkGrey;
+  overflow: hidden;
+  &.dark {
+    border-color: v.$grey;
+    background-color: v.$black;
+    box-shadow: 2px 0 8px 0px v.$grey;
+  }
+  &.list {
+    min-width: none;
+    width: 100%;
+  }
   &__title {
     margin: 0 0 6px 0;
-    font-size: 16px;
+    font-size: 22px;
+    text-transform: uppercase;
   }
   &__meta {
-    margin: 0;
-    font-size: 13px;
-    opacity: 0.8;
+    margin: v.$space-3 0;
+    font-size: 14px;
+    span {
+      font-size: 15px;
+      font-weight: bold;
+    }
+    ul {
+      display: inline-flex;
+      gap: v.$space-2;
+      li {
+        list-style: none;
+        padding: v.$space-1;
+        border: 1px solid v.$grey;
+        border-radius: v.$radius;
+      }
+    } 
+
+  }
+  &__container {
+    display: flex;
+    justify-content: flex-start;
+    gap: v.$space-4;
+    align-items: flex-start;
+    flex-direction: column;
+    &.list {
+      flex-direction: row;
+    }
+  }
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: v.$space-2;
+    width: 100%;
+  }
+  &__infos {
+    width: 100%;
+    .infos__type, .info {
+      font-size: 18px;
+    }
+    .info {
+      font-weight: bold;
+    }
   }
   &.bluray {
-    background-color: blue;
+    outline: 3px solid v.$bluray;
   }
   &.dvd {
-    background-color: green;
+    outline: 3px solid v.$dvd;
   }
   &.dd {
-    background-color: grey;
+    outline: 3px solid v.$dd;
+  }
+  &.dark {
+    &.bluray {
+      outline: 3px solid v.$darkbluray;
+    }
+    &.dvd {
+      outline: 3px solid v.$darkdvd;
+    }
+    &.dd {
+      outline: 3px solid v.$darkdd;
+    }
   }
   &.hidden {
     display: none;
+  }
+  &.list {
+    .media-card__infos {
+      flex: 1;
+    }
+  }
+  .infos {
+    &__sup {
+      display: none;
+      background-color: rgba($color: #000000, $alpha: 0.8);
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left:0;
+      z-index: 3;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      &.active {display: flex;}
+    }
+    &__container {
+      background-color: v.$white;
+      padding: v.$space-6;
+      border-radius: v.$radius;
+      width: 100%;
+      max-width: 40vw;
+      position: relative;
+      &.dark {
+        background-color: v.$darkGrey;
+      }
+      .cross {
+        background-color: v.$black;
+        width: 24px;
+        height: 24px;
+        color: v.$black;
+        padding: v.$space-1;
+        position: absolute;
+        right: v.$space-1;
+        top: v.$space-1;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        padding: v.$space-2;
+        &:before {
+          content: 'x';
+          color: v.$white;
+          position: relative;
+          bottom: 2px;
+          font-size: 18px;
+        }
+      }
+      .ImgCard__img {
+        width: auto;
+      }
+    } 
   }
 }

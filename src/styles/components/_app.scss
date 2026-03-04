@@ -11,11 +11,22 @@
   color: v.$white;
   background-color: v.$black;
 }
+.container {
+  display: flex;
+  gap: v.$space-4;
+  align-items: flex-start;
+  margin-top: v.$space-4;
+  width: 100%;
+  &.empty {
+    align-items: center;
+  }
+}
 .results-section {
   border: v.$border;
   padding: v.$space-4;
   border-radius: v.$radius;
-  min-height: 80vh;
+  min-height: calc(100vh - 280px);
+  max-height: calc(100vh - 280px);
   &.empty {
     display: flex;
     align-items: center;

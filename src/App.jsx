@@ -7,6 +7,7 @@ import useTmdbGenres from "./hooks/useTmdbGenres";
 import LastSearch from "./components/LastSearch";
 import NoResult from "./components/NoResult"
 import Filters from "./components/Filters"
+import { ListProvider } from "./components/context/ListContext.jsx";
 import {ThemeContext} from "./components/context/ThemeContext.jsx"
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
   const [selectedGenres, setSelectedGenres] = useState(['all'])
   const [selectedTypes, setSelectedTypes] = useState(["all"])
   const [msgError, setMsgError] = useState(false)
+  const [filmFilter, setFilmFilter] = useState('all')
 
   const { theme } = useContext(ThemeContext)
   const darkmode = theme !== 'light' ? '-dark' : ''
@@ -97,10 +99,11 @@ const App = () => {
       if(wichbutton === 'genre') setSelectedGenres((prev) => toogleBtnFilter(t, prev))
   }
 
-  const clearFilters = () => {
+  const clearFilters = (clearRadio) => {
     setSelectedYear("all");
     setSelectedTypes(["all"])
     setSelectedGenres(["all"]);
+    clearRadio && setFilmFilter("all")
   };
 
   const getDate = (item) => {
@@ -118,7 +121,7 @@ const App = () => {
 
   const clearMoovie = () => {
     setLastSearch("")
-    clearFilters()
+    clearFilters(true)
     setResults([])
   }
 
@@ -181,7 +184,7 @@ const App = () => {
     const q = value.trim().toLowerCase();
     
     if(!q) {
-      clearFilters()
+      clearFilters(true)
       setResults([])
       return
     }
@@ -203,7 +206,7 @@ const App = () => {
 
       const filtered = cleanedResults.filter(hasNotDocumentary).filter(hasGenreExist).filter(hasYear).filter(hasLang).filter(hasImage).filter(hasDescription).filter((item) => matchesTitleStrict(item, q));
       
-        clearFilters();
+        clearFilters(true);
         msgError && setMsgError(true)
 
         setResults(filtered);
@@ -251,6 +254,8 @@ const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : so
             <>
             {lastSearch?.length ? <LastSearch lastSearch={lastSearch} clearMoovie={clearMoovie} /> : <NoResult emptyResult={false}/> }
 
+            <div className={`container ${!sorted?.length ? 'empty' : ''}`}>
+
           {!!(availableTypes?.length || availableGenres?.length || availableYears?.length) &&
             <Filters 
             availableTypes={availableTypes} 
@@ -267,11 +272,11 @@ const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : so
             /> 
             }
 
-          { lastSearch?.length > 0 && <MediaGrid items={sorted} />}
+          { lastSearch?.length > 0 &&     <ListProvider><MediaGrid items={sorted} setFilmFilter={setFilmFilter} filmFilter={filmFilter} /></ListProvider>}
+          </div>
           </>
           :
           <p>&#128557; Désolé il semblerait qu'il y ait un problème avec l'API qui charge les films</p>
-
           }
           
           </section>

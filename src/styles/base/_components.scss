@@ -4,39 +4,133 @@
 $components: (
   "cta-primary": (
     bg: v.$black,
+    padding: v.$space-2 v.$space-3,
     color: v.$white,
     textsize: 14px,
     radius: v.$radius,
     border: v.$borderBlack,
+    weight: bold,
+
     hoverbg: v.$white,
-    hover-text: v.$black
+    hover-text: v.$black,
+    hoverbordercolor: v.$white,
+    focusBg: v.$white,
+    focusText: v.$black,
+    focusBorder:v.$white
   ),
     "cta-secondary": (
     bg: v.$white,
+    padding: v.$space-2 v.$space-3,
     color: v.$black,
     textsize: 14px,
     radius: v.$radius,
     border: v.$borderBlack,
+    weight: bold,
+
     hoverbg: v.$black,
-    hover-text: v.$white
+    hover-text: v.$white,
+    hoverbordercolor: v.$black,
+    focusBg: v.$black,
+    focusText: v.$white,
+    focusBorder:v.$black
+  ),
+  "cta-tertiary": (
+    bg: none,
+    padding: v.$space-1 v.$space-2,
+    color: v.$black,
+    textsize: 12px,
+    radius: v.$smallRadius,
+    border: 1px solid v.$darkGrey,
+    weight: normal,
+
+    hoverbg: none,
+    hover-text: v.$white,
+    hoverbordercolor: v.$white,
+    seletedbg: v.$primary,
+    focusBg: none,
+    focusText: v.$black,
+    focusBorder: v.$white
   ),
     "cta-primary-dark": (
     bg: v.$white,
+    padding: v.$space-2 v.$space-3,
     color: v.$black,
     textsize: 14px,
     radius: v.$radius,
     border: v.$borderWhite,
+    weight: bold,
+
     hoverbg: v.$black,
-    hover-text: v.$white
+    hover-text: v.$white,
+    hoverbordercolor: v.$white,
+    focusBg: v.$black,
+    focusText: v.$white,
+    focusBorder:v.$black
   ),
     "cta-secondary-dark": (
     bg: v.$black,
+    padding: v.$space-2 v.$space-3,
     color: v.$white,
     textsize: 14px,
     radius: v.$radius,
     border: v.$borderWhite,
+    weight: bold,
+
     hoverbg: v.$white,
-    hover-text: v.$black
+    hover-text: v.$black,
+    hoverbordercolor: v.$white,
+    focusBg: v.$white,
+    focusText: v.$black,
+    focusBorder:v.$white
+  ),
+  "cta-tertiary-dark": (
+    bg: none,
+    padding: v.$space-1 v.$space-2,
+    color: v.$white,
+    textsize: 12px,
+    radius: v.$smallRadius,
+    border: 1px solid v.$grey,
+    weight: normal,
+
+    hoverbg: none,
+    hover-text: v.$black,
+    hoverbordercolor: v.$black,
+    seletedbg: v.$primary-dark,
+    focusBg: none,
+    focusText: v.$black,
+    focusBorder: v.$grey
+  ),    
+  "cta-four": (
+    bg: v.$white,
+    padding: v.$space-2 v.$space-7,
+    color: v.$black,
+    textsize: 14px,
+    radius: v.$radius,
+    border: v.$borderBlack,
+    weight: bold,
+
+    hoverbg: v.$grey,
+    hover-text: v.$black,
+    hoverbordercolor: v.$black,
+    focusBg: v.$grey,
+    focusText: v.$black,
+    focusBorder:v.$black
+  ),
+    "cta-four-dark": (
+    bg: v.$black,
+    padding: v.$space-2 v.$space-7,
+    color: v.$white,
+    textsize: 14px,
+    radius: v.$radius,
+    border: v.$borderWhite,
+    weight: bold,
+
+    hoverbg: v.$darkGrey,
+    hover-text: v.$white,
+    hoverbordercolor: v.$white,
+    focusBg: v.$grey,
+    focusText: v.$white,
+    focusBorder:v.$white
   ),
   "cta-acc": (
     color: v.$black,

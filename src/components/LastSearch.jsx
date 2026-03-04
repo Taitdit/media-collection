@@ -6,7 +6,7 @@ const LastSearch = ({lastSearch, clearMoovie}) => {
     
     return (
         <div className="lastSearch">
-            <p className="lastSearch__label" aria-label={`Votre recherche pour : ${lastSearch}`}>Votre recherche pour : <b>{lastSearch}</b></p>
+            <h2 className="lastSearch__label" aria-label={`Votre recherche pour : ${lastSearch}`}>Votre recherche pour : <b>{lastSearch}</b></h2>
             <button className={`cta-primary${theme !== 'light' ? '-dark' : ''  }`} onClick={clearMoovie}>Supprimer la recherche</button>
         </div>
     )

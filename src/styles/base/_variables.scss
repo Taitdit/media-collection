@@ -10,6 +10,7 @@ $space-9: 36px;
 $space-10: 40px;
 
 $radius: 10px;
+$smallRadius: 8px;
 
 $border: 1px solid #ddd;
 $borderBlack: 1px solid #000;
@@ -17,11 +18,30 @@ $borderWhite: 1px solid #fff;
 
 $font: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
-$primary: #FFCC00;
+$primary: #ffb900;
 $primary-dark: #df8e00;
 $black: #000000;
 $white: #ffffff;
 $grey: #cfcfcf;
 $darkGrey: #7c7c7c;
 
-$transition: all 0.5s ease
+$transition: all 0.5s ease;
+
+// format
+$bluray: #8a8aff;
+$dvd: #64bd64;
+$dd: #ffb900;
+$darkbluray: #50509b;
+$darkdvd: #4b8f4b;
+$darkdd: #df8e00;
+
+
+// screen
+
+$xxs: 360px;
+$xs: 480px;
+$s: 640px;
+$m: 860px;
+$l: 1080px;
+$xl: 1280px;
+$xxl: 1820px;

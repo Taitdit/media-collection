@@ -11,6 +11,7 @@
 @use "./components/cardImg";
 @use "./components/filters";
 @use "./components/tooglemode";
+@use "./components/radiofilter";
 
 * {
     font-family: v.$font;
@@ -31,6 +32,7 @@ body {
     display: flex;
     align-items: center;
     font-family: v.$font;
+    max-height: 100px;
     img {
         margin-right: v.$space-4;
     }
@@ -38,11 +40,23 @@ body {
         font-size: 13px;
     }
 }
+.float {
+  img  {
+    float: left;
+    margin: 0 v.$space-4 v.$space-3 0; 
+  }
+}
 .cta-primary {
   @include mixins.cta("cta-primary");
 }
 .cta-secondary {
   @include mixins.cta("cta-secondary");
+}
+.cta-tertiary {
+  @include mixins.cta("cta-tertiary");
+}
+.cta-four {
+  @include mixins.cta("cta-four");
 }
 
 .cta-acc {
@@ -55,7 +69,12 @@ body {
 .cta-secondary-dark {
   @include mixins.cta("cta-secondary-dark");
 }
-
+.cta-tertiary-dark {
+  @include mixins.cta("cta-tertiary-dark");
+}
+.cta-four-dark {
+  @include mixins.cta("cta-four-dark");
+}
 .cta-acc-dark {
     @include mixins.link("cta-acc-dark"); 
 }

@@ -5,15 +5,39 @@
     padding: v.$space-5 v.$space-4;
     border-radius: v.$radius;
     margin-bottom: v.$space-3;
-
+    flex: 1;
+    text-align: left;
     &__container {
         overflow: hidden;
         max-height: 0;
         transition: v.$transition;
+        display:flex;
+        flex-direction: column;
         &.show {
             max-height: 1000px;
         }
     }
+    &__card {
+        margin-top: v.$space-2;
+        padding: v.$space-2 0;
+        border-top: 1px solid v.$white;
+        * {
+            font-size: 12px;
+        }
+        h3 {
+            margin-bottom: v.$space-2;
+        }
+    }
+    &__buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: v.$space-2;
+            
+    }
+    &__selected {
+        width: 100%;
+    }
+
 }
 .filters-dark {
     background-color: v.$darkGrey;

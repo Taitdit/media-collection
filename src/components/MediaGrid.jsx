@@ -1,12 +1,14 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useContext } from "react";
+import {ListContext} from "./context/ListContext.jsx"
 import MediaCard from "./MediaCard";
 import useTmdbGenres from "../hooks/useTmdbGenres";
 import useFilmotheque from "../hooks/useFilmotheque";
 import NoResult from "./NoResult";
+import RadioFilter from "./RadioFilter";
 
-const MediaGrid = ({ items }) => {
+const MediaGrid = ({ items, filmFilter, setFilmFilter }) => {
 const { movieGenreMap, tvGenreMap, loadingGenres, genresError } = useTmdbGenres();
-const [filmFilter, setFilmFilter] = useState('all')
+const { list } = useContext(ListContext)
 
 
 const normalizeTitle = (s) => (s ?? "").toLowerCase().replace(/['’]/g, "'").replace(/[:\-–—]/g, " ").replace(/\s+/g, " ").trim();
@@ -83,60 +85,19 @@ const libraryIndex = useMemo(() => {
 
   if (!items?.length) {
     return (
-    <>
+    <div className="container_search">
     <NoResult emptyResult={true} />
-    </>
+    </div>
     )
   }
 
   return (
-    <>
+    
+    <div className="container_search">
     {items.length && (
-<form className="yourVideo">
-  <label>
-    <input
-      type="radio"
-      name="filmFilter"
-      value="all"
-      checked={filmFilter === "all"}
-      onChange={(e) => setFilmFilter(e.target.value)}
-    />
-    Afficher tous les médias de la recherche
-  </label>
-  <label>
-    <input
-      type="radio"
-      name="filmFilter"
-      value="physicalAndDisc"
-      checked={filmFilter === "physicalAndDisc"}
-      onChange={(e) => setFilmFilter(e.target.value)}
-    />
-    Afficher tous les médias de la recherche que j'ai 
-  </label>
-  <label>
-    <input
-      type="radio"
-      name="filmFilter"
-      value="physical"
-      checked={filmFilter === "physical"}
-      onChange={(e) => setFilmFilter(e.target.value)}
-    />
-    Afficher tous les médias de la recherche que j'ai en DVD ou Blu-ray 
-  </label>
-
-  <label>
-    <input
-      type="radio"
-      name="filmFilter"
-      value="disc"
-      checked={filmFilter === "disc"}
-      onChange={(e) => setFilmFilter(e.target.value)}
-    />
-    Afficher tous les médias de la recherche que j'ai sur disque
-  </label>
-</form>
+      <RadioFilter filmFilter={filmFilter} setFilmFilter={setFilmFilter}/>
      )}
-    <div className="media-grid">
+    <div className={`media-grid${list ? ' list' : ''}`}>
       {items.map((item) => (
 
         <MediaCard
@@ -161,7 +122,7 @@ const libraryIndex = useMemo(() => {
         />
       ))}
     </div>
-    </>
+    </div>
   );
 };
 
