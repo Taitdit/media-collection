@@ -30,6 +30,10 @@
     span {
       font-size: 15px;
       font-weight: bold;
+      &.description {
+        font-weight: normal;
+        font-size: 13px;
+      }
     }
     ul {
       display: inline-flex;
@@ -88,9 +92,6 @@
     &.dd {
       outline: 3px solid v.$darkdd;
     }
-  }
-  &.hidden {
-    display: none;
   }
   &.list {
     .media-card__infos {

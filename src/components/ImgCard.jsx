@@ -18,17 +18,17 @@ const ImgCard = ({popin, title, picture, format }) => {
         <>
         {popinPicture && 
             <div className="popinPicture" onClick={() => setPopinPicture(false)}>
-                <img src={imgSize('original')} alt={title.fr}/>
+                <img src={imgSize('original')} alt={title}/>
             </div>
         }
         {popin ? 
-            <img className="ImgCard__img" src={imgSize('w154')} alt={title.fr} />
+            <img className="ImgCard__img" src={imgSize('w154')} alt={title} />
 
         : 
         <div className={`ImgCard${list ? ' list' : ''}`} onClick={() => setPopinPicture(true)} onPointerEnter={() => setHover(true)} onPointerLeave={() => setHover(false)}>
             {hover && <div className={`hover`}><Loupe /></div>}
             {format && <div className={`patch ${format}${theme !== 'light' ? ' dark' : ''}`}>{format}</div>}
-            <img className="ImgCard__img" src={imgSize(size)} alt={title.fr} />
+            <img className="ImgCard__img" src={imgSize(size)} alt={title} />
         </div>
         }
         </>

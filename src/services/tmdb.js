@@ -34,3 +34,38 @@ export async function getTvGenres(token) {
   if (!res.ok) throw new Error("Movie genres fetch failed");
   return res.json()
 }
+
+export async function fetchDetails(idTmdb) {
+  console.log(idTmdb)
+  const parts = String(idTmdb || "").split(":");
+  console.log(parts)
+  if (parts.length !== 3) throw new Error("ID TMDB invalide");
+
+  const [, mediaType, tmdbId] = parts;
+  const url = `https://api.themoviedb.org/3/${mediaType}/${tmdbId}?language=fr-FR`;
+
+  const token = import.meta.env.VITE_TMDB_TOKEN;
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s
+
+  try {
+    const res = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data?.status_message || `TMDB error ${res.status}`);
+    }
+
+    return data;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}

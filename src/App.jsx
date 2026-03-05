@@ -13,11 +13,14 @@ import {ThemeContext} from "./components/context/ThemeContext.jsx"
 const App = () => {
   const [lastSearch, setLastSearch] = useState("");
   const [results, setResults] = useState([]);
+  const [resultsJSon, setResultJson] = useState([]);
+
   const [selectedYear, setSelectedYear] = useState("all")
   const [selectedGenres, setSelectedGenres] = useState(['all'])
   const [selectedTypes, setSelectedTypes] = useState(["all"])
   const [msgError, setMsgError] = useState(false)
   const [filmFilter, setFilmFilter] = useState('all')
+  const [tab, setTab] = useState('search')
 
   const { theme } = useContext(ThemeContext)
   const darkmode = theme !== 'light' ? '-dark' : ''
@@ -60,7 +63,8 @@ const App = () => {
 
   const hasGenre = (item, name) => getGenreNames(item).includes(name);
 
-  const filtered = results.filter((item) => {
+  const filtered = (results) => {
+    return results.filter((item) => {
     const okYear = selectedYear === "all" || toYear(item) === Number(selectedYear);
 
     const okTypes = 
@@ -81,7 +85,8 @@ const App = () => {
 
       
     return okYear && okTypes && okGenres;
-  });
+    });
+  }
 
   const toogleBtnFilter = (t, prev) => {
       if(t === 'all') return ["all"]
@@ -106,18 +111,21 @@ const App = () => {
     clearRadio && setFilmFilter("all")
   };
 
-  const getDate = (item) => {
+  const getDate = (bool, item) => {
     const dateStr =
       item.media_type === "movie"
         ? item.release_date
         : item.first_air_date;
 
-    return dateStr ? new Date(dateStr).getTime() : 0;
+    return !bool ? dateStr ? new Date(dateStr).getTime() : 0 : item.year ? item.year : 0;
   };
 
-  const sorted = [...filtered].sort((a, b) => {
-    return getDate(b) - getDate(a); // décroissant (plus récent d'abord)
+  const sorted = [...filtered(results)].sort((a, b) => {
+    return getDate(false,b) - getDate(false,a); // décroissant (plus récent d'abord)
   });
+  const sortedJson = [...filtered(resultsJSon)].sort((a, b) => {
+    return getDate(true,b) - getDate(true,a); // décroissant (plus récent d'abord)
+  }); 
 
   const clearMoovie = () => {
     setLastSearch("")
@@ -179,6 +187,14 @@ const App = () => {
     return Boolean(item?.genre_ids.length > 0)
   }
 
+
+
+useEffect(() => {
+  fetch("/filmotheque.json")
+    .then(res => res.json())
+    .then(data => setResultJson(data))
+}, [])
+
   const handleSearch = async (value) => {
     setLastSearch(value)
     const q = value.trim().toLowerCase();
@@ -186,6 +202,7 @@ const App = () => {
     if(!q) {
       clearFilters(true)
       setResults([])
+      setTab('search')
       return
     }
 
@@ -210,11 +227,13 @@ const App = () => {
         msgError && setMsgError(true)
 
         setResults(filtered);
+        setTab('search')
 
     } catch (err) {
       console.error("TMDB search error:", err);
       !msgError && setMsgError(true)
       setResults([]);
+      setTab('search')
     }
   };
 
@@ -246,9 +265,13 @@ const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : so
     <Header handleSearch={handleSearch} />
     <div className={`app${darkmode}`}>
       <main className="app__main">
-        
-        
-        <section className={classResult()}>
+        <div className="tabs">
+          <button className={`tabs__tab${tab === 'search' ? ' selected' : ''}`} onClick={() => setTab('search')} disabled={tab === 'search'}>Votre recherche</button>
+          <button className={`tabs__tab${tab !== 'search' ? ' selected' : ''}`} onClick={() => setTab('medias')} disabled={tab !== 'search'}>Ma médiathèque</button>
+        </div>
+        {
+          tab === 'search' ?  
+          <section className={classResult()}>
         
           {!msgError ?
             <>
@@ -272,14 +295,27 @@ const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : so
             /> 
             }
 
-          { lastSearch?.length > 0 &&     <ListProvider><MediaGrid items={sorted} setFilmFilter={setFilmFilter} filmFilter={filmFilter} /></ListProvider>}
+          { lastSearch?.length > 0 &&     
+          <ListProvider>
+            <MediaGrid 
+              jsonItems={false}
+              items={sorted} 
+              setFilmFilter={setFilmFilter} 
+              filmFilter={filmFilter} />
+              </ListProvider>}
           </div>
           </>
           :
           <p>&#128557; Désolé il semblerait qu'il y ait un problème avec l'API qui charge les films</p>
           }
           
+          </section> : 
+          <section className="mediaTed">
+            <ListProvider><MediaGrid jsonItems={true} items={sortedJson} setFilmFilter={setFilmFilter} 
+              filmFilter={filmFilter} /></ListProvider>
           </section>
+        }
+
       </main>
     </div>
   </>

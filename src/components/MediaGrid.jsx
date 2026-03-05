@@ -6,7 +6,7 @@ import useFilmotheque from "../hooks/useFilmotheque";
 import NoResult from "./NoResult";
 import RadioFilter from "./RadioFilter";
 
-const MediaGrid = ({ items, filmFilter, setFilmFilter }) => {
+const MediaGrid = ({jsonItems, items, filmFilter, setFilmFilter }) => {
 const { movieGenreMap, tvGenreMap, loadingGenres, genresError } = useTmdbGenres();
 const { list } = useContext(ListContext)
 
@@ -91,36 +91,53 @@ const libraryIndex = useMemo(() => {
     )
   }
 
+  const setGenre = (item) => {
+      const ids = item.genre_ids ?? [];
+      const mapForType = item.media_type === "movie" ? movieGenreMap : tvGenreMap;
+      const arrayGenre =  ids.map((id) => mapForType[id]).filter(Boolean)
+      return arrayGenre.filter((v) => v !== 'Animation').filter((v) => v !== 'Téléfilm')
+  }
+
   return (
-    
     <div className="container_search">
-    {items.length && (
-      <RadioFilter filmFilter={filmFilter} setFilmFilter={setFilmFilter}/>
+    {items.length &&  (
+      <RadioFilter jsonItems={jsonItems} filmFilter={filmFilter} setFilmFilter={setFilmFilter}/>
      )}
     <div className={`media-grid${list ? ' list' : ''}`}>
-      {items.map((item) => (
+      {jsonItems ? 
+        items.map((item) => (
+          <MediaCard
+            jsonItems={jsonItems}
+            key={`${item.type}:${item.id}`}
+            id={item.id}
+            hide={hideCard(item)}   
+            img={item.img}
+            title={item.name}
+            type={item.type}
+            year={item.year}
+            owned={owned(item)}
+          />
+        ))
+      :
+        items.map((item) => (
+          <MediaCard
+            jsonItems={jsonItems}
+            key={`${item.media_type}:${item.id}`}
+            id={item.id}
+            hide={hideCard(item)}        
+            img={item.poster_path}
+            title={trueTitle(item)}
+            type={typeLabel(item)}
+            year={toYear(item)}
+            description={item.overview}
+            lang={item.original_language}
+            country={item.origin_country}
+            owned={owned(item)}
+            genre= {setGenre(item)}
+          />
+        ))
+      }
 
-        <MediaCard
-          key={`${item.media_type}:${item.id}`}
-          hide={hideCard(item)}        
-          img={item.poster_path}
-          title={trueTitle(item)}
-          type={typeLabel(item)}
-          year={toYear(item)}
-          description={item.overview}
-          lang={item.original_language}
-          country={item.origin_country}
-          owned={owned(item)}
-          genre= {
-            (() => {
-            const ids = item.genre_ids ?? [];
-            const mapForType = item.media_type === "movie" ? movieGenreMap : tvGenreMap;
-            const arrayGenre =  ids.map((id) => mapForType[id]).filter(Boolean)
-            return arrayGenre.filter((v) => v !== 'Animation').filter((v) => v !== 'Téléfilm')
-          })()
-        }
-        />
-      ))}
     </div>
     </div>
   );

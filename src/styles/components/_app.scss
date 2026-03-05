@@ -6,6 +6,11 @@
   padding: v.$space-6;
   color: v.$black;
   background-color: v.$white;
+  &__main {
+    border: v.$border;
+    padding: v.$space-4;
+    border-radius: v.$radius;
+  }
 }
 .app-dark {
   color: v.$white;
@@ -22,9 +27,6 @@
   }
 }
 .results-section {
-  border: v.$border;
-  padding: v.$space-4;
-  border-radius: v.$radius;
   min-height: calc(100vh - 280px);
   max-height: calc(100vh - 280px);
   &.empty {
