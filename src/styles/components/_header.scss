@@ -14,7 +14,7 @@
         align-items: center;
         justify-content: space-between;
         height: 150px;
-        
+        z-index: 999;
         &.dark {
             background-color: v.$primary-dark;
         }

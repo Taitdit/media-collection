@@ -80,7 +80,6 @@ const MediaCard = ({jsonItems, id, title, img, genre , lang, hide, country, owne
                   <ImgCard popin={true} picture={img} title={title} />
                     {title.original ? <p className="media-card__meta">Titre original : <span className="info">{title.original}</span></p> : ''}
                     {lang ?<p className="media-card__meta">Langue d'origine : <span className="info">{lang}</span></p> : ''}
-                    {details && console.log(details)}
                     {details?.origin_country ? <div className="media-card__meta">Pays : <ul>{details.origin_country.map((g) => <li  key={g}>{g}</li>)}</ul></div> : ''}
                     {genreList ? <div className="media-card__meta">Genres : <ul>{genreList.map((g) => <li key={g}>{g}</li>)}</ul></div> : ''}
                     {(details?.budget && details.budget > 0)  ? <p className="media-card__meta">Budget : <span className="info">{new Intl.NumberFormat('fr-FR').format(details.budget)}</span></p> : ''}
