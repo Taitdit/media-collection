@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {ListContext} from "./context/ListContext.jsx"
 import {ThemeContext} from "./context/ThemeContext.jsx"
 import Grille from './svg/Grille'
@@ -10,6 +10,12 @@ const RadioFilter = ({jsonItems, filmFilter, setFilmFilter}) => {
 
     const arrayFIlter = jsonItems ? ["all", "physical", "disc"] : ["all", "physicalAndDisc", "physical", "disc"]
 
+    useEffect(() => {
+        if(jsonItems && filmFilter === 'physicalAndDisc') {
+            setFilmFilter("all")
+        }
+
+    },[jsonItems])
     return (
         <div className={`radioFilter ${theme !== 'light' ? 'dark' : ''}`}>
          <h3>Quels médias afficher ?</h3>
@@ -24,7 +30,7 @@ const RadioFilter = ({jsonItems, filmFilter, setFilmFilter}) => {
                         checked={filmFilter === el}
                         onChange={(e) => setFilmFilter(e.target.value)}/>
                         <span className={`falseradio ${el===filmFilter && 'selected'}`}></span>
-                        {el === 'all' ? 'Tous les médias' : el === 'physicalAndDisc' ? "Seulement ceux que j'ai" : el==='physical' ? "Seulement ceux que j'ai en DVD ou Blu-ray " : "Seulement ceux que j'ai sur disque"}
+                        {el === 'all' ? jsonItems ? "Tous les médias que j'ai" : 'Tous les médias recherché' : el === 'physicalAndDisc' ? "Seulement ceux que j'ai" : el==='physical' ? "Seulement ceux que j'ai en DVD ou Blu-ray " : "Seulement ceux que j'ai sur disque"}
 
                     </label>
                 )

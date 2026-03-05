@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useMemo } from "react";
 import Header from './components/Header.jsx'
 import MediaGrid from "./components/MediaGrid";
 // import { mockResults } from "./utils/mockResults";
@@ -25,7 +25,6 @@ const App = () => {
   const { theme } = useContext(ThemeContext)
   const darkmode = theme !== 'light' ? '-dark' : ''
 
-  
   useEffect(() => {
     const body = document.querySelector('body')
     const removeAndAdd = (bool, value) => {
@@ -120,12 +119,22 @@ const App = () => {
     return !bool ? dateStr ? new Date(dateStr).getTime() : 0 : item.year ? item.year : 0;
   };
 
+const filteredJson = useMemo(() => filtered(resultsJSon), [
+  resultsJSon,
+  selectedYear,
+  selectedTypes,
+  selectedGenres,
+  genresReady,
+  movieGenreMap,
+  tvGenreMap,
+]);
+
   const sorted = [...filtered(results)].sort((a, b) => {
     return getDate(false,b) - getDate(false,a); // décroissant (plus récent d'abord)
   });
-  const sortedJson = [...filtered(resultsJSon)].sort((a, b) => {
+  const sortedJson = [...filteredJson].sort((a, b) => {
     return getDate(true,b) - getDate(true,a); // décroissant (plus récent d'abord)
-  }); 
+  },[filteredJson]); 
 
   const clearMoovie = () => {
     setLastSearch("")
@@ -309,13 +318,12 @@ const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : so
           <p>&#128557; Désolé il semblerait qu'il y ait un problème avec l'API qui charge les films</p>
           }
           
-          </section> : 
-          <section className="mediaTed">
+          </section> : ''
+        }
+        <section className={`mediaTed${tab === 'search' ? ' hidden' : ''}`}>
             <ListProvider><MediaGrid jsonItems={true} items={sortedJson} setFilmFilter={setFilmFilter} 
               filmFilter={filmFilter} /></ListProvider>
           </section>
-        }
-
       </main>
     </div>
   </>

@@ -37,8 +37,10 @@ const libraryIndex = useMemo(() => {
 
   const owned = (item) => {
     const titles = trueTitle(item);
-    const type = typeLabel(item);
-    const year = toYear(item)
+   
+    const type = jsonItems ? item.type : typeLabel(item);
+   
+    const year = jsonItems ? item.year : toYear(item); 
     return libraryIndex.get(makeKey(type, titles.fr, year)) || libraryIndex.get(makeKey(type, titles.original, year)) || null
   }
   

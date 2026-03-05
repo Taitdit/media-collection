@@ -36,9 +36,7 @@ export async function getTvGenres(token) {
 }
 
 export async function fetchDetails(idTmdb) {
-  console.log(idTmdb)
   const parts = String(idTmdb || "").split(":");
-  console.log(parts)
   if (parts.length !== 3) throw new Error("ID TMDB invalide");
 
   const [, mediaType, tmdbId] = parts;
