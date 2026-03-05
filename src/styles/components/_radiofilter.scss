@@ -7,8 +7,33 @@
     margin-bottom: v.$space-4;
     position: relative;
     padding-right: 68px;
+    background-color: v.$white;
+    &.fixed {
+        position: fixed;
+        top: 160px;
+        z-index: 99;
+        left: 10px;
+        width: calc(100vw - 155px);
+        outline: 10px solid v.$white;
+        &::after {
+            position: absolute;
+            z-index: 0;
+            background-color: v.$white;
+            top: -22px;
+            width: 30px;
+            height: 20px;
+            content: "";
+            right: -22px;
+            content: '';
+        }
+    }
     &.dark {
+        background-color: v.$black;
         border: 2px solid v.$primary-dark;
+        outline: 10px solid v.$black;
+        &::after {
+            background-color: v.$black;
+        }
         .radioFilter__label {
             border-color: v.$primary-dark;
             .falseradio {
@@ -19,9 +44,17 @@
                 }
             }
         }
-        .radioFilter__list .picto svg {
-            fill: v.$grey;
+        .radioFilter__list {
+            .picto svg {
+                fill: v.$darkGrey;
+            }
+            &:hover {
+                .picto svg {
+                    fill: v.$white;
+                }
+            }
         }
+
     }
     h3 {
         margin-bottom: v.$space-3;
@@ -42,7 +75,12 @@
         .picto svg {
             width: 100%;
             height: 100%;
-            fill: v.$darkGrey;
+            fill: v.$grey;
+        }
+        &:hover {
+            .picto svg {
+            fill: v.$black;
+            }
         }
     }
     &__label {

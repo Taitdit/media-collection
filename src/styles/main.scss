@@ -82,3 +82,35 @@ body {
     display: none;
     visibility: hidden;
 }
+.scrollTop {
+  right: 16px;
+  height: 82px;
+  width: 100px;
+  position: fixed;
+  top: 160px;
+  border-radius: v.$radius;
+  z-index: 99;
+  background-color: v.$primary;
+  border: 2px solid v.$primary;
+  border: 0;
+  outline: 10px solid v.$white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: v.$space-1;
+  .arrow {
+    font-size: 32px;
+  }
+  &:hover {
+    background-color: v.$grey;
+  }
+  &.dark {
+    background-color: v.$primary-dark;
+    border-color: v.$primary-dark;
+    outline-color: v.$black;
+    &:hover {
+      background-color: v.$darkGrey;
+    }
+  }
+}

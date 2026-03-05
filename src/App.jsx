@@ -9,6 +9,10 @@ import NoResult from "./components/NoResult"
 import Filters from "./components/Filters"
 import { ListProvider } from "./components/context/ListContext.jsx";
 import {ThemeContext} from "./components/context/ThemeContext.jsx"
+import {StickyProvider} from "./components/context/StickyContext.jsx"
+  
+
+
 
 const App = () => {
   const [lastSearch, setLastSearch] = useState("");
@@ -278,6 +282,7 @@ const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : so
           <button className={`tabs__tab${tab === 'search' ? ' selected' : ''}`} onClick={() => setTab('search')} disabled={tab === 'search'}>Votre recherche</button>
           <button className={`tabs__tab${tab !== 'search' ? ' selected' : ''}`} onClick={() => setTab('medias')} disabled={tab !== 'search'}>Ma médiathèque</button>
         </div>
+        <StickyProvider>
         {
           tab === 'search' ?  
           <section className={classResult()}>
@@ -285,7 +290,7 @@ const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : so
           {!msgError ?
             <>
             {lastSearch?.length ? <LastSearch lastSearch={lastSearch} clearMoovie={clearMoovie} /> : <NoResult emptyResult={false}/> }
-
+            
             <div className={`container ${!sorted?.length ? 'empty' : ''}`}>
 
           {!!(availableTypes?.length || availableGenres?.length || availableYears?.length) &&
@@ -324,6 +329,7 @@ const classResult = () => lastSearch.length <= 0 ?  "results-section empty" : so
             <ListProvider><MediaGrid jsonItems={true} items={sortedJson} setFilmFilter={setFilmFilter} 
               filmFilter={filmFilter} /></ListProvider>
           </section>
+          </StickyProvider>
       </main>
     </div>
   </>

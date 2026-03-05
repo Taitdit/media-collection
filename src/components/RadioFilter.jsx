@@ -1,13 +1,15 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import {ListContext} from "./context/ListContext.jsx"
 import {ThemeContext} from "./context/ThemeContext.jsx"
 import Grille from './svg/Grille'
 import Liste from './svg/Liste'
+import { useSticky } from "./context/StickyContext";
 
-const RadioFilter = ({jsonItems, filmFilter, setFilmFilter}) => {
+
+const RadioFilter = ({ jsonItems, filmFilter, setFilmFilter}) => {
+    const { fixed } = useSticky()
     const { theme } = useContext(ThemeContext)
     const { list, toggleList } = useContext(ListContext)
-
     const arrayFIlter = jsonItems ? ["all", "physical", "disc"] : ["all", "physicalAndDisc", "physical", "disc"]
 
     useEffect(() => {
@@ -17,7 +19,8 @@ const RadioFilter = ({jsonItems, filmFilter, setFilmFilter}) => {
 
     },[jsonItems])
     return (
-        <div className={`radioFilter ${theme !== 'light' ? 'dark' : ''}`}>
+        <>
+        <div className={`radioFilter ${theme !== 'light' ? 'dark' : ''}${fixed ? ' fixed' : ''}`}>
          <h3>Quels médias afficher ?</h3>
          <form className="radioFilter__filters">
             {arrayFIlter.map((el) => {
@@ -39,7 +42,8 @@ const RadioFilter = ({jsonItems, filmFilter, setFilmFilter}) => {
         </form>
         <button className="radioFilter__list" onClick={() => toggleList()}>{list ? <Liste className='picto' /> : <Grille className='picto' />}</button>
         </div>
-
+        {fixed && <button className={`scrollTop${theme !== 'light' ? ' dark' : ''}`} onClick={() => window.scrollTo(0, 0)} ><span className="arrow">&#11145;</span><span>Haut</span></button>}
+        </>
     )
 }
 export default RadioFilter
