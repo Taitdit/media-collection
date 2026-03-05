@@ -1,4 +1,4 @@
-import { useMemo, useState, useContext } from "react";
+import { useMemo, useContext } from "react";
 import {ListContext} from "./context/ListContext.jsx"
 import MediaCard from "./MediaCard";
 import useTmdbGenres from "../hooks/useTmdbGenres";
@@ -6,9 +6,11 @@ import useFilmotheque from "../hooks/useFilmotheque";
 import NoResult from "./NoResult";
 import RadioFilter from "./RadioFilter";
 
+
 const MediaGrid = ({jsonItems, items, filmFilter, setFilmFilter }) => {
 const { movieGenreMap, tvGenreMap, loadingGenres, genresError } = useTmdbGenres();
 const { list } = useContext(ListContext)
+
 
 
 const normalizeTitle = (s) => (s ?? "").toLowerCase().replace(/['’]/g, "'").replace(/[:\-–—]/g, " ").replace(/\s+/g, " ").trim();

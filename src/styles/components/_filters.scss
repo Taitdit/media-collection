@@ -1,12 +1,24 @@
 @use "../base/variables" as v;
 
+.container-filter {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .filters, .filters-dark {
     background-color: v.$grey;
     padding: v.$space-5 v.$space-4;
     border-radius: v.$radius;
     margin-bottom: v.$space-3;
-    flex: 1;
     text-align: left;
+    &.fixed {
+       position: fixed;
+       z-index: 99;
+       top: 250px;
+       margin-left: v.$space-8;
+        
+    }
     &__container {
         overflow: hidden;
         max-height: 0;

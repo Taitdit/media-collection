@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import {ThemeContext} from "./context/ThemeContext.jsx"
 import FilterA from "./svg/FilterA"
 import FilterB from "./svg/FilterB"
-
+import { useSticky } from "./context/StickyContext";
 
 const Filters = ({
     availableTypes,
@@ -17,6 +17,7 @@ const Filters = ({
     selectedGenres,
     clearFilters,
 }) => {
+    const { fixed } = useSticky()
     const [showFilsters, setShowFilters] = useState(false)
     const { theme } = useContext(ThemeContext)
 
@@ -24,7 +25,8 @@ const Filters = ({
     const arrayFilter = ['type', 'genre', 'year']
 
     return (
-        <div className={`filters${theme !== 'light' ? '-dark' : ''}`}>
+        <section className="container-filter">
+        <div className={`filters${theme !== 'light' ? '-dark' : ''}${fixed ? ' fixed' : ''}`}>
         <button className={`cta-acc${theme !== 'light' ? '-dark' : ''}`} onClick={() => setShowFilters(currentValue => !currentValue)}><span className="label">Filtrez votre recherche</span> {!showFilsters ? <FilterA className="picto" /> : <FilterB className="picto" />}</button>
           <div className={`filters__container ${classContainer}`}>
            
@@ -77,6 +79,7 @@ const Filters = ({
           )}
           </div>
         </div>
+        </section>
     )
 }
 
