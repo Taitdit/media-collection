@@ -1,0 +1,282 @@
+[
+  {
+    "index": 28,
+    "item": {
+      "id": "tmdb:movie:10191",
+      "name": "Dragons",
+      "year": 2010,
+      "type": "animation",
+      "creator": "",
+      "img": "https://image.tmdb.org/t/p/w342/a2xXAG8QuFZYt4ElbDrUd0IC3Ge.jpg",
+      "format": "dvd"
+    },
+    "reason": "ambiguous_match",
+    "alternatives": [
+      {
+        "id": 10191,
+        "title": "Dragons",
+        "date": "2010-03-18",
+        "score": 240
+      },
+      {
+        "id": 40911,
+        "title": "Dragons",
+        "date": "2010-02-05",
+        "score": 240
+      },
+      {
+        "id": 45725,
+        "title": "Moi, Arthur, 12 ans, chasseur de dragons",
+        "date": "2010-04-16",
+        "score": 120
+      },
+      {
+        "id": 63695,
+        "title": "La Légende des 1000 dragons",
+        "date": "2010-05-06",
+        "score": 120
+      },
+      {
+        "id": 1262199,
+        "title": "Dragonslayer Doppelgänger",
+        "date": "2010-03-04",
+        "score": 120
+      }
+    ],
+    "score": 240
+  },
+  {
+    "index": 85,
+    "item": {
+      "id": "tmdb:movie:98205",
+      "name": "rebelle",
+      "year": 2012,
+      "type": "animation",
+      "creator": "",
+      "img": "https://image.tmdb.org/t/p/w342/vUKn1OSyh6o9dYWyOADWtxPh9a8.jpg",
+      "format": "dvd"
+    },
+    "reason": "ambiguous_match",
+    "alternatives": [
+      {
+        "id": 98205,
+        "title": "Rebelle",
+        "date": "2012-02-17",
+        "score": 240
+      },
+      {
+        "id": 62177,
+        "title": "Rebelle",
+        "date": "2012-06-21",
+        "score": 240
+      },
+      {
+        "id": 132601,
+        "title": "Festin de requin 2 : Le récif se rebelle",
+        "date": "2012-10-19",
+        "score": 120
+      },
+      {
+        "id": 126017,
+        "title": "Les Rebelles Du Foot",
+        "date": "2012-07-14",
+        "score": 120
+      },
+      {
+        "id": 294950,
+        "title": "Christophe Alévêque est Super Rebelle... et candidat libre !",
+        "date": "2012-01-01",
+        "score": 120
+      }
+    ],
+    "score": 240
+  },
+  {
+    "index": 121,
+    "item": {
+      "id": "tmdb:movie:19995",
+      "name": "avatar",
+      "year": 2009,
+      "type": "film",
+      "creator": "",
+      "img": "https://image.tmdb.org/t/p/w342/v5Y8pVwJK68SKQQ1GRbIB1hkPDy.jpg",
+      "format": "dvd"
+    },
+    "reason": "ambiguous_match",
+    "alternatives": [
+      {
+        "id": 19995,
+        "title": "Avatar",
+        "date": "2009-12-16",
+        "score": 240
+      },
+      {
+        "id": 1632524,
+        "title": "AVATAR",
+        "date": "2009-07-04",
+        "score": 240
+      },
+      {
+        "id": 287003,
+        "title": "Avatar: Scene Deconstruction",
+        "date": "2009-12-18",
+        "score": 120
+      },
+      {
+        "id": 287004,
+        "title": "Avatar: Production Materials",
+        "date": "2009-12-18",
+        "score": 120
+      },
+      {
+        "id": 931019,
+        "title": "Avatar: Enter The World",
+        "date": "2009-12-05",
+        "score": 120
+      }
+    ],
+    "score": 240
+  },
+  {
+    "index": 125,
+    "item": {
+      "id": "tmdb:movie:1988",
+      "name": "un coeur invaincu",
+      "year": 2007,
+      "type": "film",
+      "creator": "",
+      "img": "https://image.tmdb.org/t/p/w342/16SNI1faFcugiZPu6pAmSvMoXIc.jpg",
+      "format": "dvd"
+    },
+    "reason": "low_confidence",
+    "alternatives": [],
+    "score": 80
+  },
+  {
+    "index": 149,
+    "item": {
+      "id": "",
+      "name": "Le Cercle des poètes disparus",
+      "year": 1986,
+      "type": "film",
+      "creator": "",
+      "img": "",
+      "format": "dvd"
+    },
+    "reason": "no_results"
+  },
+  {
+    "index": 156,
+    "item": {
+      "id": "tmdb:movie:1366",
+      "name": "Rocky",
+      "year": 1976,
+      "type": "film",
+      "creator": "",
+      "img": "https://image.tmdb.org/t/p/w342/5cfUTKtLYJx8WcTRJII4JRnlg6p.jpg",
+      "format": "dvd"
+    },
+    "reason": "ambiguous_match",
+    "alternatives": [
+      {
+        "id": 1366,
+        "title": "Rocky",
+        "date": "1976-12-03",
+        "score": 240
+      },
+      {
+        "id": 1187746,
+        "title": "Rocky",
+        "date": "1976-10-05",
+        "score": 240
+      },
+      {
+        "id": 748397,
+        "title": "Rocky Marciano Is Dead",
+        "date": "1976-09-28",
+        "score": 120
+      },
+      {
+        "id": 379067,
+        "title": "La Panthère et la pierre",
+        "date": "1976-07-09",
+        "score": 80
+      },
+      {
+        "id": 36685,
+        "title": "The Rocky Horror Picture Show",
+        "date": "1975-08-14",
+        "score": 40
+      }
+    ],
+    "score": 240
+  },
+  {
+    "index": 164,
+    "item": {
+      "id": "",
+      "name": "Spider-Man 3",
+      "year": 2002,
+      "type": "film",
+      "creator": "",
+      "img": "",
+      "format": "dvd"
+    },
+    "reason": "no_results"
+  },
+  {
+    "index": 176,
+    "item": {
+      "id": "tmdb:movie:12244",
+      "name": "numéros 9",
+      "year": 2009,
+      "type": "animation",
+      "creator": "",
+      "img": "https://image.tmdb.org/t/p/w342/h7uO28IWKtIIXhPWKvVdFOaPcSq.jpg",
+      "format": "Blu-ray"
+    },
+    "reason": "low_confidence",
+    "alternatives": [],
+    "score": 80
+  },
+  {
+    "index": 186,
+    "item": {
+      "id": "tmdb:movie:24428",
+      "name": "The Avengers",
+      "year": 2012,
+      "type": "film",
+      "creator": "",
+      "img": "https://image.tmdb.org/t/p/w342/ylsAO88v2tF0iXRFojPa0UaAJf1.jpg",
+      "format": "dvd"
+    },
+    "reason": "ambiguous_match",
+    "alternatives": [
+      {
+        "id": 24428,
+        "title": "Avengers",
+        "date": "2012-04-25",
+        "score": 120
+      },
+      {
+        "id": 448368,
+        "title": "The Avengers: A Visual Journey",
+        "date": "2012-09-25",
+        "score": 120
+      },
+      {
+        "id": 448364,
+        "title": "The Avengers: Assembling the Ultimate Team",
+        "date": "2012-09-25",
+        "score": 120
+      },
+      {
+        "id": 14611,
+        "title": "Les Vengeurs Ultimate 2",
+        "date": "2006-08-08",
+        "score": 0
+      }
+    ],
+    "score": 120
+  }
+]

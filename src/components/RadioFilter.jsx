@@ -4,11 +4,11 @@ import {ThemeContext} from "./context/ThemeContext.jsx"
 import Grille from './svg/Grille'
 import Liste from './svg/Liste'
 
-const RadioFilter = ({filmFilter, setFilmFilter}) => {
+const RadioFilter = ({jsonItems, filmFilter, setFilmFilter}) => {
     const { theme } = useContext(ThemeContext)
     const { list, toggleList } = useContext(ListContext)
 
-    const arrayFIlter = ["all", "physicalAndDisc", "physical", "disc"]
+    const arrayFIlter = jsonItems ? ["all", "physical", "disc"] : ["all", "physicalAndDisc", "physical", "disc"]
 
     return (
         <div className={`radioFilter ${theme !== 'light' ? 'dark' : ''}`}>
