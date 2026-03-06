@@ -38,6 +38,9 @@
     align-items: center;
     gap: v.$space-3;
     font-weight: bold;
+    width: 100%;
+    justify-content: space-around;
+
      &:hover {
       .label {
           text-decoration: none;
@@ -47,15 +50,19 @@
        text-decoration: none;
        &.label {
         text-decoration: underline;
-        font-size: map.get($conf, textsize);
+        font-size: 13px;
         text-transform: uppercase;
         flex: 2;
-        font-size: 15px;
         text-align: left;
+        @media (min-width: v.$xs) {
+          font-size: map.get($conf, textsize);
+        }
        }
      }
      .picto {
-        flex:1;
+          @media (min-width: v.$s) {
+           flex:1;
+          }
       svg {
         width: 60px;
         height: auto;

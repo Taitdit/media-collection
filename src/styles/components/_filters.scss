@@ -13,10 +13,39 @@
     margin-bottom: v.$space-3;
     text-align: left;
     &.fixed {
-       position: fixed;
-       z-index: 99;
-       top: 250px;
-       margin-left: v.$space-8;
+       @media (min-width: v.$s) {
+        position: fixed;
+        z-index: 99;
+        left: 10px;
+        top : 270px;
+        max-width: 200px;
+        &.open {
+            bottom: 185px;
+            
+        } 
+       }  
+       @media (min-width: v.$m) {
+            top : 220px;
+            &.open {
+                bottom: 185px;
+            } 
+       }
+       @media (min-width: v.$l) {
+            top : 220px;
+            &.open {
+                bottom: 90px;
+            } 
+       }
+       @media (min-width: v.$xl) {
+            width: auto;
+            margin-left: 3%;
+            left: auto;
+            top: 250px;
+            max-width: auto;
+            &.open {
+                bottom: 0;
+            }
+        }
         
     }
     &__container {
@@ -26,7 +55,8 @@
         display:flex;
         flex-direction: column;
         &.show {
-            max-height: 1000px;
+            overflow: scroll;
+            max-height: 90%;
         }
     }
     &__card {

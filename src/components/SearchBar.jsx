@@ -17,7 +17,7 @@ const SearchBar = ({ onSearch, className }) => {
 
     return (
     <div className={className}>
-      <p className="search__info">Utilisez la barre de recherche ci-dessous pour trouver votre, film, série, animé, série animé ou téléfilm...</p>
+      <p className="search__info">Utilisez la barre de recherche ci-dessous pour trouver votre film, série, animé, série animée ou téléfilm...</p>
     <form className="search__form" onSubmit={handleSubmit}>
       <input
         type="text"

@@ -10,27 +10,34 @@
     background-color: v.$white;
     &.fixed {
         position: fixed;
-        top: 160px;
         z-index: 99;
         left: 10px;
-        width: calc(100vw - 155px);
+        width: calc(100vw - 20px);
         outline: 10px solid v.$white;
+        bottom: -8px;
+        top: auto;
+        @media (min-width: v.$xl) {
+            top: 160px;
+            bottom: auto;
+            width: calc(100vw - 155px);
+        }
         &::after {
             position: absolute;
             z-index: 0;
             background-color: v.$white;
             top: -22px;
             width: 30px;
-            height: 20px;
+            height: calc(100% + 32px);
+            right: -32px;
             content: "";
-            right: -22px;
-            content: '';
         }
     }
     &.dark {
         background-color: v.$black;
         border: 2px solid v.$primary-dark;
-        outline: 10px solid v.$black;
+        &.fixed {
+            outline: 10px solid v.$black;
+        }
         &::after {
             background-color: v.$black;
         }
@@ -59,9 +66,51 @@
     h3 {
         margin-bottom: v.$space-3;
     }
+    .buttonFilterRadioShow {
+        display: none;
+    }
+    &.dark.fixed .buttonFilterRadioShow {
+        border: v.$borderWhite;
+        color: v.$white;
+        &:hover{
+            background-color: v.$darkGrey;
+        }
+    }
+    &.fixed {
+        .buttonFilterRadioShow {
+            display: block;
+            color: v.$black;
+            font-weight: bold;
+            background: none;
+            border: 1px solid v.$black;
+            padding: v.$space-2 v.$space-4;
+            border-radius: v.$radius;
+            &:hover{
+                background-color: v.$grey;
+            }
+            @media (min-width: v.$l) {
+                display: none;
+            }
+        }
+        .radioFilter__filters {
+            max-height: 0;
+            overflow: hidden;
+            &.open {
+                padding-top: v.$space-4;
+                max-height: 1000px;
+            }
+            @media (min-width: v.$l) {
+                max-height: 1000px;
+            }
+        }
+    }
     &__filters {
         display: flex;
         gap: v.$space-3;
+        flex-direction: column;
+        @media (min-width: v.$l) {
+            flex-direction: row;
+        }
     }
     &__list {
         background: none;
@@ -84,14 +133,21 @@
         }
     }
     &__label {
-        padding-left: v.$space-3;
-        border-left: 2px solid v.$primary;
         display: flex;
         align-items: center;
         justify-content: flex-start;
         gap: v.$space-2;
         position: relative;
+        font-size: 14px;
         cursor: pointer;
+        @media (min-width: v.$l) {
+            border-left: 2px solid v.$primary;
+            padding-left: v.$space-3;
+
+        }
+        @media (min-width: v.$xxl) {
+            font-size: 16px;
+        }
         &:hover {
             text-decoration: underline;
         }

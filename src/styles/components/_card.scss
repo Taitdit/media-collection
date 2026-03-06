@@ -7,22 +7,28 @@
   width: calc(25% - 12px);
   background-color: v.$white;
   flex: 0 0 auto;
-  min-width: 360px;
+  min-width: 100%;
   box-shadow: 1px 0 8px 0px v.$darkGrey;
   overflow: hidden;
+  @media (min-width: v.$xs) {
+      min-width: 360px;
+  }
   &.dark {
     border-color: v.$grey;
     background-color: v.$black;
     box-shadow: 2px 0 8px 0px v.$grey;
   }
   &.list {
-    min-width: none;
+    min-width: 0;
     width: 100%;
   }
   &__title {
     margin: 0 0 6px 0;
-    font-size: 22px;
+    font-size: 16px;
     text-transform: uppercase;
+    @media (min-width: v.$xs) {
+      font-size: 22px;
+    }
   }
   &__meta {
     margin: v.$space-3 0;
@@ -59,15 +65,22 @@
   }
   &__btn {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    flex-direction: column;
     gap: v.$space-2;
     width: 100%;
+    @media (min-width: v.$s) {
+      flex-direction: row;
+      align-items: center;
+    }
   }
   &__infos {
     width: 100%;
     .infos__type, .info {
-      font-size: 18px;
+      font-size: 16px;
+      @media (min-width: v.$xs) {
+        font-size: 18px;
+      }
     }
     .info {
       font-weight: bold;
