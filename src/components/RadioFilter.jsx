@@ -7,6 +7,7 @@ import { useSticky } from "./context/StickyContext";
 
 
 const RadioFilter = ({ jsonItems, filmFilter, setFilmFilter}) => {
+    const [openRadio, setOpenRadio] = useState(false)
     const { fixed } = useSticky()
     const { theme } = useContext(ThemeContext)
     const { list, toggleList } = useContext(ListContext)
@@ -22,7 +23,8 @@ const RadioFilter = ({ jsonItems, filmFilter, setFilmFilter}) => {
         <>
         <div className={`radioFilter ${theme !== 'light' ? 'dark' : ''}${fixed ? ' fixed' : ''}`}>
          <h3>Quels médias afficher ?</h3>
-         <form className="radioFilter__filters">
+         <button className='buttonFilterRadioShow' onClick={() => setOpenRadio((prev) => !prev)}>{openRadio ? 'Cachez' : 'Afficher'} les filtres</button>
+         <form  className={`radioFilter__filters${openRadio ? ' open' : ''}`}>
             {arrayFIlter.map((el) => {
                 return (
                     <label className="radioFilter__label" key={`filmFilter-${el}`}>
@@ -33,7 +35,7 @@ const RadioFilter = ({ jsonItems, filmFilter, setFilmFilter}) => {
                         checked={filmFilter === el}
                         onChange={(e) => setFilmFilter(e.target.value)}/>
                         <span className={`falseradio ${el===filmFilter && 'selected'}`}></span>
-                        {el === 'all' ? jsonItems ? "Tous les médias que j'ai" : 'Tous les médias recherché' : el === 'physicalAndDisc' ? "Seulement ceux que j'ai" : el==='physical' ? "Seulement ceux que j'ai en DVD ou Blu-ray " : "Seulement ceux que j'ai sur disque"}
+                        {el === 'all' ? jsonItems ? "Tous les médias que j'ai" : 'Tous les médias recherchés' : el === 'physicalAndDisc' ? "Seulement ceux que j'ai" : el==='physical' ? "Seulement ceux que j'ai en DVD ou Blu-ray " : "Seulement ceux que j'ai sur disque"}
 
                     </label>
                 )

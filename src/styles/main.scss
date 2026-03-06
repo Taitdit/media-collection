@@ -15,10 +15,13 @@
 
 * {
     font-family: v.$font;
-    font-size: 16px;
+    font-size: 14px;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    @media (min-width: v.$xs) {
+      font-size: 16px;
+    }
 }
 body {
   color: v.$black;
@@ -37,7 +40,10 @@ body {
         margin-right: v.$space-4;
     }
     .small {
-        font-size: 13px;
+        font-size: 12px;
+        @media (min-width: v.$xs) {
+          font-size: 13px;
+        }
     }
 }
 .float {
@@ -60,7 +66,7 @@ body {
 }
 
 .cta-acc {
-    @include mixins.link("cta-acc"); 
+    @include mixins.link("cta-acc");
 }
 
 .cta-primary-dark {
@@ -83,17 +89,29 @@ body {
     visibility: hidden;
 }
 .scrollTop {
-  right: 16px;
-  height: 82px;
-  width: 100px;
+  right: 10px;
+  width: calc(100% - 20px);
   position: fixed;
-  top: 160px;
   border-radius: v.$radius;
   z-index: 99;
+  padding: v.$space-1;
   background-color: v.$primary;
   border: 2px solid v.$primary;
   border: 0;
   outline: 10px solid v.$white;
+  top: 270px;
+  @media (min-width: v.$xs) {
+    top: 210px;
+  }
+  @media (min-width: v.$m) {
+    top: 160px;
+
+  }
+  @media (min-width: v.$xl) {
+    height: 82px;
+    width: 100px;
+    right: 16px;
+  }
   cursor: pointer;
   display: flex;
   align-items: center;

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext,useEffect } from "react";
 import {ThemeContext} from "./context/ThemeContext.jsx"
 import FilterA from "./svg/FilterA"
 import FilterB from "./svg/FilterB"
@@ -20,13 +20,24 @@ const Filters = ({
     const { fixed } = useSticky()
     const [showFilsters, setShowFilters] = useState(false)
     const { theme } = useContext(ThemeContext)
+    const [openClass, setOpenClass] = useState('');
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setOpenClass(showFilsters ? ' open' : '');
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }, [showFilsters]);
 
     const classContainer = showFilsters && 'show'
     const arrayFilter = ['type', 'genre', 'year']
 
+
+
     return (
         <section className="container-filter">
-        <div className={`filters${theme !== 'light' ? '-dark' : ''}${fixed ? ' fixed' : ''}`}>
+        <div className={`filters${theme !== 'light' ? '-dark' : ''}${fixed ? ' fixed' : ''}${showFilsters ? ' open' : openClass}`}>
         <button className={`cta-acc${theme !== 'light' ? '-dark' : ''}`} onClick={() => setShowFilters(currentValue => !currentValue)}><span className="label">Filtrez votre recherche</span> {!showFilsters ? <FilterA className="picto" /> : <FilterB className="picto" />}</button>
           <div className={`filters__container ${classContainer}`}>
            

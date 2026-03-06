@@ -20,7 +20,7 @@
 }
 .ImgCard {
     cursor: pointer;
-    max-height: 330px;
+    max-height: 360px;
     overflow: hidden;
     width: 100%;
     position: relative;
@@ -32,7 +32,10 @@
         width: auto;
         display: flex;
         .ImgCard__img {
-            width: auto;
+            width: 100%;
+            @media (min-width: v.$xs) {
+                width: auto;
+            }
         }
     }
     .hover {
@@ -57,8 +60,8 @@
         bottom: 0;
         right: 0;
         z-index: 1;
-        width: 140px;
-        height: 70px;
+        width: 100%;
+        height: 40px;
         font-weight: bold;
         text-transform: uppercase;
         text-align: center;
@@ -66,6 +69,10 @@
         align-items: center;
         justify-content: center;
         border-radius: 18px 0 0;
+        @media (min-width: v.$xs) {
+            width: 140px;
+            height: 70px;
+        }
         &.blu-ray {
             background-color: v.$bluray;
         }

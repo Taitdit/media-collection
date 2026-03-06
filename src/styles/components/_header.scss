@@ -8,13 +8,29 @@
         left: 0;
         background-color: v.$primary;
         z-index: 1;
-        padding: v.$space-4;
+        gap: v.$space-2;
+        padding: v.$space-3;
         display: flex;
-        gap: v.$space-10;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
-        height: 150px;
+        height: 260px;
         z-index: 999;
+        flex-direction: column;
+        @media (min-width: v.$xs) {
+            flex-direction: row;
+            flex-wrap: wrap;
+            height: 200px;
+            align-items: center;
+            gap: v.$space-1;
+        }
+        @media (min-width: v.$m) {
+            padding: v.$space-4;
+            height: 150px;
+        }
+        @media (min-width: v.$xl) {
+            flex-wrap: nowrap;
+            gap: v.$space-10;
+        }
         &.dark {
             background-color: v.$primary-dark;
         }
@@ -32,10 +48,23 @@
         }
     }
     &__logo {
-        max-width: 390px;
+        max-width: 290px;
         width: 100%;
         position: relative;
         top: v.$space-1;
+        padding-bottom: 0;
+        order:1;
+        @media (min-width: v.$s) {
+            max-width: 310px;
+        }
+        @media (min-width: v.$m) {
+            padding-bottom: v.$space-6;
+            order: 1;
+        }
+        @media (min-width: v.$xl) {
+            max-width: 390px;
+            padding-bottom: 0;
+        }
         svg {
             width: 100%;
             height: auto;
@@ -48,9 +77,26 @@
     }
     &__search {
        width: 100%;
-       max-width: 540px;
        display: flex;
        flex-direction: column;
        gap: v.$space-4;
+       order:3;
+        @media (min-width: v.$m) {
+            order: 2;
+            flex: 1;
+            padding:0 3%;
+            max-width: calc(540px + 6%);
+        }
+       @media (min-width: v.$xl2) {
+        max-width: calc(540px + 10%);
+        padding: 0 5%;
+       }
+       form {
+        max-width: 540px;
+        padding: 0;
+       }
+       @media (min-width: v.$xl) {
+        flex: auto;
+       }
     }
 }
