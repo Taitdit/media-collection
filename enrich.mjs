@@ -1,8 +1,8 @@
 import fs from "node:fs/promises";
 
-const INPUT = "./library.json";
-const OUTPUT = "./library.enriched.json";
-const REVIEW = "./library.needs-review.json";
+const INPUT = "./filmotheque-dd.json";
+const OUTPUT = "./dd.enriched.json";
+const REVIEW = "./dd.needs-review.json";
 
 const TMDB_TOKEN = process.env.TMDB_TOKEN;
 if (!TMDB_TOKEN) {
