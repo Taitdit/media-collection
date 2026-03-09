@@ -38,10 +38,10 @@
        }
        @media (min-width: v.$xl) {
             width: auto;
-            margin-left: 3%;
+            margin-left: 2%;
             left: auto;
             top: 250px;
-            max-width: auto;
+            max-width: none;
             &.open {
                 bottom: 0;
             }

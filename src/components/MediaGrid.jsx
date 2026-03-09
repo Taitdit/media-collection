@@ -29,13 +29,30 @@ const normalizeType = (s) =>
 const makeKey = (type, title, year) =>
   `${normalizeType(type)}|${normalizeTitle(title)}|${year}`;
 
+const formatPriority = (format = "") => {
+  const f = format.toLowerCase();
+
+  if (f === "blu-ray") return 3;
+  if (f === "dvd") return 2;
+  if (f === "disque-dur") return 1;
+  return 0;
+};
+
 const libraryIndex = useMemo(() => {
   const m = new Map();
+
   library.forEach((x) => {
-    m.set(makeKey(x.type, x.name, x.year), x)
+    const key = makeKey(x.type, x.name, x.year);
+    const existing = m.get(key);
+
+    if (!existing || formatPriority(x.format) > formatPriority(existing.format)) {
+      m.set(key, x);
+    }
   });
+
   return m;
 }, [library]);
+
 
   const owned = (item) => {
     const titles = trueTitle(item);
