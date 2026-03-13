@@ -68,8 +68,8 @@ const MediaCard = ({key, jsonItems, id, title, img, genre , lang, hide, country,
         <ImgCard format={format} popin={false} picture={img} title={wichTitle} />
         <div className="media-card__infos">
           <h3 className="media-card__title">{wichTitle}</h3>
-          {id && <p className="hidden">tmdb:movie:{id}</p>}
-          {img && <p className="hidden">{img}</p>}
+          {id && <p className="">tmdb:movie:{id}</p>}
+          {img && <p className="">{img}</p>}
           
           <div className="media-card__btn">
           {type ?

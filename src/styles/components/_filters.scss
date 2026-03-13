@@ -12,6 +12,8 @@
     border-radius: v.$radius;
     margin-bottom: v.$space-3;
     text-align: left;
+    overflow-y: scroll;
+    overflow-x: hidden;
     &.fixed {
        @media (min-width: v.$s) {
         position: fixed;
@@ -20,14 +22,14 @@
         top : 270px;
         max-width: 200px;
         &.open {
-            bottom: 185px;
+            bottom: 106px;
             
         } 
        }  
        @media (min-width: v.$m) {
             top : 220px;
             &.open {
-                bottom: 185px;
+                bottom: 106px;
             } 
        }
        @media (min-width: v.$l) {
@@ -43,7 +45,8 @@
             top: 250px;
             max-width: none;
             &.open {
-                bottom: 0;
+                max-height: 480px;
+                bottom: auto;
             }
         }
         
