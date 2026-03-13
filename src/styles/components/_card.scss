@@ -148,7 +148,7 @@
       max-height: 380px;
       &.active {display: block;}
       @media (min-width: v.$s) {
-        margin-top: -190px;
+        margin-top: -170px;
         max-height: 400px;
       }
       @media (min-width: v.$m) {
