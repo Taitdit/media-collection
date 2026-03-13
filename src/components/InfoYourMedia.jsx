@@ -41,14 +41,15 @@ useEffect(() => {
   const close = (e) => {
     e.stopPropagation();
     setBulleInfo(false);
+    document.body.classList.contains('ohi') ? document.body.classList.remove('ohi') : ''
   };
 
   const original = details?.original_title || details?.original_name;
     return (
-
-      <div onClick={close} className={`infos__sup${bulleInfo ? ' active' : ''}`}>
-        <div className={`infos__container${theme !== 'light' ? ' dark' : ''}`}>
-        <div className="cross"></div>
+      <>
+      <div className={`infos__bgPopin${bulleInfo ? ' active' : ''}`} onClick={close}></div>
+      <div className={`infos__sup${bulleInfo ? ' active' : ''}${theme !== 'light' ? ' dark' : ''}`}>
+        <div className="cross" onClick={close}></div>
         <h3 className="media-card__title">{title}</h3>
         <div className="float">
             <ImgCard popin={true} picture={img} title={title} />
@@ -69,9 +70,8 @@ useEffect(() => {
                 </p>
             )}
           </div>
-        </div>
       </div>
-
+      </>
     )
 }
 

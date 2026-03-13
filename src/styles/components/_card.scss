@@ -21,11 +21,18 @@
   &.list {
     min-width: 0;
     width: 100%;
+    .media-card__infos {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+      }
   }
   &__title {
     margin: 0 0 6px 0;
     font-size: 16px;
     text-transform: uppercase;
+    overflow-wrap: anywhere;
+    word-break: break-word;
     @media (min-width: v.$xs) {
       font-size: 22px;
     }
@@ -76,6 +83,7 @@
   }
   &__infos {
     width: 100%;
+    min-width: 0;
     .infos__type, .info {
       font-size: 16px;
       @media (min-width: v.$xs) {
@@ -112,7 +120,7 @@
     }
   }
   .infos {
-    &__sup {
+    &__bgPopin {
       display: none;
       background-color: rgba($color: #000000, $alpha: 0.8);
       width: 100%;
@@ -120,19 +128,44 @@
       position: fixed;
       top: 0;
       left:0;
-      z-index: 3;
-      align-items: center;
-      justify-content: center;
+      z-index: 100;
       cursor: pointer;
-      &.active {display: flex;}
+      &.active {display: block;}
     }
-    &__container {
+    &__sup {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 50%;
+      left:0;
+      z-index: 101;
+      margin-top: -100px;
       background-color: v.$white;
       padding: v.$space-6;
       border-radius: v.$radius;
-      width: 100%;
-      max-width: 40vw;
-      position: relative;
+      overflow-y: scroll;
+      max-height: 380px;
+      &.active {display: block;}
+      @media (min-width: v.$s) {
+        margin-top: -190px;
+        max-height: 400px;
+      }
+      @media (min-width: v.$m) {
+      max-width: 450px;
+      margin-left: -225px;
+      left: 50%;
+      margin-top: -190px;
+      max-height: 450px;
+      }
+      @media (min-width: v.$xl) {
+      max-width: 580px;
+      margin-left: -290px;
+      }
+      @media (min-width: v.$xxl) {
+      max-width: 640px;
+      margin-left: -320px;
+      }
       &.dark {
         background-color: v.$darkGrey;
       }
@@ -149,6 +182,7 @@
         display: flex;
         align-items: center;
         padding: v.$space-2;
+        cursor: pointer;
         &:before {
           content: 'x';
           color: v.$white;

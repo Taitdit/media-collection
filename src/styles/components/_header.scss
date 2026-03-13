@@ -8,20 +8,17 @@
         left: 0;
         background-color: v.$primary;
         z-index: 1;
-        gap: v.$space-2;
+        gap: v.$space-1;
         padding: v.$space-3;
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        height: 260px;
+        height: 220px;
         z-index: 999;
-        flex-direction: column;
+        flex-wrap: wrap;
         @media (min-width: v.$xs) {
-            flex-direction: row;
-            flex-wrap: wrap;
             height: 200px;
             align-items: center;
-            gap: v.$space-1;
         }
         @media (min-width: v.$m) {
             padding: v.$space-4;
@@ -48,12 +45,21 @@
         }
     }
     &__logo {
-        max-width: 290px;
+        max-width: 220px;
         width: 100%;
         position: relative;
         top: v.$space-1;
         padding-bottom: 0;
         order:1;
+        @media (min-width: v.$xxs) {
+            max-width: 246px;
+        }
+        @media (min-width: v.$xxs2) {
+            max-width: 280px;
+        }
+        @media (min-width: v.$xs) {
+            max-width: 300px;
+        }
         @media (min-width: v.$s) {
             max-width: 310px;
         }

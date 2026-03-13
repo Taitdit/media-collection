@@ -44,7 +44,7 @@ const RadioFilter = ({ jsonItems, filmFilter, setFilmFilter}) => {
         </form>
         <button className="radioFilter__list" onClick={() => toggleList()}>{list ? <Liste className='picto' /> : <Grille className='picto' />}</button>
         </div>
-        {fixed && <button className={`scrollTop${theme !== 'light' ? ' dark' : ''}`} onClick={() => window.scrollTo(0, 0)} ><span className="arrow">&#11145;</span><span>Haut</span></button>}
+        {fixed && <button className={`scrollTop${theme !== 'light' ? ' dark' : ''}`} onClick={() => window.scrollTo(0, 0)} ><span className="arrow">&#8593;</span><span>Haut</span></button>}
         </>
     )
 }
