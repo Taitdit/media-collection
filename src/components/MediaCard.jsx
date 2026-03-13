@@ -8,7 +8,7 @@ import { fetchDetails } from "../services/tmdb";
 // tmdb:movie:82702
 // tmdb:tv:26453
 
-const MediaCard = ({jsonItems, id, title, img, genre , lang, hide, country, owned, type, description, year }) => {
+const MediaCard = ({key, jsonItems, id, title, img, genre , lang, hide, country, owned, type, description, year }) => {
 
     const { theme } = useContext(ThemeContext)
     const { list } = useContext(ListContext)
@@ -55,8 +55,14 @@ const MediaCard = ({jsonItems, id, title, img, genre , lang, hide, country, owne
        } 
        return true
     }
+
+    const toggle = () => {
+      setBulleInfo((prev) => !prev)
+      document.body.classList.contains('ohi') ? document.body.classList.remove('ohi') :  document.body.classList.add('ohi')
+    }
+
     return (
-    <article className={classArticle}>
+    <article key={key} className={classArticle}>
     
       <div className={`media-card__container${list ? ' list' : ''}`}>
         <ImgCard format={format} popin={false} picture={img} title={wichTitle} />
@@ -69,12 +75,13 @@ const MediaCard = ({jsonItems, id, title, img, genre , lang, hide, country, owne
           {type ?
                 <p className="infos__type">Format : <span className="info">{`${type[0].toUpperCase()}${type.replace(type[0],'')}`}</span></p>
            : ''}
-           <button className={`cta-four${theme !== 'light' ? '-dark' : ''}`} onClick={() => setBulleInfo((prev) => !prev)}>Infos</button>
+           <button className={`cta-four${theme !== 'light' ? '-dark' : ''}`} onClick={toggle}>Infos</button>
          </div>
             {!needToLoad() ?
-            <div onClick={() => setBulleInfo((prev) => !prev)} className={`infos__sup${bulleInfo ? ' active' : ''}`}>
-              <div className={`infos__container${theme !== 'light' ? ' dark' : ''}`}>
-                <div className="cross"></div>
+            <>
+            <div className={`infos__bgPopin${bulleInfo ? ' active' : ''}`} onClick={toggle}></div>
+            <div  className={`infos__sup${bulleInfo ? ' active' : ''}${theme !== 'light' ? ' dark' : ''}`}>
+                <div className="cross" onClick={toggle}></div>
                 <h3 className="media-card__title">{wichTitle}</h3>
                 <div className="float">
                   <ImgCard popin={true} picture={img} title={title} />
@@ -86,8 +93,8 @@ const MediaCard = ({jsonItems, id, title, img, genre , lang, hide, country, owne
                     {description ? <p className="media-card__meta">Scénario :<br/><span className="description">{description}</span></p> : ''}
 
                 </div>
-              </div>
             </div>
+            </>
             : <InfoYourMedia id={id} setBulleInfo={setBulleInfo} bulleInfo={bulleInfo} title={wichTitle} img={img} />}
             {year ?<p className="media-card__meta">Année : <span className="info">{year}</span></p> : ''}
         </div>

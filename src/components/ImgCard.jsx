@@ -11,6 +11,7 @@ const ImgCard = ({popin, title, picture, format }) => {
     const [popinPicture, setPopinPicture] = useState(false)
     const [hover, setHover] = useState(false);
 
+    const canHover = window.matchMedia('(hover: hover)').matches;
     const domain = 'https://image.tmdb.org/t/p/'
     const imgSize = (size) => domain + size + picture
     const size = list ? 'w154' : 'w342'
@@ -25,8 +26,8 @@ const ImgCard = ({popin, title, picture, format }) => {
             <img className="ImgCard__img" src={imgSize('w154')} alt={title} />
 
         : 
-        <div className={`ImgCard${list ? ' list' : ''}`} onClick={() => setPopinPicture(true)} onPointerEnter={() => setHover(true)} onPointerLeave={() => setHover(false)}>
-            {hover && <div className={`hover`}><Loupe /></div>}
+        <div className={`ImgCard${list ? ' list' : ''}`} onClick={() => setPopinPicture(true)}>
+            <div className={`hover`}><Loupe /></div>
             {format && <div className={`patch ${format}${theme !== 'light' ? ' dark' : ''}`}>{format}</div>}
             <img className="ImgCard__img" src={imgSize(size)} alt={title} />
         </div>

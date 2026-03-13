@@ -1,0 +1,20 @@
+{
+  "name": "Ma médiathèque",
+  "short_name": "Mediatheque",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffb900",
+  "theme_color": "#ffb900",
+  "icons": [
+    {
+      "src": "/ico/icone-appli-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/ico/icone-appli-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

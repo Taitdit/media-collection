@@ -30,6 +30,9 @@ body {
     color:v.$white;
     background-color: v.$darkGrey;
   }
+  &.ohi {
+    overflow: hidden;
+  }
 }
 .mention {
     display: flex;
@@ -99,7 +102,9 @@ body {
   border: 2px solid v.$primary;
   border: 0;
   outline: 10px solid v.$white;
-  top: 270px;
+  top: 229px;
+  font-weight: bold;
+  color: v.$black;
   @media (min-width: v.$xs) {
     top: 210px;
   }
@@ -119,6 +124,7 @@ body {
   gap: v.$space-1;
   .arrow {
     font-size: 32px;
+    color: v.$black;
   }
   &:hover {
     background-color: v.$grey;
@@ -127,6 +133,10 @@ body {
     background-color: v.$primary-dark;
     border-color: v.$primary-dark;
     outline-color: v.$black;
+    color: v.$white;
+    .arrow {
+      color: v.$white;
+    }
     &:hover {
       background-color: v.$darkGrey;
     }
