@@ -5,8 +5,6 @@ import InfoYourMedia from "./InfoYourMedia"
 import ImgCard from "./ImgCard";
 import { fetchDetails } from "../services/tmdb";
 
-// tmdb:movie:82702
-// tmdb:tv:26453
 
 const MediaCard = ({key, jsonItems, id, title, img, genre , lang, hide, country, owned, type, description, year }) => {
 
@@ -17,7 +15,7 @@ const MediaCard = ({key, jsonItems, id, title, img, genre , lang, hide, country,
     const [error, setError] = useState(null);
 
     const idForDetails = `tmdb:${
-      type ? (type==='série animée' || type==='série') ? 'tv' : 'movie' : ''
+      type ? (type.toLowerCase()==='série animée' || type.toLowerCase()==='série') ? 'tv' : 'movie' : ''
     }:${id ? id : ''}`
 
     useEffect(() => {
@@ -68,8 +66,8 @@ const MediaCard = ({key, jsonItems, id, title, img, genre , lang, hide, country,
         <ImgCard format={format} popin={false} picture={img} title={wichTitle} />
         <div className="media-card__infos">
           <h3 className="media-card__title">{wichTitle}</h3>
-          {id && <p className="hidden">tmdb:movie:{id}</p>}
-          {img && <p className="hidden">{img}</p>}
+          {id && <p className="">{idForDetails}</p>}
+          {img && <p className="">{img}</p>}
           
           <div className="media-card__btn">
           {type ?
@@ -95,7 +93,7 @@ const MediaCard = ({key, jsonItems, id, title, img, genre , lang, hide, country,
                 </div>
             </div>
             </>
-            : <InfoYourMedia id={id} setBulleInfo={setBulleInfo} bulleInfo={bulleInfo} title={wichTitle} img={img} />}
+            : <InfoYourMedia id={id} idDetails={idForDetails} setBulleInfo={setBulleInfo} bulleInfo={bulleInfo} title={wichTitle} img={img} />}
             {year ?<p className="media-card__meta">Année : <span className="info">{year}</span></p> : ''}
         </div>
       </div>
