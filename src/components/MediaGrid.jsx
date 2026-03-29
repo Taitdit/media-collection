@@ -44,7 +44,7 @@ const libraryIndex = useMemo(() => {
   library.forEach((x) => {
     const key = makeKey(x.type, x.name, x.year);
     const existing = m.get(key);
-
+    
     if (!existing || formatPriority(x.format) > formatPriority(existing.format)) {
       m.set(key, x);
     }
@@ -55,6 +55,11 @@ const libraryIndex = useMemo(() => {
 
 
   const owned = (item) => {
+    if (jsonItems) {
+      return item;
+    }
+
+
     const titles = trueTitle(item);
    
     const type = jsonItems ? item.type : typeLabel(item);
