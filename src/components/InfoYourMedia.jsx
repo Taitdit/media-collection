@@ -7,7 +7,7 @@ import { fetchDetails } from "../services/tmdb";
 
 
 
-const InfoYourMedia = ({ id, setBulleInfo, bulleInfo, title, img}) => {
+const InfoYourMedia = ({ id, idDetails, setBulleInfo, bulleInfo, title, img}) => {
   const { theme } = useContext(ThemeContext);
 
   const [details, setDetails] = useState(null);
@@ -18,6 +18,7 @@ const InfoYourMedia = ({ id, setBulleInfo, bulleInfo, title, img}) => {
 useEffect(() => {
     if (!bulleInfo) return;
     if (!id) return;
+    if(!idDetails) return;
     if (details ) return;
   
     let cancelled = false;
@@ -26,7 +27,7 @@ useEffect(() => {
       try {
         setError(null);
 
-        const data = await fetchDetails(id);
+        const data = await fetchDetails(idDetails);
         if (!cancelled) setDetails(data);
       } catch (e) {
         if (!cancelled) setError(e?.message ?? "Erreur de chargement");
@@ -36,7 +37,7 @@ useEffect(() => {
     return () => {
       cancelled = true;
     };
-  }, [bulleInfo, id, details]);
+  }, [bulleInfo, id, idDetails, details]);
 
   const close = (e) => {
     e.stopPropagation();
