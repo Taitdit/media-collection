@@ -17,19 +17,13 @@ const Home = () => {
                 </p>
 
                 <p>
-                    Ce projet est né d’un besoin simple :
-                    <b>
-                    me faciliter la vie lors des brocantes, braderies et achats
+                    Ce projet est né d’un besoin simple : <b>me faciliter la vie lors des brocantes, braderies et achats
                     d’occasion
-                    </b>,
-                    en me permettant de vérifier rapidement si je possède déjà un
-                    <b>DVD</b>, un <b>Blu-ray</b> ou un
-                    <b>jeu de société</b>.
+                    </b>, en me permettant de vérifier rapidement si je possède déjà un <b>DVD</b>, un <b>Blu-ray</b> ou un <b>jeu de société</b>.
                 </p>
 
                 <p>
-                    Au-delà de l’inventaire, <b>La Médiated</b> m’aide aussi à
-                    <b>choisir quoi regarder ou à quoi jouer</b>, en rendant la recherche
+                    Au-delà de l’inventaire, <b>La Médiated</b> m’aide aussi à <b>choisir quoi regarder ou à quoi jouer</b>, en rendant la recherche
                     dans mes propres collections plus rapide et plus agréable.
                 </p>
 
@@ -43,18 +37,15 @@ const Home = () => {
                     <h3>🎬 <b>Films & Séries</b></h3>
 
                     <p>
-                        Recherchez un <b>film</b>, une <b>série</b>, un
-                        <b>animé</b> ou un <b>téléfilm</b> et vérifiez instantanément si je
-                        le possède en version <b>physique</b> ou
-                        <b>numérique</b>.
+                        Recherchez un <b>film</b>, une <b>série</b>, un <b>animé</b> ou un <b>téléfilm</b> et vérifiez instantanément si je
+                        le possède en version <b>physique</b> ou <b>numérique</b>.
                     </p>
                 </Link>
                 <Link className={`${theme !== 'light' ? 'dark ' : ''} home__card`} to='/jeux-de-societe' title='Film et Série'>
                     <h3>🎲 <b>Jeux de société</b></h3>
 
                     <p>
-                        Retrouvez ma collection de <b>jeux de société</b>, leurs
-                        <b>extensions</b> et les différentes éditions disponibles dans ma
+                        Retrouvez ma collection de <b>jeux de société</b>, leurs <b>extensions</b> et les différentes éditions disponibles dans ma
                         ludothèque.
                     </p>
                 </Link>
