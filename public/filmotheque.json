@@ -3249,15 +3249,6 @@
     "format": "disque-dur"
   },
   {
-    "id": "9476",
-    "name": "Chevalier",
-    "year": 2001,
-    "type": "film",
-    "creator": "",
-    "img": "/4IArFkJE7F9R5e2mu0z7hqDO4PC.jpg",
-    "format": "disque-dur"
-  },
-  {
     "id": "1061990",
     "name": "Nicky Larson",
     "year": 2024,
@@ -4328,15 +4319,6 @@
     "format": "disque-dur"
   },
   {
-    "id": "417859",
-    "name": "Le Chat Potté",
-    "year": 2011,
-    "type": "animation",
-    "creator": "",
-    "img": "/upvidRGSHxs24wfPxVf3GuaCBVM.jpg",
-    "format": "disque-dur"
-  },
-  {
     "id": "15371",
     "name": "Vidocq contre Cagliostro",
     "year": 1979,
@@ -5363,15 +5345,6 @@
     "format": "disque-dur"
   },
   {
-    "id": "14160",
-    "name": "Là-haut",
-    "year": 2009,
-    "type": "animation",
-    "creator": "",
-    "img": "/k55kMEPkxGej70udPcVNqhTiwBz.jpg",
-    "format": "disque-dur"
-  },
-  {
     "id": "10198",
     "name": "la princesse et la grenouille",
     "year": 2009,
@@ -5945,15 +5918,6 @@
     "type": "film",
     "creator": "",
     "img": "/18IsRVfs5MkkTcqTGlUAnka6sCh.jpg",
-    "format": "disque-dur"
-  },
-  {
-    "id": "307081",
-    "name": "La Rage au ventre",
-    "year": 2015,
-    "type": "film",
-    "creator": "",
-    "img": "/sruN6garsbuJbXLucGxoObzMTxd.jpg",
     "format": "disque-dur"
   },
   {
@@ -6622,15 +6586,6 @@
     "format": "disque-dur"
   },
   {
-    "id": "49538",
-    "name": "X-Men : Le Commencement",
-    "year": 2011,
-    "type": "film",
-    "creator": "",
-    "img": "/6vZHDdyKXhd2CezhWLmxLT9EP4s.jpg",
-    "format": "disque-dur"
-  },
-  {
     "id": "791373",
     "name": "Zack Snyder's Justice League",
     "year": 2021,
@@ -7043,15 +6998,6 @@
     "type": "Film",
     "creator": "",
     "img": "/3z5UZcKnoItfBkA1J84yexW65gc.jpg",
-    "format": "disque-dur"
-  },
-    {
-    "id": "8290",
-    "name": "La Grande Vadrouille",
-    "year": 1966,
-    "type": "Film",
-    "creator": "",
-    "img": "/835Yw9f0gYyR8RSsDKL34VEgCjL.jpg",
     "format": "disque-dur"
   },
     {

@@ -3,11 +3,11 @@
 
 .app, .app-dark {
   font-family: v.$font;
-  padding: v.$space-3;
+  padding: v.$space-3 v.$space-3 0 v.$space-3;
   color: v.$black;
   background-color: v.$white;
   @media (min-width: v.$s) {
-  padding: v.$space-6;
+  padding: v.$space-6 v.$space-6 0 v.$space-6;
   }
   &__main {
     border: v.$border;

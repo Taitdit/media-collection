@@ -14,12 +14,56 @@
     text-align: left;
     overflow-y: scroll;
     overflow-x: hidden;
+    &.games.fixed {
+        position: fixed;
+        z-index: 99;
+        left: 0;
+        width: 100vw;
+        bottom: 0;
+        margin-bottom: 0;
+        @media (min-width: v.$s) {
+        position: fixed;
+        z-index: 99;
+        left: 10px;
+        top : 213px;
+        max-width: 200px;
+        bottom: auto;
+        margin-bottom: 12px;
+        &.open {
+            bottom: 106px;
+            
+        } 
+       }  
+       @media (min-width: v.$m) {
+            top : 165px;
+            &.open {
+                bottom: 106px;
+            } 
+       }
+       @media (min-width: v.$l) {
+            top : 165px;
+            &.open {
+                bottom: 90px;
+            } 
+       }
+       @media (min-width: v.$xl) {
+            width: auto;
+            margin-left: 2%;
+            left: auto;
+            top: 216px;
+            max-width: none;
+            &.open {
+                max-height: 480px;
+                bottom: auto;
+            }
+        }
+    }
     &.fixed {
        @media (min-width: v.$s) {
         position: fixed;
         z-index: 99;
         left: 10px;
-        top : 270px;
+        top : 308px;
         max-width: 200px;
         &.open {
             bottom: 106px;
@@ -42,7 +86,7 @@
             width: auto;
             margin-left: 2%;
             left: auto;
-            top: 250px;
+            top: 310px;
             max-width: none;
             &.open {
                 max-height: 480px;
@@ -58,7 +102,7 @@
         display:flex;
         flex-direction: column;
         &.show {
-            overflow: scroll;
+            overflow: visible;
             max-height: 90%;
         }
     }
@@ -86,4 +130,17 @@
 }
 .filters-dark {
     background-color: v.$darkGrey;
+}
+.gameFilters {
+    &__jauge {
+        input {
+            width: 100%;
+        }
+    }
+    &__duration {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+    }
 }

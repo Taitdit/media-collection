@@ -134,7 +134,7 @@ const libraryIndex = useMemo(() => {
         items.map((item) => (
           <MediaCard
             jsonItems={jsonItems}
-            key={`${item.type}:${item.id}`}
+            key={`${item.type}:${item.id}:${item.format}`}
             id={item.id}
             hide={hideCard(item)}   
             img={item.img}
@@ -148,7 +148,7 @@ const libraryIndex = useMemo(() => {
         items.map((item) => (
           <MediaCard
             jsonItems={jsonItems}
-            key={`${item.media_type}:${item.id}`}
+            key={`${item.media_type}:${item.id}:${item.format}`}
             id={item.id}
             hide={hideCard(item)}        
             img={item.poster_path}

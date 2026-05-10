@@ -53,7 +53,7 @@ useEffect(() => {
         <div className="cross" onClick={close}></div>
         <h3 className="media-card__title">{title}</h3>
         <div className="float">
-            <ImgCard popin={true} picture={img} title={title} />
+            <ImgCard imgTmdb={true} popin={true} picture={img} title={title} />
             {error && <p className="media-card__meta">Erreur : {error}</p>}
 
             {original ? <p className="media-card__meta">Titre original : <span className="info">{original}</span></p> : ''}

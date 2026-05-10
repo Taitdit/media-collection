@@ -1,6 +1,12 @@
 import { useState, useContext } from "react";
 import {ThemeContext} from "./context/ThemeContext.jsx"
+import { useLocation } from 'react-router-dom';
+
+
+
 const SearchBar = ({ onSearch, className }) => {
+  const location = useLocation()
+const noFilmPage = location.pathname !== "/films-et-series"
     const { theme } = useContext(ThemeContext)
 
     const [query, setQuery] = useState("");
@@ -17,7 +23,7 @@ const SearchBar = ({ onSearch, className }) => {
 
     return (
     <div className={className}>
-      <p className="search__info">Utilisez la barre de recherche ci-dessous pour trouver votre film, série, animé, série animée ou téléfilm...</p>
+      <p className="search__info">Utilisez la barre de recherche ci-dessous pour trouver  {noFilmPage ? 'vos jeux' : 'votre film, série, animé, série animée ou téléfilm...'}</p>
     <form className="search__form" onSubmit={handleSubmit}>
       <input
         type="text"

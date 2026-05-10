@@ -1,0 +1,116 @@
+@use "../base/variables" as v;
+
+.containerHome {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+
+  &:first-child {
+    background: transparent;
+  }
+
+  &:last-child {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Fond gris full largeur pour la 2e partie */
+.containerHome:last-child {
+  position: relative;
+  z-index: 1;
+  &.dark::before {
+    background-color: v.$darkGrey;
+   }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: -1;
+    width: 100vw;
+    height: 100%;
+    transform: translateX(-50%);
+    background: v.$grey;
+  }
+}
+
+.containerHome h1 {
+  margin-bottom: 1.5rem;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+}
+
+.containerHome p {
+  max-width: 850px;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.home__card {
+  display: block;
+  min-height: 190px;
+  padding: 1.5rem;
+  color: inherit;
+  text-decoration: none;
+  background: v.$white;
+  border: 1px solid v.$black;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+    &.dark {
+        background-color: v.$black;
+        &:hover {
+            background: v.$darkGrey;
+        }
+    }
+  h3 {
+    margin-bottom: 1rem;
+    font-size: 1.35rem;
+  }
+
+  p {
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  &:hover {
+    background: v.$grey;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  &.disabled {
+    cursor: initial;
+    opacity: 0.8;
+    background-color: v.$grey;
+    &:hover {
+        background-color: v.$grey;
+        transform: translateY(0);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    &.dark {
+        background-color: v.$darkGrey;
+        &:hover {
+            background-color: v.$darkGrey;
+        }
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .containerHome {
+    &:last-child {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .home__card {
+    min-height: auto;
+  }
+}

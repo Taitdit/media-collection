@@ -6,7 +6,7 @@ import ImgCard from "./ImgCard";
 import { fetchDetails } from "../services/tmdb";
 
 
-const MediaCard = ({key, jsonItems, id, title, img, genre , lang, hide, country, owned, type, description, year }) => {
+const MediaCard = ({jsonItems, id, title, img, genre , lang, hide, country, owned, type, description, year }) => {
 
     const { theme } = useContext(ThemeContext)
     const { list } = useContext(ListContext)
@@ -60,10 +60,10 @@ const MediaCard = ({key, jsonItems, id, title, img, genre , lang, hide, country,
     }
 
     return (
-    <article key={key} className={classArticle}>
+    <article className={classArticle}>
     
       <div className={`media-card__container${list ? ' list' : ''}`}>
-        <ImgCard format={format} popin={false} picture={img} title={wichTitle} />
+        <ImgCard imgTmdb={true} format={format} popin={false} picture={img} title={wichTitle} />
         <div className="media-card__infos">
           <h3 className="media-card__title">{wichTitle}</h3>
           {id && <p className="hidden">{idForDetails}</p>}
@@ -82,7 +82,7 @@ const MediaCard = ({key, jsonItems, id, title, img, genre , lang, hide, country,
                 <div className="cross" onClick={toggle}></div>
                 <h3 className="media-card__title">{wichTitle}</h3>
                 <div className="float">
-                  <ImgCard popin={true} picture={img} title={title} />
+                  <ImgCard imgTmdb={true} popin={true} picture={img} title={title} />
                     {title.original ? <p className="media-card__meta">Titre original : <span className="info">{title.original}</span></p> : ''}
                     {lang ?<p className="media-card__meta">Langue d'origine : <span className="info">{lang}</span></p> : ''}
                     {details?.origin_country ? <div className="media-card__meta">Pays : <ul>{details.origin_country.map((g) => <li  key={g}>{g}</li>)}</ul></div> : ''}
