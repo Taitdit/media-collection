@@ -30,7 +30,7 @@ const Filters = ({
       return () => clearTimeout(timer);
     }, [showFilsters]);
 
-    const classContainer = showFilsters && 'show'
+    const classContainer = showFilsters ? 'show' : '';
     const arrayFilter = ['type', 'genre', 'year']
 
 

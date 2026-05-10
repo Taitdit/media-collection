@@ -17,7 +17,7 @@
         bottom: -8px;
         top: auto;
         @media (min-width: v.$xl) {
-            top: 160px;
+            top: 205px;
             bottom: auto;
             width: calc(100vw - 155px);
         }
@@ -25,7 +25,7 @@
             position: absolute;
             z-index: 0;
             background-color: v.$white;
-            top: -22px;
+            top: -24px;
             width: 30px;
             height: calc(100% + 32px);
             right: -32px;

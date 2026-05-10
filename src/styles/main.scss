@@ -4,6 +4,8 @@
 
 @use "./components/app";
 @use "./components/header";
+@use "./components/home";
+@use "./components/footer";
 @use "./components/searchbar";
 @use "./components/lastsearch";
 @use "./components/grid";
@@ -106,10 +108,10 @@ body {
   font-weight: bold;
   color: v.$black;
   @media (min-width: v.$xs) {
-    top: 210px;
+    top: 248px;
   }
   @media (min-width: v.$m) {
-    top: 160px;
+    top: 205px;
 
   }
   @media (min-width: v.$xl) {

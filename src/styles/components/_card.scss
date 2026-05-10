@@ -13,6 +13,9 @@
   @media (min-width: v.$xs) {
       min-width: 360px;
   }
+  @media (min-width: v.$s) {
+      min-width: 345px;
+  }
   &.dark {
     border-color: v.$grey;
     background-color: v.$black;
@@ -103,6 +106,12 @@
   &.dd {
     outline: 3px solid v.$dd;
   }
+  &.jeu {
+    outline: 3px solid v.$jeu;
+  }
+  &.extension {
+    outline: 3px solid v.$extension;
+  }
   &.dark {
     &.bluray {
       outline: 3px solid v.$darkbluray;
@@ -112,6 +121,12 @@
     }
     &.dd {
       outline: 3px solid v.$darkdd;
+    }
+    &.jeu {
+      outline: 3px solid v.$darkjeu;
+    }
+    &.extension {
+      outline: 3px solid v.$darkextension;
     }
   }
   &.list {

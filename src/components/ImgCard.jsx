@@ -4,7 +4,7 @@ import {ListContext} from "./context/ListContext.jsx"
 import Loupe from "./svg/Loupe";
 
 
-const ImgCard = ({popin, title, picture, format }) => {
+const ImgCard = ({imgTmdb, popin, title, picture, format }) => {
     const { list } = useContext(ListContext)
     const { theme } = useContext(ThemeContext)
 
@@ -19,17 +19,18 @@ const ImgCard = ({popin, title, picture, format }) => {
         <>
         {popinPicture && 
             <div className="popinPicture" onClick={() => setPopinPicture(false)}>
-                <img src={imgSize('original')} alt={title}/>
+                {imgTmdb  ? <img src={imgSize('original')} alt={title}/> : <img src={picture} alt={title}/>}
+                
             </div>
         }
         {popin ? 
-            <img className="ImgCard__img" src={imgSize('w154')} alt={title} />
+            imgTmdb ? <img className="ImgCard__img" src={imgSize('w154')} alt={title} /> : <img className="ImgCard__img" src={picture} alt={title}/>
 
         : 
-        <div className={`ImgCard${list ? ' list' : ''}`} onClick={() => setPopinPicture(true)}>
+        <div className={`ImgCard${list ? ' list' : ''}${!imgTmdb ? ' game' : ''}`} onClick={() => setPopinPicture(true)}>
             <div className={`hover`}><Loupe /></div>
             {format && <div className={`patch ${format}${theme !== 'light' ? ' dark' : ''}`}>{format}</div>}
-            <img className="ImgCard__img" src={imgSize(size)} alt={title} />
+           {imgTmdb  ? <img className="ImgCard__img" src={imgSize(size)} alt={title} /> : <img className="ImgCard__img" src={picture} alt={title}/>}
         </div>
         }
         </>

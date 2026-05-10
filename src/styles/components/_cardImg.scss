@@ -16,6 +16,7 @@
     img {
         max-width: calc(100% - v.$space-3);
         max-height: calc(100% - v.$space-3);
+        min-width: 350px;
     }
 }
 .ImgCard {
@@ -27,10 +28,24 @@
     &__img {
         width: 100%;
     }
+    &.game {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        .ImgCard__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+    }
     &.list {
         max-height: 500px;
         width: auto;
         display: flex;
+        &.game {
+            max-height: 180px;
+        }
         .ImgCard__img {
             width: 100%;
             @media (min-width: v.$xs) {
@@ -88,6 +103,12 @@
         &.disque-dur {
             background-color: v.$dd;
         }
+        &.jeu {
+            background-color: v.$jeu;
+        }
+        &.extension {
+            background-color: v.$extension;
+        }
         &.dark {
             &.blu-ray{
                 background-color: v.$darkbluray;
@@ -97,6 +118,12 @@
             }
             &.disque-dur {
                 background-color: v.$darkdd;                
+            }
+            &.jeu {
+                background-color: v.$darkjeu;
+            }
+            &.extension {
+                background-color: v.$darkextension;
             }
         }
     }

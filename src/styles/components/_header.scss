@@ -10,40 +10,45 @@
         z-index: 1;
         gap: v.$space-1;
         padding: v.$space-3;
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
+       
         height: 220px;
         z-index: 999;
-        flex-wrap: wrap;
         @media (min-width: v.$xs) {
-            height: 200px;
+            height: 240px;
             align-items: center;
         }
         @media (min-width: v.$m) {
             padding: v.$space-4;
-            height: 150px;
+            height: 200px;
         }
-        @media (min-width: v.$xl) {
-            flex-wrap: nowrap;
-            gap: v.$space-10;
-        }
+
         &.dark {
             background-color: v.$primary-dark;
         }
 
         .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        .header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            @media (min-width: v.$xl) {
+                flex-wrap: nowrap;
+                gap: v.$space-10;
+            }
         }
     }
+
     &__logo {
         max-width: 220px;
         width: 100%;
@@ -85,13 +90,16 @@
        width: 100%;
        display: flex;
        flex-direction: column;
-       gap: v.$space-4;
+       gap: v.$space-2;
        order:3;
-        @media (min-width: v.$m) {
-            order: 2;
-            flex: 1;
-            padding:0 3%;
-            max-width: calc(540px + 6%);
+       @media (min-width: v.$s) {
+           gap: v.$space-4;
+       }
+       @media (min-width: v.$m) {
+           order: 2;
+           flex: 1;
+           padding:0 3%;
+           max-width: calc(540px + 6%);
         }
        @media (min-width: v.$xl2) {
         max-width: calc(540px + 10%);
@@ -105,4 +113,45 @@
         flex: auto;
        }
     }
+}
+.app__header {
+.container__nav {
+    bottom: 0;
+    position: absolute;
+ ul {
+    display: flex;
+    align-items: center;
+    color: v.$black;
+    gap: 1rem;
+    justify-content: center;
+    list-style: none;
+    width: 100%;
+    li {
+        color: v.$black;
+        font-weight: bold;
+        list-style: none;
+        padding: 0.5rem;
+        &.active, &:hover, &:focus, &:active {
+            background-color: v.$white;
+        }
+        a {
+            color: v.$black;
+            cursor: pointer;
+            text-decoration: none;
+            span {
+                font-size: 12px;
+                @media (min-width: v.$xxs) {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+&.dark .container__nav ul li {
+    color: v.$white;
+    a {
+        color: v.$white;
+    }
+}
+}
 }
