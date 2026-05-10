@@ -48,7 +48,7 @@ const Header = ({ handleSearch }) => {
             {!isVideo ? <Link to='/films-et-series' title='Film et Série'><span>Films et Séries</span></Link> : <span>Films et Séries</span> }
            </li>
           <li className={`${isJeu ? 'active' : ''}`} > 
-            {!isJeu ? <Link to='/jeux-de-societe' title='Film et Série'><span>Jeux de socièté</span></Link> : <span>Jeux de socièté</span> }
+            {!isJeu ? <Link to='/jeux-de-societe' title='Film et Série'><span>Jeux de société</span></Link> : <span>Jeux de société</span> }
           </li>
         </ul>
       </nav>
