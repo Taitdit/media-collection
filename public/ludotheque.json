@@ -867,6 +867,18 @@
   "type": "jeu",
   "style": "ambiance",
   "img": "/img/jeux/duplik.png"
+},
+{
+  "id": 75,
+  "name": "Eila et l'Eclat de la Montagne",
+  "year": 2012,
+  "players": "1 à 10",
+  "playersMax": "10",
+  "playersMin": "1",
+  "duration": "45",
+  "type": "jeu",
+  "style": "plateau",
+  "img": "/img/jeux/eila-et-l-eclat-de-la-montagne.png"
 }
 
 ]
