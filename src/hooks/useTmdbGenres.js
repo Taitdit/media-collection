@@ -34,11 +34,10 @@ const useTmdbGenres = () => {
         setMovieGenreMap(toMapObject(movieData.genres));
         setTvGenreMap(toMapObject(tvData.genres));
       } catch (e) {
-        if (cancelled) return;
+        if (cancelled) return e;
         setGenresError("Impossible de charger les genres TMDB.");
       } finally {
-        if (cancelled) return;
-        setLoadingGenres(false);
+        if (cancelled) setLoadingGenres(false);
       }
     }
 

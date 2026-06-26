@@ -3,8 +3,7 @@ import {ListContext} from "./context/ListContext.jsx"
 import {ThemeContext} from "./context/ThemeContext.jsx"
 import Grille from './svg/Grille'
 import Liste from './svg/Liste'
-import { useSticky } from "./context/StickyContext";
-
+import { useSticky } from "../components/context/useSticky.js";
 
 const RadioFilter = ({ jsonItems, filmFilter, setFilmFilter}) => {
     const [openRadio, setOpenRadio] = useState(false)
@@ -18,7 +17,7 @@ const RadioFilter = ({ jsonItems, filmFilter, setFilmFilter}) => {
             setFilmFilter("all")
         }
 
-    },[jsonItems])
+    },[jsonItems, filmFilter,setFilmFilter])
     return (
         <>
         <div className={`radioFilter ${theme !== 'light' ? 'dark' : ''}${fixed ? ' fixed' : ''}`}>
@@ -35,7 +34,7 @@ const RadioFilter = ({ jsonItems, filmFilter, setFilmFilter}) => {
                         checked={filmFilter === el}
                         onChange={(e) => setFilmFilter(e.target.value)}/>
                         <span className={`falseradio ${el===filmFilter && 'selected'}`}></span>
-                        {el === 'all' ? jsonItems ? "Tous les médias que j'ai" : 'Tous les médias recherchés' : el === 'physicalAndDisc' ? "Seulement ceux que j'ai" : el==='physical' ? "Seulement ceux que j'ai en DVD ou Blu-ray " : "Seulement ceux que j'ai sur disque"}
+                        {el === 'all' ? jsonItems ? "Tous les médias" : 'Tous les médias recherchés' : el === 'physicalAndDisc' ? "Seulement ceux que j'ai" : el==='physical' ? "Seulement ceux que j'ai en DVD ou Blu-ray " : "Seulement ceux que j'ai sur disque"}
 
                     </label>
                 )

@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {ThemeContext} from "../components/context/ThemeContext.jsx"
+import { preloadLibraries } from "../services/mediaLibraryCache";
 
 
 const Home = () => {
     const { theme } = useContext(ThemeContext)
     const darkmode = theme !== 'light' ? '-dark' : ''
     
+    useEffect(() => {
+        preloadLibraries();
+    }, []);
+
+
     return (
         <main className={`app${darkmode}`}>
             <div className="containerHome">
