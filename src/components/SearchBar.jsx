@@ -16,7 +16,9 @@ const noFilmPage = location.pathname !== "/films-et-series"
         const cleaned = query.trim();
         if(!cleaned) return
         
-        onSearch(cleaned)
+        if (onSearch) {
+            onSearch(cleaned);
+        }
         setQuery("")
 
     }

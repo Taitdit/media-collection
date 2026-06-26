@@ -81,6 +81,9 @@
   margin-top: v.$space-4;
   flex-direction: column;
   width: 100%;
+  &.stretch {
+    align-items: stretch;
+  }
   @media (min-width: v.$s) {
     flex-direction: row;
   }

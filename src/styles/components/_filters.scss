@@ -3,7 +3,7 @@
 .container-filter {
     flex: 1;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 .filters, .filters-dark {
@@ -12,8 +12,10 @@
     border-radius: v.$radius;
     margin-bottom: v.$space-3;
     text-align: left;
-    overflow-y: scroll;
+    overflow-y: auto;
+    width: 100%;
     overflow-x: hidden;
+    height: fit-content;
     &.games.fixed {
         position: fixed;
         z-index: 99;
@@ -21,39 +23,42 @@
         width: 100vw;
         bottom: 0;
         margin-bottom: 0;
+        max-height: calc(100vh - 220px);
+        overflow-y: auto;
         @media (min-width: v.$s) {
-        position: fixed;
+        position: sticky;
         z-index: 99;
         left: 10px;
-        top : 213px;
+        top : 253px;
+        width: 100%;
         max-width: 200px;
         bottom: auto;
+        max-height: none;
         margin-bottom: 12px;
+        overflow: visible;
         &.open {
             bottom: 106px;
             
         } 
        }  
        @media (min-width: v.$m) {
-            top : 165px;
+            top : 215px;
             &.open {
                 bottom: 106px;
             } 
        }
        @media (min-width: v.$l) {
-            top : 165px;
+            top : 215px;
             &.open {
                 bottom: 90px;
             } 
        }
        @media (min-width: v.$xl) {
-            width: auto;
-            margin-left: 2%;
             left: auto;
             top: 216px;
             max-width: none;
             &.open {
-                max-height: 480px;
+                max-height: calc(100vh - 200px);
                 bottom: auto;
             }
         }
@@ -84,7 +89,6 @@
        }
        @media (min-width: v.$xl) {
             width: auto;
-            margin-left: 2%;
             left: auto;
             top: 310px;
             max-width: none;
@@ -141,6 +145,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        flex-wrap: wrap;
         gap: 8px;
     }
 }

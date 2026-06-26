@@ -55,7 +55,6 @@ export async function fetchDetails(idTmdb) {
       },
     });
 
-
     const data = await res.json();
 
     if (!res.ok) {

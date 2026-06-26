@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import {ThemeContext} from "./context/ThemeContext.jsx"
-import {ListContext} from "./context/ListContext.jsx"
+import { ListContext } from "../components/context/ListContext";
+
 import Loupe from "./svg/Loupe";
 
 
@@ -9,9 +10,7 @@ const ImgCard = ({imgTmdb, popin, title, picture, format }) => {
     const { theme } = useContext(ThemeContext)
 
     const [popinPicture, setPopinPicture] = useState(false)
-    const [hover, setHover] = useState(false);
 
-    const canHover = window.matchMedia('(hover: hover)').matches;
     const domain = 'https://image.tmdb.org/t/p/'
     const imgSize = (size) => domain + size + picture
     const size = list ? 'w154' : 'w342'
@@ -28,7 +27,7 @@ const ImgCard = ({imgTmdb, popin, title, picture, format }) => {
 
         : 
         <div className={`ImgCard${list ? ' list' : ''}${!imgTmdb ? ' game' : ''}`} onClick={() => setPopinPicture(true)}>
-            <div className={`hover`}><Loupe /></div>
+            <div className={'hover'}><Loupe /></div>
             {format && <div className={`patch ${format}${theme !== 'light' ? ' dark' : ''}`}>{format}</div>}
            {imgTmdb  ? <img className="ImgCard__img" src={imgSize(size)} alt={title} /> : <img className="ImgCard__img" src={picture} alt={title}/>}
         </div>

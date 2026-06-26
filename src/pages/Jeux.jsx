@@ -1,18 +1,19 @@
 import { useEffect, useMemo, useContext, useState, useCallback } from "react";
-import { ListContext } from "../components/context/ListContext.jsx";
+import { ListContext } from "../components/context/ListContext";
 import Grille from '../components/svg/Grille'
 import Liste from '../components/svg/Liste'
 import ImgCard from '../components/imgCard'
 import FilterA from "../components/svg/FilterA"
 import FilterB from "../components/svg/FilterB"
 import { ThemeContext } from "../components/context/ThemeContext.jsx";
-import { StickyProvider, useSticky } from "../components/context/StickyContext.jsx";
-
+import { StickyProvider } from "../components/context/StickyProvider.jsx";
+import { useSticky } from "../components/context/useSticky.js";
+import { loadGames, getGamesCache } from "../services/mediaLibraryCache";
 
 const JeuxContent = ({ setSearchHandler }) => {
   const { fixed } = useSticky();
 
-  const [games, setGames] = useState([]);
+  const [games, setGames] = useState(() => getGamesCache() ?? []);
   const [query, setQuery] = useState("");
   const { list, toggleList } = useContext(ListContext)
 
@@ -39,12 +40,10 @@ const JeuxContent = ({ setSearchHandler }) => {
 const classContainer = showFilsters ? 'show' : '';
 
   useEffect(() => {
-    fetch("/ludotheque.json")
-      .then((res) => res.json())
+    loadGames()
       .then((data) => setGames(data))
       .catch((err) => console.error("Erreur chargement ludothèque :", err));
   }, []);
-
   const handleSearch = useCallback((value) => {
     setQuery(value);
   }, []);
@@ -65,43 +64,43 @@ const classContainer = showFilsters ? 'show' : '';
       .replace(/[\u0300-\u036f]/g, "")
       .trim();
 
-  const getPlayerNumbers = (players = "") => {
-    const numbers = players.toString().match(/\d+/g);
-    return numbers ? numbers.map(Number) : [];
-  };
-const gameMatchesPlayers = (game) => {
-  const selectedPlayers = Number(maxPlayers);
 
-  if (!selectedPlayers) return true;
-
-  const minPlayers = Number(game.playersMin);
-  const maxPlayersGame = Number(game.playersMax);
-
-  if (
-    Number.isNaN(minPlayers) ||
-    Number.isNaN(maxPlayersGame)
-  ) {
-    return true;
-  }
-
-  return (
-    selectedPlayers >= minPlayers &&
-    selectedPlayers <= maxPlayersGame
-  );
-};
-const gameMatchesDuration = (game) => {
-  const selectedDuration = Number(maxDuration);
-
-  if (!selectedDuration) return true;
-
-  const gameDuration = Number(game.duration);
-
-  if (Number.isNaN(gameDuration)) return true;
-
-  return gameDuration <= selectedDuration;
-};
 const filteredGames = useMemo(() => {
   const q = normalize(query);
+
+  const gameMatchesPlayers = (game) => {
+    const selectedPlayers = Number(maxPlayers);
+
+    if (!selectedPlayers) return true;
+
+    const minPlayers = Number(game.playersMin);
+    const maxPlayersGame = Number(game.playersMax);
+
+    if (
+      Number.isNaN(minPlayers) ||
+      Number.isNaN(maxPlayersGame)
+    ) {
+      return true;
+    }
+
+    return (
+      selectedPlayers >= minPlayers &&
+      selectedPlayers <= maxPlayersGame
+    );
+  };
+
+  const gameMatchesDuration = (game) => {
+    const selectedDuration = Number(maxDuration);
+
+    if (!selectedDuration) return true;
+
+    const gameDuration = Number(game.duration);
+
+    if (Number.isNaN(gameDuration)) return true;
+
+    return gameDuration <= selectedDuration;
+  };
+
 
   let result = games.filter((game) => {
     const matchesSearch =
@@ -157,132 +156,133 @@ const clearSearch = () => {
 
 
         <section
-          className={`container ${
+          className={`container stretch ${
             !filteredGames.length ? "empty" : ""
           }`}
         >
-<div className="container-filter">
-  <div className={`filters${theme !== 'light' ? '-dark' : ''} games${fixed ? ' fixed' : ''}${showFilsters ? ' open' : openClass}`}>
-  <button className={`cta-acc${theme !== 'light' ? '-dark' : ''}`} onClick={() => setShowFilters(currentValue => !currentValue)}><span className="label">Filtres</span> {!showFilsters ? <FilterA className="picto" /> : <FilterB className="picto" />}</button>
-  <div className={`filters__container ${classContainer}`}>
-    <div className="filters__card">
-    <h3>Tri :</h3>
-    <div className="filters__buttons">
-    <select className={`cta-tertiary${theme !== 'light' ? '-dark' : ''}`}
-      value={sortMode}
-      onChange={(e) => setSortMode(e.target.value)}
-    >
-      <option value="alpha">Alphabétique</option>
-      <option value="recent">Année : récent au plus ancien</option>
-      <option value="oldest">Année : ancien au plus récent</option>
-    </select>
-    </div>
-  </div>
-  <div className="filters__card">
-    <h3>Type :</h3>
-    <div className="filters__buttons">
-    <select className={`cta-tertiary${theme !== 'light' ? '-dark' : ''}`}
-      value={selectedType}
-      onChange={(e) => setSelectedType(e.target.value)}
-    >
-      <option value="all">Tous</option>
-      <option value="jeu">Jeu</option>
-      <option value="extension">Extension</option>
-    </select>
-    </div>
-  </div>
-  <div className="filters__card">
-    <h3>Style :</h3>
-    <div className="filters__buttons">
-    <select className={`cta-tertiary${theme !== 'light' ? '-dark' : ''}`}
-      value={selectedStyle}
-      onChange={(e) => setSelectedStyle(e.target.value)}
-    >
-      <option value="all">Tous</option>
-      <option value="ambiance">Jeu d'ambiance</option>
-      <option value="plateau">Jeu de plateau</option>
-      <option value="coop">Jeu de plateau coopératif</option>
-      <option value="cartes">Jeu de cartes</option>
-    </select>
-    </div>
-  </div>
+        <div className="container-filter">
+          <div className={`filters${theme !== 'light' ? '-dark' : ''} games${fixed ? ' fixed' : ''}${showFilsters ? ' open' : openClass}`}>
+          <button className={`cta-acc${theme !== 'light' ? '-dark' : ''}`} onClick={() => setShowFilters(currentValue => !currentValue)}><span className="label">Filtres</span> {!showFilsters ? <FilterA className="picto" /> : <FilterB className="picto" />}</button>
+          <div className={`filters__container ${classContainer}`}>
+            <div className="filters__card">
+            <h3>Tri :</h3>
+            <div className="filters__buttons">
+            <select className={`cta-tertiary${theme !== 'light' ? '-dark' : ''}`}
+              value={sortMode}
+              onChange={(e) => setSortMode(e.target.value)}
+            >
+              <option value="alpha">Alphabétique</option>
+              <option value="recent">Plus récent au plus ancien</option>
+              <option value="oldest">Plus ancien au plus récent</option>
+            </select>
+            </div>
+          </div>
+          <div className="filters__card">
+            <h3>Type :</h3>
+            <div className="filters__buttons">
+            <select className={`cta-tertiary${theme !== 'light' ? '-dark' : ''}`}
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value)}
+            >
+              <option value="all">Tous</option>
+              <option value="jeu">Jeu</option>
+              <option value="extension">Extension</option>
+            </select>
+            </div>
+          </div>
+          <div className="filters__card">
+            <h3>Style :</h3>
+            <div className="filters__buttons">
+            <select className={`cta-tertiary${theme !== 'light' ? '-dark' : ''}`}
+              value={selectedStyle}
+              onChange={(e) => setSelectedStyle(e.target.value)}
+            >
+              <option value="all">Tous</option>
+              <option value="ambiance">Jeu d'ambiance</option>
+              <option value="plateau">Jeu de plateau</option>
+              <option value="coop">Jeu de plateau coopératif</option>
+              <option value="cartes">Jeu de cartes</option>
+            </select>
+            </div>
+          </div>
 
-<div className="filters__card gameFilters">
-  <h3>Joueurs max</h3>
+        <div className="filters__card gameFilters">
+          <h3>Nombre de joueurs :</h3>
 
-  <div className="gameFilters__duration">
-    <input
-      type="number"
-      min="0"
-      value={maxPlayers || ""}
-      placeholder="Tous"
-      onChange={(e) => {
-        const value = e.target.value;
+          <div className="gameFilters__duration">
+            <input
+              type="number"
+              min="0"
+              value={maxPlayers || ""}
+              placeholder="Tous"
+              onChange={(e) => {
+                const value = e.target.value;
 
-        if (value === "") {
-          setMaxPlayers(0);
-          return;
-        }
+                if (value === "") {
+                  setMaxPlayers(0);
+                  return;
+                }
 
-        const numberValue = Number(value);
+                const numberValue = Number(value);
 
-        if (Number.isNaN(numberValue)) return;
+                if (Number.isNaN(numberValue)) return;
 
-        setMaxPlayers(Math.max(0, numberValue));
-      }}
-    />
+                setMaxPlayers(Math.max(0, numberValue));
+              }}
+            />
 
-    <span>joueur(s)</span>
-  </div>
+            <span>joueur(s)</span>
+          </div>
 
-  <button
-    type="button"
-    className={`cta-tertiary${theme !== "light" ? "-dark" : ""}`}
-    onClick={() => setMaxPlayers(0)}
-  >
-    Pas de joueurs max
-  </button>
-</div>
-<div className="filters__card gameFilters">
-  <h3>
-    Durée max
-  </h3>
+          <button
+            type="button"
+            style={{marginTop: '8px'}}
+            className={`cta-tertiary${theme !== "light" ? "-dark" : ""}`}
+            onClick={() => setMaxPlayers(0)}
+          >
+            + de 100
+          </button>
+        </div>
+        <div className="filters__card gameFilters">
+          <h3>
+            Durée max
+          </h3>
 
-  <div className="gameFilters__jauge">
-    <input
-      id="durationFilter"
-      type="range"
-      min="0"
-      max="180"
-      step="5"
-      value={maxDuration}
-      onChange={(e) => setMaxDuration(Number(e.target.value))}
-    />
-    </div>
-    <div className="gameFilters__duration">
-    <input
-      type="number"
-      min="0"
-      max="180"
-      step="5"
-      value={maxDuration}
-      onChange={(e) => {
-        const value = Number(e.target.value);
+          <div className="gameFilters__jauge">
+            <input
+              id="durationFilter"
+              type="range"
+              min="0"
+              max="180"
+              step="5"
+              value={maxDuration}
+              onChange={(e) => setMaxDuration(Number(e.target.value))}
+            />
+            </div>
+            <div className="gameFilters__duration">
+            <input
+              type="number"
+              min="0"
+              max="180"
+              step="5"
+              value={maxDuration}
+              onChange={(e) => {
+                const value = Number(e.target.value);
 
-        if (Number.isNaN(value)) return;
+                if (Number.isNaN(value)) return;
 
-        setMaxDuration(
-          Math.min(180, Math.max(0, value))
-        );
-      }}
-    />
+                setMaxDuration(
+                  Math.min(180, Math.max(0, value))
+                );
+              }}
+            />
 
-    <span>min</span>
-  </div>
-</div>
-</div>
-</div>
-</div>
+            <span>min</span>
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
           <div className="container_search">
             {filteredGames.length ?
             <div className={`radioFilter ${theme !== 'light' ? 'dark' : ''}`}>
