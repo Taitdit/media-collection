@@ -9,7 +9,7 @@
     "duration": "90",
     "type": "jeu",
     "style": "coop",
-    "img": "/img/jeux/les-chevaliers-de-la-table-ronde.png"
+    "img": "/img/jeux/les-chevaliers-de-la-table-ronde.webp"
   },
   {
     "id": 2,
@@ -21,7 +21,7 @@
     "duration": "90",
     "type": "extension",
     "style": "coop",
-    "img": "/img/jeux/la-compagnie-de-merlin.png"
+    "img": "/img/jeux/la-compagnie-de-merlin.webp"
   },
   {
     "id": 3,
@@ -33,7 +33,7 @@
     "duration": "60",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/petits-peuples.png"
+    "img": "/img/jeux/petits-peuples.webp"
   },
   {
     "id": 4,
@@ -45,7 +45,7 @@
     "duration": "45",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/micromacro-crime-city.png"
+    "img": "/img/jeux/micromacro-crime-city.webp"
   },
   {
     "id": 5,
@@ -57,7 +57,7 @@
     "duration": "45",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/micromacro-full-house.png"
+    "img": "/img/jeux/micromacro-full-house.webp"
   },
   {
     "id": 6,
@@ -69,7 +69,7 @@
     "duration": "45",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/dice-town.png"
+    "img": "/img/jeux/dice-town.webp"
   },
   {
     "id": 7,
@@ -81,7 +81,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/petits-meurtres-et-faits-divers.png"
+    "img": "/img/jeux/petits-meurtres-et-faits-divers.webp"
   },
   {
     "id": 8,
@@ -93,7 +93,7 @@
     "duration": "45",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/maka-bana.png"
+    "img": "/img/jeux/maka-bana.webp"
   },
   {
     "id": 9,
@@ -105,7 +105,7 @@
     "duration": "80",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/small-world-underground.png"
+    "img": "/img/jeux/small-world-underground.webp"
   },
   {
     "id": 10,
@@ -117,7 +117,7 @@
     "duration": "60",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/evo.png"
+    "img": "/img/jeux/evo.webp"
   },
   {
     "id": 11,
@@ -129,7 +129,7 @@
     "duration": "90",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/dungeon-lords.png"
+    "img": "/img/jeux/dungeon-lords.webp"
   },
   {
     "id": 12,
@@ -141,7 +141,7 @@
     "duration": "40",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/sea-of-clouds.png"
+    "img": "/img/jeux/sea-of-clouds.webp"
   },
   {
     "id": 13,
@@ -153,7 +153,7 @@
     "duration": "45",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/glow.png"
+    "img": "/img/jeux/glow.webp"
   },
   {
     "id": 14,
@@ -165,7 +165,7 @@
     "duration": "60",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/galaxy-trucker.png"
+    "img": "/img/jeux/galaxy-trucker.webp"
   },
   {
     "id": 15,
@@ -177,7 +177,7 @@
     "duration": "45",
     "type": "jeu",
     "style": "coop",
-    "img": "/img/jeux/pandemic.png"
+    "img": "/img/jeux/pandemic.webp"
   },
   {
     "id": 16,
@@ -189,7 +189,7 @@
     "duration": "45",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/popcorn.png"
+    "img": "/img/jeux/popcorn.webp"
   },
   {
     "id": 17,
@@ -201,7 +201,7 @@
     "duration": "40",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/colt-express.png"
+    "img": "/img/jeux/colt-express.webp"
   },
   {
     "id": 18,
@@ -213,7 +213,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/dixit.png"
+    "img": "/img/jeux/dixit.webp"
   },
   {
     "id": 19,
@@ -225,7 +225,7 @@
     "duration": "45",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/dice-forge.png"
+    "img": "/img/jeux/dice-forge.webp"
   },
   {
     "id": 20,
@@ -237,7 +237,7 @@
     "duration": "60",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/trivial-pursuit-harry-potter.png"
+    "img": "/img/jeux/trivial-pursuit-harry-potter.webp"
   },
   {
     "id": 22,
@@ -249,7 +249,7 @@
     "duration": "45",
     "type": "jeu",
     "style": "coop",
-    "img": "/img/jeux/not-alone.png"
+    "img": "/img/jeux/not-alone.webp"
   },
   {
     "id": 23,
@@ -261,7 +261,7 @@
     "duration": "60",
     "type": "jeu",
     "style": "cartes",
-    "img": "/img/jeux/citadelles.png"
+    "img": "/img/jeux/citadelles.webp"
   },
   {
     "id": 24,
@@ -273,7 +273,7 @@
     "duration": "15",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/sushi-go.png"
+    "img": "/img/jeux/sushi-go.webp"
   },
   {
     "id": 25,
@@ -285,7 +285,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/skull-and-roses.png"
+    "img": "/img/jeux/skull-and-roses.webp"
   },
   {
     "id": 26,
@@ -297,7 +297,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/king-of-tokyo-dark-edition.png"
+    "img": "/img/jeux/king-of-tokyo-dark-edition.webp"
   },
   {
     "id": 27,
@@ -309,7 +309,7 @@
     "duration": "45",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/takenoko.png"
+    "img": "/img/jeux/takenoko.webp"
   },
   {
     "id": 28,
@@ -321,7 +321,7 @@
     "duration": "50",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/marvel-villainous.png"
+    "img": "/img/jeux/marvel-villainous.webp"
   },
   {
     "id": 29,
@@ -333,7 +333,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/celestia.png"
+    "img": "/img/jeux/celestia.webp"
   },
   {
     "id": 30,
@@ -345,7 +345,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/happy-city.png"
+    "img": "/img/jeux/happy-city.webp"
   },
   {
     "id": 31,
@@ -357,7 +357,7 @@
     "duration": "20",
     "type": "jeu",
     "style": "cartes",
-    "img": "/img/jeux/love-letter.png"
+    "img": "/img/jeux/love-letter.webp"
   },
   {
     "id": 32,
@@ -369,7 +369,7 @@
     "duration": "45",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/carcassonne.png"
+    "img": "/img/jeux/carcassonne.webp"
   },
   {
     "id": 33,
@@ -381,7 +381,7 @@
     "duration": "20",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/bazar-bizarre.png"
+    "img": "/img/jeux/bazar-bizarre.webp"
   },
   {
     "id": 34,
@@ -393,7 +393,7 @@
     "duration": "15",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/mimetix.png"
+    "img": "/img/jeux/mimetix.webp"
   },
   {
     "id": 35,
@@ -405,7 +405,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/the-big-idea.png"
+    "img": "/img/jeux/the-big-idea.webp"
   },
   {
     "id": 36,
@@ -417,7 +417,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/6-qui-prend.png"
+    "img": "/img/jeux/6-qui-prend.webp"
   },
   {
     "id": 37,
@@ -429,7 +429,7 @@
     "duration": "25",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/mito.png"
+    "img": "/img/jeux/mito.webp"
   },
   {
     "id": 38,
@@ -441,7 +441,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/le-monde-est-fou.png"
+    "img": "/img/jeux/le-monde-est-fou.webp"
   },
   {
     "id": 39,
@@ -453,7 +453,7 @@
     "duration": "15",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/dobble.png"
+    "img": "/img/jeux/dobble.webp"
   },
   {
     "id": 40,
@@ -465,7 +465,7 @@
     "duration": "15",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/dobble-harry-potter.png"
+    "img": "/img/jeux/dobble-harry-potter.webp"
   },
   {
     "id": 41,
@@ -477,7 +477,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/codenames-duo.png"
+    "img": "/img/jeux/codenames-duo.webp"
   },
   {
     "id": 42,
@@ -489,7 +489,7 @@
     "duration": "60",
     "type": "jeu",
     "style": "cartes",
-    "img": "/img/jeux/hp-defense-contre-forces-du-mal.png"
+    "img": "/img/jeux/hp-defense-contre-forces-du-mal.webp"
   },
   {
     "id": 43,
@@ -501,7 +501,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/7-wonders-duel.png"
+    "img": "/img/jeux/7-wonders-duel.webp"
   },
   {
     "id": 44,
@@ -513,7 +513,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/kahuna.png"
+    "img": "/img/jeux/kahuna.webp"
   },
   {
     "id": 45,
@@ -525,7 +525,7 @@
     "duration": "20",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/kingdomino.png"
+    "img": "/img/jeux/kingdomino.webp"
   },
   {
     "id": 46,
@@ -537,7 +537,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/cash-n-guns.png"
+    "img": "/img/jeux/cash-n-guns.webp"
   },
   {
     "id": 47,
@@ -549,7 +549,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/times-up-harry-potter.png"
+    "img": "/img/jeux/times-up-harry-potter.webp"
   },
   {
     "id": 48,
@@ -561,7 +561,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/debats-nuls.png"
+    "img": "/img/jeux/debats-nuls.webp"
   },
   {
     "id": 49,
@@ -573,7 +573,7 @@
     "duration": "15",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/thats-not-a-hat.png"
+    "img": "/img/jeux/thats-not-a-hat.webp"
   },
   {
     "id": 50,
@@ -585,7 +585,7 @@
     "duration": "15",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/jungle-speed.png"
+    "img": "/img/jeux/jungle-speed.webp"
   },
   {
     "id": 51,
@@ -597,7 +597,7 @@
     "duration": "20",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/zik.png"
+    "img": "/img/jeux/zik.webp"
   },
   {
     "id": 52,
@@ -609,7 +609,7 @@
     "duration": "20",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/shabada.png"
+    "img": "/img/jeux/shabada.webp"
   },
   {
     "id": 53,
@@ -621,7 +621,7 @@
     "duration": "25",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/welcome.png"
+    "img": "/img/jeux/welcome.webp"
   },
   {
     "id": 54,
@@ -633,7 +633,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/esquisse.png"
+    "img": "/img/jeux/esquisse.webp"
   },
   {
     "id": 55,
@@ -645,7 +645,7 @@
     "duration": "15",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/strike.png"
+    "img": "/img/jeux/strike.webp"
   },
   {
     "id": 56,
@@ -657,7 +657,7 @@
     "duration": "15",
     "type": "jeu",
     "style": "ambiance",
-    "img": "/img/jeux/trou-noir.png"
+    "img": "/img/jeux/trou-noir.webp"
   },
 {
   "id": 57,
@@ -669,7 +669,7 @@
   "duration": "15",
   "type": "jeu",
   "style": "ambiance",
-  "img": "/img/jeux/mr-troove.png"
+  "img": "/img/jeux/mr-troove.webp"
 },{
   "id": 58,
   "name": "Peur Primate",
@@ -680,7 +680,7 @@
   "duration": "45",
   "type": "jeu",
   "style": "cartes",
-  "img": "/img/jeux/peur-primate.png"
+  "img": "/img/jeux/peur-primate.webp"
 },{
   "id": 59,
   "name": "Paf le Singe",
@@ -691,7 +691,7 @@
   "duration": "15",
   "type": "jeu",
   "style": "cartes",
-  "img": "/img/jeux/paf-le-singe.png"
+  "img": "/img/jeux/paf-le-singe.webp"
 },{
   "id": 60,
   "name": "Kanagawa",
@@ -702,7 +702,7 @@
   "duration": "45",
   "type": "jeu",
   "style": "plateau",
-  "img": "/img/jeux/kanagawa.png"
+  "img": "/img/jeux/kanagawa.webp"
 },{
   "id": 61,
   "name": "Galaxy Trucker : La Grosse Extension",
@@ -713,7 +713,7 @@
   "duration": "60",
   "type": "extension",
   "style": "plateau",
-  "img": "/img/jeux/galaxy-trucker-grosse-extension.png"
+  "img": "/img/jeux/galaxy-trucker-grosse-extension.webp"
 },
 {
   "id": 62,
@@ -725,7 +725,7 @@
   "duration": "45",
   "type": "extension",
   "style": "plateau",
-  "img": "/img/jeux/dice-forge-rebellion.png"
+  "img": "/img/jeux/dice-forge-rebellion.webp"
 },{
   "id": 63,
   "name": "7 Wonders",
@@ -736,7 +736,7 @@
   "duration": "30",
   "type": "jeu",
   "style": "plateau",
-  "img": "/img/jeux/7-wonders.png"
+  "img": "/img/jeux/7-wonders.webp"
 },{
   "id": 64,
   "name": "Space Alert",
@@ -747,7 +747,7 @@
   "duration": "30",
   "type": "jeu",
   "style": "plateau",
-  "img": "/img/jeux/space-alert.png"
+  "img": "/img/jeux/space-alert.webp"
 },
   {
     "id": 65,
@@ -759,7 +759,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/fantasy-pub.png"
+    "img": "/img/jeux/fantasy-pub.webp"
   },
   {
     "id": 66,
@@ -771,7 +771,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "cartes",
-    "img": "/img/jeux/wanted.png"
+    "img": "/img/jeux/wanted.webp"
   },
   {
     "id": 67,
@@ -783,7 +783,7 @@
     "duration": "30",
     "type": "jeu",
     "style": "plateau",
-    "img": "/img/jeux/santy-anno.png"
+    "img": "/img/jeux/santy-anno.webp"
   },
   {
   "id": 68,
@@ -795,7 +795,7 @@
   "duration": "30",
   "type": "jeu",
   "style": "ambiance",
-  "img": "/img/jeux/lgdt-best-of.png"
+  "img": "/img/jeux/lgdt-best-of.webp"
 },{
   "id": 69,
   "name": "Dobble Marvel Emoji",
@@ -806,7 +806,7 @@
   "duration": "15",
   "type": "jeu",
   "style": "ambiance",
-  "img": "/img/jeux/dobble-marvel.png"
+  "img": "/img/jeux/dobble-marvel.webp"
 },
 {
   "id": 70,
@@ -818,7 +818,7 @@
   "duration": "40",
   "type": "jeu",
   "style": "ambiance",
-  "img": "/img/jeux/times-up.png"
+  "img": "/img/jeux/times-up.webp"
 },
 {
   "id": 71,
@@ -830,7 +830,7 @@
   "duration": "30",
   "type": "jeu",
   "style": "ambiance",
-  "img": "/img/jeux/mimtoo.png"
+  "img": "/img/jeux/mimtoo.webp"
 },
 {
   "id": 72,
@@ -842,7 +842,7 @@
   "duration": "180",
   "type": "jeu",
   "style": "plateau",
-  "img": "/img/jeux/detective.png"
+  "img": "/img/jeux/detective.webp"
 },
 {
   "id": 73,
@@ -854,7 +854,7 @@
   "duration": "30",
   "type": "jeu",
   "style": "ambiance",
-  "img": "/img/jeux/pit.png"
+  "img": "/img/jeux/pit.webp"
 },
 {
   "id": 74,
@@ -866,7 +866,7 @@
   "duration": "45",
   "type": "jeu",
   "style": "ambiance",
-  "img": "/img/jeux/duplik.png"
+  "img": "/img/jeux/duplik.webp"
 },
 {
   "id": 75,
@@ -878,7 +878,7 @@
   "duration": "45",
   "type": "jeu",
   "style": "plateau",
-  "img": "/img/jeux/eila-et-l-eclat-de-la-montagne.png"
+  "img": "/img/jeux/eila-et-l-eclat-de-la-montagne.webp"
 }
 
 ]
